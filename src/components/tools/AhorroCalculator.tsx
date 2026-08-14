@@ -1,14 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useReducer } from "react";
-import { RATES, futureValue, weeklyRate } from "@/lib/finance";
+import { RATES, dailyRate, futureValue } from "@/lib/finance";
 import { money, percent } from "@/lib/format";
 import styles from "./Calculator.module.css";
 
-const AMOUNTS = [5000, 10000, 20000] as const;
+const AMOUNTS = [10000, 50000, 100000] as const;
+const DAYS_PER_YEAR = 365;
 const HORIZONS = [1, 5] as const;
 
-type State = { perWeek: number; years: number; week: number; running: boolean };
+type State = { perDay: number; years: number; day: number; running: boolean };
 
 type Action =
   | { type: "setAmount"; value: number }
@@ -19,14 +20,14 @@ type Action =
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "setAmount":
-      return { ...state, perWeek: action.value, week: 0, running: true };
+      return { ...state, perDay: action.value, day: 0, running: true };
     case "setYears":
-      return { ...state, years: action.value, week: 0, running: true };
+      return { ...state, years: action.value, day: 0, running: true };
     case "start":
       return { ...state, running: true };
     case "tick": {
-      const next = Math.min(action.total, state.week + action.step);
-      return { ...state, week: next, running: next < action.total };
+      const next = Math.min(action.total, state.day + action.step);
+      return { ...state, day: next, running: next < action.total };
     }
   }
 }
@@ -38,14 +39,14 @@ function reducer(state: State, action: Action): State {
  */
 export function AhorroCalculator() {
   const [state, dispatch] = useReducer(reducer, {
-    perWeek: 10000,
+    perDay: 10000,
     years: 1,
-    week: 0,
+    day: 0,
     running: false,
   });
 
-  const totalWeeks = state.years * 52;
-  const iWeek = useMemo(() => weeklyRate(RATES.cdtEA), []);
+  const totalDays = state.years * DAYS_PER_YEAR;
+  const iDay = useMemo(() => dailyRate(RATES.cdtEA), []);
 
   useEffect(() => {
     const t = setTimeout(() => dispatch({ type: "start" }), 400);
@@ -53,22 +54,28 @@ export function AhorroCalculator() {
   }, []);
 
   useEffect(() => {
-    if (!state.running || state.week >= totalWeeks) return;
-    const step = Math.max(1, Math.round(totalWeeks / 55));
+    if (!state.running || state.day >= totalDays) return;
+    const step = Math.max(1, Math.round(totalDays / 55));
     const t = setTimeout(
-      () => dispatch({ type: "tick", total: totalWeeks, step }),
+      () => dispatch({ type: "tick", total: totalDays, step }),
       32
     );
     return () => clearTimeout(t);
-  }, [state.running, state.week, totalWeeks]);
+  }, [state.running, state.day, totalDays]);
 
-  const saved = state.perWeek * state.week;
-  const invested = futureValue(state.perWeek, iWeek, state.week);
+  const saved = state.perDay * state.day;
+  const invested = futureValue(state.perDay, iDay, state.day);
 
-  const finalSaved = state.perWeek * totalWeeks;
-  const finalInvested = futureValue(state.perWeek, iWeek, totalWeeks);
+  const finalSaved = state.perDay * totalDays;
+  const finalInvested = futureValue(state.perDay, iDay, totalDays);
   const gap = finalInvested - finalSaved;
   const max = finalInvested || 1;
+
+  // A raw day count past ~90 stops meaning anything; switch to months.
+  const elapsed =
+    state.day < 90
+      ? `${state.day} ${state.day === 1 ? "día" : "días"}`
+      : `${Math.round(state.day / 30)} meses`;
 
   const setAmount = useCallback(
     (value: number) => dispatch({ type: "setAmount", value }),
@@ -83,15 +90,15 @@ export function AhorroCalculator() {
     <figure className={styles.card}>
       <figcaption className={styles.head}>
         <div className={styles.row}>
-          <p className={styles.q}>Si guardas cada semana</p>
-          <div className={styles.picks} role="group" aria-label="Cuánto guardas por semana">
+          <p className={styles.q}>Si guardas cada día</p>
+          <div className={styles.picks} role="group" aria-label="Cuánto guardas por día">
             {AMOUNTS.map((a) => (
               <button
                 key={a}
                 type="button"
                 onClick={() => setAmount(a)}
-                aria-pressed={a === state.perWeek}
-                className={`${styles.pick} ${a === state.perWeek ? styles.on : ""}`}
+                aria-pressed={a === state.perDay}
+                className={`${styles.pick} ${a === state.perDay ? styles.on : ""}`}
               >
                 {money(a)}
               </button>
@@ -116,6 +123,8 @@ export function AhorroCalculator() {
           </div>
         </div>
       </figcaption>
+
+      <p className={styles.elapsed}>Después de {elapsed}</p>
 
       <div className={styles.bars}>
         <Bar

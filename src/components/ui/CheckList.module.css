@@ -1,0 +1,99 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 32px 0 0;
+}
+
+.col {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 22px 20px;
+}
+.yes {
+  border-color: #cdebdf;
+  background: #fbfffd;
+}
+.no {
+  border-color: #f0dcd8;
+  background: #fffcfb;
+}
+
+.head {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+.yes .head {
+  color: var(--green);
+}
+.no .head {
+  color: var(--red);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.list li {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+}
+
+.list strong {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.list em {
+  display: block;
+  font-style: normal;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--gray);
+  margin-top: 3px;
+}
+
+.markYes,
+.markNo {
+  flex-shrink: 0;
+  width: 21px;
+  height: 21px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.markYes {
+  background: #dff5ec;
+  color: var(--green);
+}
+.markNo {
+  background: #fbe4df;
+  color: var(--red);
+}
+.markYes svg,
+.markNo svg {
+  width: 12px;
+  height: 12px;
+}
+
+@media (min-width: 780px) {
+  .wrap {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}

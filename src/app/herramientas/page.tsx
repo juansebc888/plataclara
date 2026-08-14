@@ -15,7 +15,7 @@ const TOOLS = [
   {
     href: "/herramientas/ahorro",
     name: "Cuánto junto ahorrando",
-    desc: "Mira lo que se acumula guardando una cantidad fija cada semana, y qué cambia si esa plata está en un CDT.",
+    desc: "Mira lo que se acumula guardando una cantidad fija cada día, y qué cambia si esa plata está en un CDT.",
     tone: "green" as const,
   },
   {

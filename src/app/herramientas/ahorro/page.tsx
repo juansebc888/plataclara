@@ -8,7 +8,7 @@ import styles from "../../subpage.module.css";
 export const metadata: Metadata = {
   title: "Cuánto junto ahorrando",
   description:
-    "Calculadora: cuánto se acumula guardando una cantidad fija cada semana, y qué cambia si esa plata está en un CDT.",
+    "Calculadora: cuánto se acumula guardando una cantidad fija cada día, y qué cambia si esa plata está en un CDT.",
 };
 
 export default function Page() {
@@ -17,7 +17,7 @@ export default function Page() {
       <PageHero
         eyebrow="Herramienta"
         title="Cuánto junto ahorrando"
-        intro="No hace falta ganar más para empezar a juntar. Cambia el monto y el tiempo, y mira qué pasa."
+        intro="No hace falta ganar más para empezar a juntar. Cambia cuánto guardas al día y por cuánto tiempo, y mira qué pasa."
         tone="green"
         trail={[
           { href: "/herramientas", label: "Herramientas" },
@@ -43,7 +43,7 @@ export default function Page() {
               <p>
                 El interés se vuelve importante con el tiempo. Cambia a cinco
                 años y vas a ver que la brecha se abre sin que hayas guardado un
-                peso más por semana.
+                peso más por día.
               </p>
             </div>
           </Reveal>

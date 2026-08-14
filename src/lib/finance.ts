@@ -1,7 +1,7 @@
 /**
  * Tasas de referencia.
- * VERIFICAR ambas contra fuentes actuales antes de publicar: las tasas de CDT
- * se mueven con las decisiones del Banco de la República.
+ * VERIFICAR todas contra fuentes actuales antes de publicar: las tasas de
+ * CDT se mueven con las decisiones del Banco de la República.
  */
 export const RATES = {
   /** CDT, efectivo anual. */
@@ -11,6 +11,10 @@ export const RATES = {
   /** Microcrédito formal, mensual aproximado. */
   formalMonthly: 0.025,
 } as const;
+
+/** Convierte una tasa efectiva anual a su equivalente diario. */
+export const dailyRate = (annualEA: number): number =>
+  Math.pow(1 + annualEA, 1 / 365) - 1;
 
 /** Convierte una tasa efectiva anual a su equivalente semanal. */
 export const weeklyRate = (annualEA: number): number =>
