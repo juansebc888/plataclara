@@ -2,41 +2,98 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
+import { Outcomes } from "@/components/ui/Outcomes";
 import { getCategory } from "@/content/categories";
-import styles from "../subpage.module.css";
+import { CHANNELS, RIGHTS_NOTES } from "@/content/ayuda";
+import shared from "../subpage.module.css";
+import styles from "./ayuda.module.css";
 
 const CATEGORY = getCategory("ayuda")!;
 
 export const metadata: Metadata = {
-  title: CATEGORY.name,
-  description: CATEGORY.desc,
+  title: "Hablar con alguien",
+  description:
+    "Dónde acudir cuando una entidad financiera no responde, te cobró de más o un prestamista te está amenazando. Todos estos canales son gratuitos.",
 };
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Tema"
-        title={CATEGORY.name}
-        intro={CATEGORY.intro}
+        eyebrow="Cuando la página no alcanza"
+        title="Hablar con alguien"
+        intro="Hay problemas que no se resuelven leyendo. Estos son los lugares donde atiende una persona, y ninguno te puede cobrar por atenderte."
         tone="blue"
-        trail={[{ label: CATEGORY.name }]}
-      />
+        trail={[{ label: "Hablar con alguien" }]}
+      >
+        <Outcomes items={CATEGORY.outcomes} />
+      </PageHero>
 
-      <section className={styles.body}>
+      <section className={shared.body}>
         <div className="shell">
           <Reveal>
+            <h2 className="h2">Cada problema tiene su puerta.</h2>
+            <p className="lede">
+              Ir al lugar equivocado hace perder semanas. Esto es qué resuelve
+              cada quién.
+            </p>
+          </Reveal>
+
+          <div className={styles.grid}>
+            {CHANNELS.map((c, i) => (
+              <Reveal key={c.name} delay={i * 70}>
+                <article className={`${styles.card} ${styles[c.tone]}`}>
+                  <h3 className="h3">{c.name}</h3>
+
+                  <p className={styles.label}>Para qué sirve</p>
+                  <p className={styles.text}>{c.forWhat}</p>
+
+                  <p className={styles.label}>Cómo llegar</p>
+                  <p className={styles.text}>{c.how}</p>
+
+                  <p className={styles.cost}>{c.cost}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.notes}>
+        <div className="shell">
+          <Reveal>
+            <p className="eyebrow">Bueno saberlo</p>
+            <h2 className="h2">Tres cosas que casi nadie te dice.</h2>
+            <ul className={styles.noteList}>
+              {RIGHTS_NOTES.map((n) => (
+                <li key={n}>{n}</li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className={shared.body}>
+        <div className="shell">
+          <Reveal>
+            <h2 className="h2">Si te están amenazando, eso no es una deuda.</h2>
             <div className="prose">
               <p>
-                Esta página todavía no tiene el contenido definitivo. La
-                estructura, la navegación y el diseño ya están listos; falta
-                escribir y verificar la información con fuentes reales.
+                Cobrar con amenazas, intimidación o presión sobre tu familia es
+                un delito, aunque tú sí debas la plata. Deber no le da a nadie
+                derecho a asustarte.
+              </p>
+              <p>
+                Denunciar no cuesta y no necesitas abogado para hacerlo.
               </p>
             </div>
-            <div className={styles.pending}>
+
+            <div className={shared.pending}>
               <p>
-                <strong>Pendiente:</strong> redactar las guías de esta sección y
-                confirmar requisitos, entidades y cifras antes de publicar.
+                <strong>Pendiente:</strong> agregar los puntos de atención de
+                Barranquilla con dirección, horario y teléfono verificados, y
+                la línea nacional vigente para denuncias. No poner ningún número
+                sin confirmarlo primero en la fuente oficial.
               </p>
             </div>
           </Reveal>
@@ -44,10 +101,10 @@ export default function Page() {
       </section>
 
       <CTA
-        title="¿Prefieres hablar con alguien?"
-        body="Hay lugares donde atiende una persona y no te cobran por escucharte."
-        href="/ayuda"
-        label="Ver dónde buscar ayuda"
+        title="¿Todavía no tienes cuenta?"
+        body="Casi todo lo demás empieza ahí, y pide menos requisitos de los que crees."
+        href="/empezando"
+        label="Ver cómo abrir una"
       />
     </>
   );

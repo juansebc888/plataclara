@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
+import { Outcomes } from "@/components/ui/Outcomes";
 import { ArrowRight } from "@/components/ui/Icon";
 import { getCategory } from "@/content/categories";
 import styles from "../subpage.module.css";
@@ -19,11 +20,13 @@ export default function Page() {
     <>
       <PageHero
         eyebrow="Tema"
-        title="Programas del gobierno"
+        title="Ayuda del gobierno"
         intro={CATEGORY.intro}
         tone="green"
-        trail={[{ label: "Programas" }]}
-      />
+        trail={[{ label: "Ayuda del gobierno" }]}
+      >
+        <Outcomes items={CATEGORY.outcomes} />
+      </PageHero>
 
       <section className={styles.body}>
         <div className="shell">

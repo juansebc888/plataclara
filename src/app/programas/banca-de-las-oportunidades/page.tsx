@@ -25,7 +25,7 @@ export default function Page() {
         intro="Un programa del Gobierno que acerca crédito y servicios financieros a familias de menores ingresos y a microempresas."
         tone="green"
         trail={[
-          { href: "/programas", label: "Programas" },
+          { href: "/programas", label: "Ayuda del gobierno" },
           { label: "Banca de las Oportunidades" },
         ]}
       />

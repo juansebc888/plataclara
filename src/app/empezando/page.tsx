@@ -3,6 +3,8 @@ import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { CheckList } from "@/components/ui/CheckList";
+import { Outcomes } from "@/components/ui/Outcomes";
+import { getCategory } from "@/content/categories";
 import {
   ACCOUNT_TYPES,
   BASIC_PHONE_STEPS,
@@ -22,12 +24,14 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Empezando"
+        eyebrow="Paso 1"
         title="Abrir tu primera cuenta"
         intro="La mayoría de la gente cree que le van a pedir un fiador, un contrato de trabajo o una plata que no tiene. Para una cuenta básica, nada de eso es cierto."
         tone="blue"
-        trail={[{ label: "Empezando" }]}
-      />
+        trail={[{ label: "Abrir una cuenta" }]}
+      >
+        <Outcomes items={getCategory("empezando")!.outcomes} />
+      </PageHero>
 
       {/* 1 — the myth, first, because it is the actual barrier */}
       <section className={shared.body}>

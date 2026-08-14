@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
+import { Outcomes } from "@/components/ui/Outcomes";
 import { LazyGotaAGota } from "@/components/tools/LazyTools";
 import { getCategory } from "@/content/categories";
 import styles from "../subpage.module.css";
@@ -18,11 +19,13 @@ export default function Page() {
     <>
       <PageHero
         eyebrow="Tema"
-        title="Deudas"
+        title="Salir de deudas"
         intro={CATEGORY.intro}
         tone="red"
-        trail={[{ label: "Deudas" }]}
-      />
+        trail={[{ label: "Salir de deudas" }]}
+      >
+        <Outcomes items={CATEGORY.outcomes} />
+      </PageHero>
 
       <section className={styles.body}>
         <div className={`shell ${styles.split}`}>

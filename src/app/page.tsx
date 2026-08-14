@@ -44,12 +44,12 @@ export default function Home() {
           <Reveal>
             <div className={styles.head}>
               <div>
-                <p className="eyebrow">Seis temas</p>
-                <h2 className="h2">¿Por dónde quieres empezar?</h2>
+                <p className="eyebrow">Seis cosas que puedes resolver</p>
+                <h2 className="h2">¿Qué necesitas hacer?</h2>
               </div>
               <p className="lede">
-                No hay que leerlo todo. Cada tema arranca con algo concreto que
-                puedes hacer esta semana.
+                No hay que leerlo todo. Cada página dice de entrada qué vas a
+                saber al terminarla.
               </p>
             </div>
           </Reveal>
