@@ -1,0 +1,83 @@
+.body {
+  padding: clamp(44px, 6vw, 76px) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.tile {
+  position: relative;
+  display: block;
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 24px 24px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.green::before {
+  background: var(--wash-green);
+}
+.red::before {
+  background: var(--wash-red);
+}
+.tile > * {
+  position: relative;
+}
+.tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 46px rgba(10, 23, 37, 0.1);
+  border-color: #d6d0c8;
+}
+.tile:hover::before {
+  opacity: 1;
+}
+
+.desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0 0 20px;
+  max-width: 46ch;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.green .action {
+  color: var(--green);
+}
+.red .action {
+  color: var(--red);
+}
+.action svg {
+  transition: transform 0.26s var(--ease);
+}
+.tile:hover .action svg {
+  transform: translate(3px, -3px);
+}
+
+@media (min-width: 780px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

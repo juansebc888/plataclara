@@ -1,0 +1,306 @@
+/* ==================================================================
+   Plata Clara — design tokens + primitives
+   Every animation here is CSS-only and runs on the compositor
+   (transform / opacity), so it holds 60fps on low-end Android.
+   ================================================================== */
+
+:root {
+  --ink: #0a1725;
+  --blue: #1b4dff;
+  --blue-soft: #e4ebff;
+  --paper: #faf9f7;
+  --gray: #68737f;
+  --line: #e6e2dc;
+  --amber: #ffb020;
+  --red: #d8442f;
+  --green: #0fa36b;
+
+  --wash-blue: #f2f5ff;
+  --wash-green: #f0faf6;
+  --wash-red: #fdf4f2;
+
+  --shell: 1140px;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --radius: 22px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- layout ---------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: clamp(56px, 8vw, 104px) 0;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 0 0 10px 0;
+  z-index: 100;
+}
+.skip:focus {
+  left: 0;
+}
+
+/* ---------- type ---------- */
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 18px;
+}
+.eyebrow-light {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.h1 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(38px, 6.2vw, 78px);
+  line-height: 0.96;
+  letter-spacing: -0.042em;
+  margin: 0 0 24px;
+}
+
+.h2 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(27px, 3.5vw, 42px);
+  line-height: 1.07;
+  letter-spacing: -0.033em;
+  margin: 0;
+  max-width: 20ch;
+}
+.h2-light {
+  color: #fff;
+  max-width: 26ch;
+}
+
+.h3 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(19px, 2vw, 22px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+}
+
+.sub {
+  font-size: clamp(16px, 1.55vw, 18.5px);
+  line-height: 1.58;
+  color: var(--gray);
+  margin: 0 0 32px;
+  max-width: 46ch;
+}
+
+.lede {
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--gray);
+  margin: 0;
+  max-width: 44ch;
+}
+
+.prose p {
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: #38434f;
+  margin: 0 0 18px;
+  max-width: 62ch;
+}
+.prose strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.underline-mark {
+  position: relative;
+  display: inline-block;
+}
+.underline-mark::after {
+  content: "";
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  bottom: 0.08em;
+  height: 0.14em;
+  background: var(--amber);
+  border-radius: 99px;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: wipe 0.75s var(--ease) 0.7s forwards;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 23px;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.24s var(--ease), box-shadow 0.24s ease,
+    background 0.24s ease;
+}
+.btn:hover {
+  background: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(27, 77, 255, 0.28);
+}
+.btn svg {
+  transition: transform 0.24s var(--ease);
+}
+.btn:hover svg {
+  transform: translateX(3px);
+}
+
+.btn-sm {
+  padding: 9px 18px;
+  font-size: 14px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+.btn-ghost:hover {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 0 10px 26px rgba(10, 23, 37, 0.08);
+}
+
+/* ---------- motion ---------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wipe {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Page transition — applied by app/template.tsx on every route change.
+   Opacity + transform only: no layout thrash, no JS. */
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: pageIn 0.28s var(--ease) both;
+}
+
+.rise {
+  animation: rise 0.7s var(--ease) both;
+}
+
+/* Scroll reveal. The element starts hidden and the Reveal client
+   component flips `data-shown` once it intersects. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+[data-reveal][data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  .underline-mark::after {
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,31 @@
+.cta {
+  background: var(--ink);
+  color: #fff;
+  padding: clamp(48px, 6vw, 76px) 0;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.body {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+  margin: 14px 0 0;
+  max-width: 48ch;
+}
+
+.btn {
+  background: #fff;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.btn:hover {
+  background: var(--blue);
+  color: #fff;
+}

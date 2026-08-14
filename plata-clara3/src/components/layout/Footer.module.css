@@ -1,0 +1,83 @@
+.footer {
+  background: var(--ink);
+  color: #fff;
+  padding: 60px 0 26px;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 44px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.025em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.mark {
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  background: var(--blue);
+  box-shadow: 5px 0 0 -1px var(--amber);
+}
+
+.note {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.48);
+  margin: 14px 0 0;
+  max-width: 34ch;
+  line-height: 1.6;
+}
+
+.cols {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.h {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 14px;
+}
+
+.link {
+  display: block;
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.74);
+  text-decoration: none;
+  margin-bottom: 9px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.link:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.base {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 48px;
+  padding-top: 22px;
+}
+.base p {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.36);
+  margin: 0;
+}
