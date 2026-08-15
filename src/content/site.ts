@@ -22,6 +22,7 @@ export const NAV = [
 ] as const;
 
 export const FOOTER_EXTRA = [
+  { href: "/mi-plan", label: "Mi plan" },
   { href: "/herramientas", label: "Herramientas" },
   { href: "/sobre-el-proyecto", label: "Sobre el proyecto" },
 ] as const;

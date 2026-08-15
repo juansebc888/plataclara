@@ -1,52 +1,76 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useReducer } from "react";
-import { RATES, dailyRate, futureValue } from "@/lib/finance";
+import { useEffect, useMemo, useReducer } from "react";
+import { RATES, futureValue } from "@/lib/finance";
 import { money, percent } from "@/lib/format";
 import styles from "./Calculator.module.css";
 
-const AMOUNTS = [10000, 50000, 100000] as const;
-const DAYS_PER_YEAR = 365;
-const HORIZONS = [1, 5] as const;
+type Freq = "dia" | "semana" | "mes";
 
-type State = { perDay: number; years: number; day: number; running: boolean };
+const FREQS: { key: Freq; label: string; perYear: number }[] = [
+  { key: "dia", label: "cada día", perYear: 365 },
+  { key: "semana", label: "cada semana", perYear: 52 },
+  { key: "mes", label: "cada mes", perYear: 12 },
+];
+
+const PRESETS: Record<Freq, number[]> = {
+  dia: [2000, 5000, 10000],
+  semana: [10000, 20000, 50000],
+  mes: [50000, 100000, 200000],
+};
+
+const YEARS = [1, 3, 5, 10] as const;
+
+type State = {
+  amount: number;
+  freq: Freq;
+  years: number;
+  step: number;
+  running: boolean;
+};
 
 type Action =
-  | { type: "setAmount"; value: number }
-  | { type: "setYears"; value: number }
-  | { type: "tick"; total: number; step: number }
+  | { type: "amount"; value: number }
+  | { type: "freq"; value: Freq }
+  | { type: "years"; value: number }
+  | { type: "tick" }
   | { type: "start" };
 
-function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case "setAmount":
-      return { ...state, perDay: action.value, day: 0, running: true };
-    case "setYears":
-      return { ...state, years: action.value, day: 0, running: true };
+const STEPS = 60;
+
+function reducer(s: State, a: Action): State {
+  switch (a.type) {
+    case "amount":
+      return { ...s, amount: a.value, step: 0, running: true };
+    case "freq":
+      // Moving to a new frequency, the old amount is meaningless.
+      return { ...s, freq: a.value, amount: PRESETS[a.value][1], step: 0, running: true };
+    case "years":
+      return { ...s, years: a.value, step: 0, running: true };
     case "start":
-      return { ...state, running: true };
+      return { ...s, step: 0, running: true };
     case "tick": {
-      const next = Math.min(action.total, state.day + action.step);
-      return { ...state, day: next, running: next < action.total };
+      const next = Math.min(STEPS, s.step + 1);
+      return { ...s, step: next, running: next < STEPS };
     }
   }
 }
 
 /**
- * Client Component, lazy-loaded. A reducer keeps the animation to one
- * state update per frame-ish tick rather than several independent
- * setStates, which matters on slow devices.
+ * Client Component, lazy-loaded.
+ *
+ * The animation runs on a fixed 60-frame budget regardless of the time
+ * horizon, so a 10-year projection costs exactly what a 1-year one
+ * does on a slow device.
  */
 export function AhorroCalculator() {
-  const [state, dispatch] = useReducer(reducer, {
-    perDay: 10000,
+  const [s, dispatch] = useReducer(reducer, {
+    amount: 5000,
+    freq: "dia",
     years: 1,
-    day: 0,
+    step: 0,
     running: false,
   });
-
-  const totalDays = state.years * DAYS_PER_YEAR;
-  const iDay = useMemo(() => dailyRate(RATES.cdtEA), []);
 
   useEffect(() => {
     const t = setTimeout(() => dispatch({ type: "start" }), 400);
@@ -54,53 +78,77 @@ export function AhorroCalculator() {
   }, []);
 
   useEffect(() => {
-    if (!state.running || state.day >= totalDays) return;
-    const step = Math.max(1, Math.round(totalDays / 55));
-    const t = setTimeout(
-      () => dispatch({ type: "tick", total: totalDays, step }),
-      32
-    );
+    if (!s.running) return;
+    const t = setTimeout(() => dispatch({ type: "tick" }), 26);
     return () => clearTimeout(t);
-  }, [state.running, state.day, totalDays]);
+  }, [s.running, s.step]);
 
-  const saved = state.perDay * state.day;
-  const invested = futureValue(state.perDay, iDay, state.day);
+  const freq = FREQS.find((f) => f.key === s.freq)!;
+  const totalPeriods = Math.round(freq.perYear * s.years);
+  const rate = useMemo(
+    () => Math.pow(1 + RATES.cdtEA, 1 / freq.perYear) - 1,
+    [freq.perYear]
+  );
 
-  const finalSaved = state.perDay * totalDays;
-  const finalInvested = futureValue(state.perDay, iDay, totalDays);
+  const shown = Math.round((s.step / STEPS) * totalPeriods);
+  const saved = s.amount * shown;
+  const invested = futureValue(s.amount, rate, shown);
+
+  const finalSaved = s.amount * totalPeriods;
+  const finalInvested = futureValue(s.amount, rate, totalPeriods);
   const gap = finalInvested - finalSaved;
   const max = finalInvested || 1;
 
-  // A raw day count past ~90 stops meaning anything; switch to months.
-  const elapsed =
-    state.day < 90
-      ? `${state.day} ${state.day === 1 ? "día" : "días"}`
-      : `${Math.round(state.day / 30)} meses`;
-
-  const setAmount = useCallback(
-    (value: number) => dispatch({ type: "setAmount", value }),
-    []
-  );
-  const setYears = useCallback(
-    (value: number) => dispatch({ type: "setYears", value }),
-    []
-  );
+  const elapsedYears = (shown / freq.perYear).toFixed(1).replace(".", ",");
 
   return (
     <figure className={styles.card}>
       <figcaption className={styles.head}>
         <div className={styles.row}>
-          <p className={styles.q}>Si guardas cada día</p>
-          <div className={styles.picks} role="group" aria-label="Cuánto guardas por día">
-            {AMOUNTS.map((a) => (
+          <p className={styles.q}>Guardo</p>
+          <div className={styles.picks} role="group" aria-label="Cada cuánto guardas">
+            {FREQS.map((f) => (
               <button
-                key={a}
+                key={f.key}
                 type="button"
-                onClick={() => setAmount(a)}
-                aria-pressed={a === state.perDay}
-                className={`${styles.pick} ${a === state.perDay ? styles.on : ""}`}
+                onClick={() => dispatch({ type: "freq", value: f.key })}
+                aria-pressed={f.key === s.freq}
+                className={`${styles.pick} ${f.key === s.freq ? styles.on : ""}`}
               >
-                {money(a)}
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.amountRow}>
+          <label className={styles.amountLabel} htmlFor="pc-monto">
+            <span className={styles.peso}>$</span>
+            <input
+              id="pc-monto"
+              className={styles.amountInput}
+              type="text"
+              inputMode="numeric"
+              value={s.amount.toLocaleString("es-CO")}
+              aria-label="Cuánto guardas cada vez"
+              onChange={(e) => {
+                const n = Number(e.target.value.replace(/\D/g, ""));
+                if (!Number.isNaN(n) && n <= 100_000_000) {
+                  dispatch({ type: "amount", value: n });
+                }
+              }}
+            />
+          </label>
+          <div className={styles.picks}>
+            {PRESETS[s.freq].map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => dispatch({ type: "amount", value: p })}
+                aria-pressed={p === s.amount}
+                className={`${styles.pick} ${p === s.amount ? styles.on : ""}`}
+              >
+                {money(p)}
               </button>
             ))}
           </div>
@@ -109,13 +157,13 @@ export function AhorroCalculator() {
         <div className={styles.row}>
           <p className={`${styles.q} ${styles.qMute}`}>Durante</p>
           <div className={styles.picks} role="group" aria-label="Por cuánto tiempo">
-            {HORIZONS.map((y) => (
+            {YEARS.map((y) => (
               <button
                 key={y}
                 type="button"
-                onClick={() => setYears(y)}
-                aria-pressed={y === state.years}
-                className={`${styles.pick} ${y === state.years ? styles.on : ""}`}
+                onClick={() => dispatch({ type: "years", value: y })}
+                aria-pressed={y === s.years}
+                className={`${styles.pick} ${y === s.years ? styles.on : ""}`}
               >
                 {y} {y === 1 ? "año" : "años"}
               </button>
@@ -124,7 +172,9 @@ export function AhorroCalculator() {
         </div>
       </figcaption>
 
-      <p className={styles.elapsed}>Después de {elapsed}</p>
+      <p className={styles.elapsed}>
+        Después de {elapsedYears} {elapsedYears === "1,0" ? "año" : "años"}
+      </p>
 
       <div className={styles.bars}>
         <Bar
@@ -144,18 +194,11 @@ export function AhorroCalculator() {
       </div>
 
       <p className={styles.foot}>
-        {state.years === 1 ? (
-          <>
-            En un año la diferencia es de <strong>{money(gap)}</strong>. Poca,
-            porque lo que manda al principio es la constancia y no el interés.
-            Mira qué pasa a 5 años.
-          </>
-        ) : (
-          <>
-            En cinco años la diferencia sube a <strong>{money(gap)}</strong>. Es
-            la misma plata guardada: lo único que cambió fue dónde la pusiste.
-          </>
-        )}
+        Con {money(s.amount)} {freq.label}, en {s.years}{" "}
+        {s.years === 1 ? "año" : "años"} juntas{" "}
+        <strong className={styles.neutral}>{money(finalSaved)}</strong>. En un
+        CDT serían <strong>{money(finalInvested)}</strong>, o sea{" "}
+        <strong>{money(gap)}</strong> más sin poner un peso adicional.
       </p>
 
       <p className={styles.warn}>

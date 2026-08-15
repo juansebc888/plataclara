@@ -1,0 +1,225 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.picker {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.pickerTitle {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.goals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.goal {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  text-align: left;
+  font-family: inherit;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease,
+    transform 0.2s var(--ease);
+}
+.goal:hover {
+  transform: translateY(-2px);
+  border-color: var(--gray);
+}
+.goalOn {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.goal strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.goal em {
+  display: block;
+  font-style: normal;
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.box {
+  flex-shrink: 0;
+  width: 21px;
+  height: 21px;
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-top: 1px;
+}
+.goalOn .box {
+  border-color: var(--blue);
+}
+
+.print {
+  width: 100%;
+  justify-content: center;
+}
+.print:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.privacy {
+  font-size: 12.5px;
+  color: var(--gray);
+  text-align: center;
+  margin: 12px 0 0;
+}
+
+/* --- the printable sheet --- */
+
+.sheet {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+}
+
+.sheetHead {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+
+.sheetBrand {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 6px;
+}
+
+.sheetTitle {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.035em;
+  margin: 0 0 14px;
+}
+
+.sheetName {
+  font-size: 14px;
+  color: var(--gray);
+  margin: 0;
+}
+
+.block {
+  margin-bottom: 24px;
+  break-inside: avoid;
+}
+
+.blockTitle {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.tasks li {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+.check {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  margin-top: 2px;
+}
+
+.empty {
+  font-size: 14.5px;
+  color: var(--gray);
+  margin: 0;
+}
+
+.sheetFoot {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  margin-top: 8px;
+}
+.sheetFoot p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--gray);
+  margin: 0;
+}
+.sheetFoot strong {
+  color: var(--ink);
+}
+.sheetUrl {
+  margin-top: 10px !important;
+  font-weight: 600;
+  color: var(--ink) !important;
+}
+
+@media (min-width: 900px) {
+  .wrap {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 32px;
+    align-items: start;
+  }
+}
+
+/* Everything except the sheet disappears on paper. */
+@media print {
+  .picker {
+    display: none;
+  }
+  .sheet {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+}

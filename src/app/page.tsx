@@ -27,8 +27,8 @@ export default function Home() {
                 Empezar aquí
                 <ArrowRight />
               </Link>
-              <Link href="/programas" className="btn btn-ghost">
-                Programas del gobierno
+              <Link href="/mi-plan" className="btn btn-ghost">
+                Armar mi plan
               </Link>
             </div>
           </div>
@@ -54,6 +54,30 @@ export default function Home() {
             </div>
           </Reveal>
           <CategoryGrid />
+        </div>
+      </section>
+
+      <section className={styles.hook}>
+        <div className="shell">
+          <Reveal>
+            <div className={styles.hookInner}>
+              <div>
+                <p className="eyebrow">Para llevar</p>
+                <h2 className="h2">
+                  Arma tu plan y llévatelo impreso.
+                </h2>
+                <p className={styles.hookBody}>
+                  Marcas lo que necesitas hacer y sale una lista concreta en una
+                  hoja. Sin registrarte, sin dejar tus datos y sin tener que
+                  volver a entrar. Funciona aunque después te quedes sin datos.
+                </p>
+              </div>
+              <Link href="/mi-plan" className="btn">
+                Armar mi plan
+                <ArrowRight />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 

@@ -52,3 +52,37 @@
     gap: 48px;
   }
 }
+
+.hook {
+  padding: clamp(40px, 5vw, 64px) 0;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.hookInner {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.hookBody {
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--gray);
+  margin: 16px 0 0;
+  max-width: 54ch;
+}
+
+@media (min-width: 900px) {
+  .hookInner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+  .hookInner > :last-child {
+    flex-shrink: 0;
+  }
+}

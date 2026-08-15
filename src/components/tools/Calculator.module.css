@@ -70,6 +70,55 @@
   font-variant-numeric: tabular-nums;
 }
 
+.amountRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 0 4px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 4px 0 10px;
+}
+
+.amountLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: text;
+}
+
+.peso {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 3.2vw, 34px);
+  letter-spacing: -0.04em;
+  color: var(--gray);
+}
+
+.amountInput {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 3.2vw, 34px);
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 100%;
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+.amountInput:focus-visible {
+  outline: 2.5px solid var(--blue);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.neutral {
+  color: var(--ink) !important;
+}
+
 .bars {
   display: flex;
   flex-direction: column;

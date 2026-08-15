@@ -1,0 +1,158 @@
+.bust {
+  background: #fff9ec;
+  border: 1px solid #f4e4c0;
+  border-radius: var(--radius);
+  padding: 24px 26px;
+}
+
+.bustTag {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8a5a00;
+  margin: 0 0 14px;
+}
+
+.bustText {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #4a3d22;
+  margin: 0 0 14px;
+  max-width: 64ch;
+}
+.bustText:last-child {
+  margin-bottom: 0;
+}
+.bustText strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.micro {
+  padding: clamp(44px, 6vw, 76px) 0;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.compare {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.col {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+.good {
+  background: #fbfffd;
+  border-color: #cdebdf;
+}
+.bad {
+  background: #fffcfb;
+  border-color: #f0dcd8;
+}
+
+.colHead {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+.good .colHead {
+  color: var(--green);
+}
+.bad .colHead {
+  color: var(--red);
+}
+
+.col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.col li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.col li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+}
+.good li::before {
+  content: "✓";
+  color: var(--green);
+}
+.bad li::before {
+  content: "✕";
+  color: var(--red);
+}
+
+.where {
+  padding: clamp(44px, 6vw, 76px) 0;
+}
+
+.allied {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.ally {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--green);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.allyName {
+  font-weight: 600;
+  font-size: 15.5px;
+  margin: 0 0 5px;
+}
+
+.allyDesc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--gray);
+  margin: 0;
+}
+
+.tip {
+  background: var(--blue-soft);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-top: 22px;
+}
+.tip p {
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: var(--ink);
+  margin: 0;
+  max-width: 64ch;
+}
+
+@media (min-width: 700px) {
+  .compare {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .allied {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

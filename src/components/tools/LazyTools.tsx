@@ -24,3 +24,8 @@ export const LazyGotaAGota = dynamic(
   () => import("./GotaAGotaCalculator").then((m) => m.GotaAGotaCalculator),
   { ssr: false, loading: Skeleton }
 );
+
+export const LazyPlan = dynamic(
+  () => import("./PlanBuilder").then((m) => m.PlanBuilder),
+  { ssr: false, loading: Skeleton }
+);
