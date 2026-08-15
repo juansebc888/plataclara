@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CheckList } from "@/components/ui/CheckList";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { OfficialLink } from "@/components/ui/OfficialLink";
+import { Illustration } from "@/components/ui/Illustration";
 import { REFERENCE } from "@/lib/finance";
 import { money } from "@/lib/format";
 import { getCategory } from "@/content/categories";
@@ -49,6 +50,10 @@ export default function Page() {
               </p>
             </div>
             <CheckList yes={NEEDED} no={NOT_NEEDED} />
+            <Illustration
+              name="cedula"
+              caption="Para una cuenta básica, la cédula vigente es lo único indispensable. Lo demás son mitos que mantienen a mucha gente por fuera del banco."
+            />
           </Reveal>
         </div>
       </section>
@@ -108,6 +113,7 @@ export default function Page() {
           </Reveal>
 
           <Reveal delay={100}>
+            <Illustration name="sim-menu" />
             <ol className={shared.steps}>
               {BASIC_PHONE_STEPS.map(([t, d], i) => (
                 <li key={t}>
@@ -123,7 +129,33 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 4 — the honest caveat */}
+      {/* 4 — corresponsales: kills the "toca ir al banco" barrier */}
+      <section className={styles.corresponsales}>
+        <div className="shell">
+          <Reveal>
+            <p className="eyebrow">No toca ir al banco</p>
+            <h2 className="h2">La tienda del barrio también es el banco.</h2>
+            <div className="prose">
+              <p>
+                Mucha gente no abre cuenta porque se imagina la fila, el
+                transporte hasta el centro y perder medio día de trabajo. Con
+                los <strong>corresponsales bancarios</strong> eso ya no aplica.
+              </p>
+              <p>
+                Un corresponsal es una tienda, droguería o papelería del barrio
+                autorizada para hacer operaciones del banco. Ahí puedes sacar
+                plata, consignar y pagar recibos, sin ir a una sucursal.
+              </p>
+            </div>
+            <Illustration
+              name="corresponsal"
+              caption="Los corresponsales suelen quedar a pocas cuadras y atienden en horario de tienda, no de banco."
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 5 — the honest caveat */}
       <section className={styles.limits}>
         <div className="shell">
           <Reveal>

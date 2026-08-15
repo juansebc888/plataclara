@@ -28,7 +28,18 @@ export const REFERENCE = {
   fogafin: 50_000_000,
   /** Monto mínimo típico para abrir un CDT en una entidad digital. */
   cdtMinimoDigital: 100_000,
+  /**
+   * Tasa de usura para crédito de consumo y ordinario, efectivo anual.
+   * ACTUALIZAR: la certifica la Superintendencia Financiera y cambia
+   * periódicamente. Este valor corresponde a agosto de 2026.
+   */
+  usuraEA: 0.2966,
+  usuraMes: "agosto de 2026",
 } as const;
+
+/** Convierte una tasa mensual a su equivalente efectivo anual. */
+export const monthlyToEA = (monthly: number): number =>
+  Math.pow(1 + monthly, 12) - 1;
 
 /** Convierte una tasa efectiva anual a su equivalente diario. */
 export const dailyRate = (annualEA: number): number =>

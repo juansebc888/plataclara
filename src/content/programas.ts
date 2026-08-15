@@ -62,6 +62,70 @@ export const PROGRAMS: Program[] = [
     },
   },
   {
+    slug: "beps",
+    name: "BEPS",
+    who: "Colpensiones · Gobierno Nacional",
+    url: "https://www.colpensiones.gov.co",
+    urlLabel: "colpensiones.gov.co",
+    what: "Ahorro para la vejez hecho para quien gana menos de un salario mínimo. Ahorras lo que puedas, cuando puedas, y el Estado le suma un 20% encima.",
+    kind: "no-se-devuelve",
+    forWhom:
+      "Personas con ingresos por debajo de un salario mínimo que no alcanzan a cotizar pensión: vendedores, mototaxistas, trabajo por días, amas de casa, campesinos.",
+    reality:
+      "No reemplaza una pensión completa, pero es la diferencia entre llegar a viejo con algo y llegar sin nada. El aporte mínimo es pequeño a propósito.",
+    detail: {
+      intro:
+        "Beneficios Económicos Periódicos. Es el programa del Gobierno diseñado exactamente para quien tiene ingreso informal y variable: no exige aportes fijos ni contrato de trabajo.",
+      outcomes: [
+        "Por qué BEPS existe si no puedes cotizar a pensión normal",
+        "Cuánto es lo mínimo que puedes ahorrar y cada cuánto",
+        "Qué pone el Estado encima de lo que tú ahorres",
+      ],
+      sections: [
+        {
+          title: "Para quién se hizo",
+          body: [
+            "El sistema de pensiones normal asume un sueldo fijo y aportes todos los meses. Si trabajas por días, vendes en la calle o tu ingreso cambia cada semana, ese sistema simplemente no te aplica.",
+            "BEPS se hizo para ese caso. Es un servicio social complementario de Colpensiones para personas que reciben menos de un salario mínimo y no alcanzan a cotizar a pensión.",
+          ],
+        },
+        {
+          title: "El Estado le pone encima",
+          body: [
+            "Esta es la parte que casi nadie sabe: sobre lo que tú ahorres, el Estado agrega un subsidio del 20% al momento del retiro.",
+            "Ese 20% no existe en ninguna otra forma de ahorro. Ni debajo del colchón, ni en una cuenta, ni en un CDT.",
+          ],
+        },
+        {
+          title: "Cuánto y cada cuánto",
+          body: [
+            "Para 2026 el aporte mínimo se mantiene en $20.000 al mes, con un tope de $2.450.000 al año. No hay obligación de aportar todos los meses: si un mes no pudiste, no pasa nada y no pierdes lo ahorrado.",
+            "Al llegar a la edad de retiro, lo ahorrado más el subsidio se convierte en una renta que llega de por vida. También se puede usar para completar semanas y alcanzar una pensión de vejez.",
+          ],
+        },
+        {
+          title: "Dónde se consigna",
+          body: [
+            "No hace falta ir a una oficina de Colpensiones. Se puede aportar en corresponsales bancarios, puntos de pago y canales digitales.",
+            "Eso importa: significa que puedes ahorrar para la vejez en la misma tienda del barrio donde pagas los recibos.",
+          ],
+        },
+      ],
+      steps: [
+        ["Confirma que aplicas", "Es para quien recibe menos de un salario mínimo y no está cotizando a pensión."],
+        ["Vincúlate a BEPS", "Se hace por los canales de Colpensiones. La vinculación no cuesta."],
+        ["Ahorra lo que puedas, cuando puedas", "Desde el mínimo mensual. No es obligatorio aportar todos los meses."],
+        ["Consigna donde te quede cerca", "Corresponsales bancarios y puntos de pago sirven."],
+        ["Revisa tu saldo de vez en cuando", "En el portal puedes ver cuánto llevas y la renta estimada."],
+      ],
+      watch: [
+        "BEPS no es una pensión completa: la renta es menor. Aun así, es mucho mejor que no tener nada.",
+        "Vincularse es gratis. Nadie puede cobrarte por inscribirte.",
+        "Los montos mínimos y máximos se actualizan cada año.",
+      ],
+    },
+  },
+  {
     slug: "fondo-emprender",
     name: "Fondo Emprender",
     who: "SENA · Gobierno Nacional",

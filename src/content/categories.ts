@@ -76,6 +76,21 @@ export const CATEGORIES: Category[] = [
     ],
   },
   {
+    slug: "estafas",
+    name: "No caer en estafas",
+    desc: "Las trampas más comunes: préstamos falsos, llamadas del «banco», pirámides y premios que no jugaste.",
+    action: "Ver las señales",
+    intro:
+      "A quien nunca ha podido acceder a un crédito le ofrecen préstamos fáciles todo el tiempo. Casi ninguno es real.",
+    tone: "red",
+    icon: "debt",
+    outcomes: [
+      "Reconocer las cinco estafas más comunes antes de perder plata",
+      "Las cinco señales que aparecen en todas, sin excepción",
+      "Qué hacer de inmediato si ya consignaste o diste tus datos",
+    ],
+  },
+  {
     slug: "programas",
     name: "Ayuda del gobierno",
     desc: "Banca de las Oportunidades y otros programas que ya existen y casi nadie usa.",
@@ -103,6 +118,21 @@ export const CATEGORIES: Category[] = [
       "Dónde atiende una persona sin cobrarte",
       "Qué entidad resuelve cada tipo de problema",
       "Qué hacer si te sientes estafado o amenazado",
+    ],
+  },
+  {
+    slug: "glosario",
+    name: "Qué significa cada palabra",
+    desc: "Cuota de manejo, tasa efectiva, mora, capital, usura. Las palabras del banco, en español claro.",
+    action: "Ver el diccionario",
+    intro:
+      "Buena parte del problema no es la plata: es el idioma.",
+    tone: "blue",
+    icon: "help",
+    outcomes: [
+      "Qué quieren decir las palabras que usan en la oficina del banco",
+      "La diferencia entre tasa efectiva y tasa nominal",
+      "Qué preguntar cuando no entiendas algo",
     ],
   },
 ];

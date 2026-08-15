@@ -22,7 +22,7 @@ export function Footer() {
         <div className={styles.cols}>
           <div>
             <p className={styles.h}>Temas</p>
-            {CATEGORIES.slice(0, 3).map((c) => (
+            {CATEGORIES.slice(0, 4).map((c) => (
               <Link key={c.slug} href={`/${c.slug}`} className={styles.link}>
                 {c.name}
               </Link>
@@ -30,7 +30,7 @@ export function Footer() {
           </div>
           <div>
             <p className={styles.h}>Más</p>
-            {CATEGORIES.slice(3).map((c) => (
+            {CATEGORIES.slice(4).map((c) => (
               <Link key={c.slug} href={`/${c.slug}`} className={styles.link}>
                 {c.name}
               </Link>

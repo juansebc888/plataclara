@@ -142,3 +142,10 @@
   gap: 10px;
   margin-top: 4px;
 }
+
+.corresponsales {
+  padding: clamp(44px, 6vw, 76px) 0;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}

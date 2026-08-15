@@ -162,3 +162,79 @@
 .exitLink {
   margin-top: 24px;
 }
+
+/* Usura (deudas) */
+.usura {
+  padding: clamp(44px, 6vw, 76px) 0;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.red {
+  color: var(--red) !important;
+}
+
+.check {
+  background: #fdf4f2;
+  border: 1px solid #f0dcd8;
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-top: 26px;
+}
+
+.checkTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 14px;
+}
+
+.check ol {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.check li {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #5a2a20;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.insolvencia {
+  background: var(--blue-soft);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-top: 24px;
+}
+
+.insolvenciaTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 12px;
+}
+
+.insolvencia p {
+  font-size: 15px;
+  line-height: 1.62;
+  color: var(--ink);
+  margin: 0 0 12px;
+  max-width: 64ch;
+}
+.insolvencia p:last-child {
+  margin-bottom: 0;
+}

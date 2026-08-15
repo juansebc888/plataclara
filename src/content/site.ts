@@ -17,12 +17,14 @@ export const NAV = [
   { href: "/presupuesto", label: "Organizar plata" },
   { href: "/credito", label: "Pedir prestado" },
   { href: "/deudas", label: "Salir de deudas" },
+  { href: "/estafas", label: "No caer en estafas" },
   { href: "/programas", label: "Ayuda del gobierno" },
   { href: "/ayuda", label: "Hablar con alguien" },
 ] as const;
 
 export const FOOTER_EXTRA = [
   { href: "/mi-plan", label: "Mi plan" },
+  { href: "/glosario", label: "Glosario" },
   { href: "/herramientas", label: "Herramientas" },
   { href: "/sobre-el-proyecto", label: "Sobre el proyecto" },
 ] as const;
