@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
+import { ArrowRight } from "@/components/ui/Icon";
 import { getCategory } from "@/content/categories";
 import { BAD_WEEK, BUCKETS, METHOD_STEPS } from "@/content/presupuesto";
 import shared from "../subpage.module.css";
@@ -97,11 +99,17 @@ export default function Page() {
               ))}
             </ul>
 
-            <div className={shared.pending}>
+            <div className={styles.paper}>
+              <p className={styles.paperTitle}>Llévatelo en papel</p>
               <p>
-                <strong>Pendiente:</strong> agregar una hoja imprimible para
-                anotar el reparto diario, pensada para quien no usa aplicaciones.
+                Esto funciona mejor escrito que en la cabeza. En «Mi plan»
+                marcas qué quieres hacer y sale una hoja para imprimir, con
+                espacio para anotar tu número.
               </p>
+              <Link href="/mi-plan" className="btn">
+                Armar mi plan
+                <ArrowRight />
+              </Link>
             </div>
           </Reveal>
         </div>

@@ -6,7 +6,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { ArrowUpRight } from "@/components/ui/Icon";
 import { getCategory } from "@/content/categories";
-import { ALLIED_KINDS, KIND_LABEL, PROGRAMS } from "@/content/programas";
+import { OfficialLink } from "@/components/ui/OfficialLink";
+import { ALLIES, KIND_LABEL, PROGRAMS } from "@/content/programas";
 import shared from "../subpage.module.css";
 import styles from "./programas.module.css";
 
@@ -90,37 +91,35 @@ export default function Page() {
 
           <div className={styles.grid}>
             {PROGRAMS.map((p, i) => {
-              const card = (
-                <article className={`${styles.card} ${styles[p.kind === "no-se-devuelve" ? "free" : p.kind === "prestado" ? "loan" : "door"]}`}>
-                  <p className={styles.cardTag}>{KIND_LABEL[p.kind]}</p>
-                  <h3 className="h3">{p.name}</h3>
-                  <p className={styles.who}>{p.who}</p>
-                  <p className={styles.what}>{p.what}</p>
-
-                  <p className={styles.label}>Para quién</p>
-                  <p className={styles.text}>{p.forWhom}</p>
-
-                  <p className={styles.label}>La realidad</p>
-                  <p className={styles.text}>{p.reality}</p>
-
-                  {p.slug ? (
-                    <span className={styles.more}>
-                      Ver en detalle
-                      <ArrowUpRight />
-                    </span>
-                  ) : null}
-                </article>
-              );
+              const toneClass =
+                p.kind === "no-se-devuelve"
+                  ? styles.free
+                  : p.kind === "prestado"
+                    ? styles.loan
+                    : styles.door;
 
               return (
-                <Reveal key={p.name} delay={i * 60}>
-                  {p.slug ? (
-                    <Link href={`/programas/${p.slug}`} className={styles.link}>
-                      {card}
-                    </Link>
-                  ) : (
-                    card
-                  )}
+                <Reveal key={p.slug} delay={i * 60}>
+                  <article className={`${styles.card} ${toneClass}`}>
+                    <p className={styles.cardTag}>{KIND_LABEL[p.kind]}</p>
+                    <h3 className="h3">{p.name}</h3>
+                    <p className={styles.who}>{p.who}</p>
+                    <p className={styles.what}>{p.what}</p>
+
+                    <p className={styles.label}>Para quién</p>
+                    <p className={styles.text}>{p.forWhom}</p>
+
+                    <p className={styles.label}>La realidad</p>
+                    <p className={styles.text}>{p.reality}</p>
+
+                    <div className={styles.actions}>
+                      <Link href={`/programas/${p.slug}`} className={styles.more}>
+                        Ver en detalle
+                        <ArrowUpRight />
+                      </Link>
+                      <OfficialLink href={p.url} label={p.urlLabel} compact />
+                    </div>
+                  </article>
                 </Reveal>
               );
             })}
@@ -158,20 +157,23 @@ export default function Page() {
             </div>
 
             <div className={styles.allied}>
-              {ALLIED_KINDS.map(([name, desc]) => (
-                <div key={name} className={styles.ally}>
-                  <p className={styles.allyName}>{name}</p>
-                  <p className={styles.allyDesc}>{desc}</p>
+              {ALLIES.map((a) => (
+                <div key={a.name} className={styles.ally}>
+                  <p className={styles.allyName}>{a.name}</p>
+                  <p className={styles.allyDesc}>{a.desc}</p>
+                  {a.url && a.urlLabel ? (
+                    <OfficialLink href={a.url} label={a.urlLabel} compact />
+                  ) : null}
                 </div>
               ))}
             </div>
 
-            <div className={shared.pending}>
+            <div className={styles.sourceNote}>
               <p>
-                <strong>Pendiente:</strong> confirmar direcciones, horarios y
-                teléfonos de los puntos de atención en Barranquilla, y revisar
-                cada convocatoria antes de publicar. Ningún dato de contacto se
-                publica sin verificarlo en la fuente oficial.
+                <strong>No publicamos direcciones ni teléfonos de sedes.</strong>{" "}
+                Cambian seguido, y un dato viejo te hace perder el día. En cada
+                programa dejamos el enlace a su página oficial, que es donde
+                siempre va a estar la información correcta.
               </p>
             </div>
           </Reveal>

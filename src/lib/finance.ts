@@ -1,15 +1,33 @@
 /**
  * Tasas de referencia.
- * VERIFICAR todas contra fuentes actuales antes de publicar: las tasas de
- * CDT se mueven con las decisiones del Banco de la República.
+ *
+ * Verificadas contra tarifarios y prensa financiera de 2026. Aun así,
+ * REVISAR cada pocos meses: las tasas de CDT se mueven con las
+ * decisiones del Banco de la República.
  */
 export const RATES = {
-  /** CDT, efectivo anual. */
-  cdtEA: 0.085,
+  /**
+   * CDT a 360 días, efectivo anual. Conservador a propósito: en 2026 los
+   * bancos tradicionales rondan 10,5%–11,25% y los digitales llegan a 13%.
+   * Usamos el piso para no prometer de más.
+   */
+  cdtEA: 0.105,
   /** Gota a gota, mensual. Cifra común en la práctica, no oficial. */
   gotaMonthly: 0.2,
   /** Microcrédito formal, mensual aproximado. */
   formalMonthly: 0.025,
+} as const;
+
+/** Datos de referencia del año en curso. ACTUALIZAR cada enero. */
+export const REFERENCE = {
+  year: 2026,
+  /** Decretos 1469 y 1470 de diciembre de 2025. */
+  smmlv: 1_750_905,
+  auxilioTransporte: 249_095,
+  /** Cobertura de Fogafín por persona y por entidad. */
+  fogafin: 50_000_000,
+  /** Monto mínimo típico para abrir un CDT en una entidad digital. */
+  cdtMinimoDigital: 100_000,
 } as const;
 
 /** Convierte una tasa efectiva anual a su equivalente diario. */

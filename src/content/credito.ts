@@ -51,6 +51,23 @@ export const CREDIT_STEPS: [string, string][] = [
 export const CREDIT_RIGHTS: string[] = [
   "Tienes derecho a consultar tu propia información y a que te expliquen qué aparece reportado.",
   "Si hay un error, puedes pedir que lo corrijan. La entidad tiene que responderte.",
-  "El reporte negativo no dura para siempre: la ley fija un tiempo máximo de permanencia contado desde que pagas.",
-  "Nadie puede cobrarte por consultar tu propia información.",
+  "El reporte negativo no dura para siempre. El tiempo máximo es el doble de lo que duraste en mora, y en todo caso no más de cuatro años contados desde que pagaste. Cumplido ese plazo, borrarlo es obligatorio y puedes reclamarlo.",
+  "Nadie puede cobrarte por consultar tu propia información ni por «limpiar» tu historial. Quien ofrezca borrarte de las centrales por una tarifa te está estafando.",
+  "Si le reclamas a una entidad y no te responde en el plazo de ley, puedes escalar al Defensor del Consumidor Financiero o a la Superintendencia Financiera, sin costo.",
+];
+
+/** Dónde se consulta el historial. Fuentes oficiales, no intermediarios. */
+export const BUREAUS: { name: string; url: string; urlLabel: string; note: string }[] = [
+  {
+    name: "Datacrédito",
+    url: "https://www.midatacredito.com",
+    urlLabel: "midatacredito.com",
+    note: "La central de riesgo más consultada por los bancos en Colombia.",
+  },
+  {
+    name: "TransUnion",
+    url: "https://www.transunion.co",
+    urlLabel: "transunion.co",
+    note: "La otra central grande. Vale la pena revisar ambas: no siempre dicen lo mismo.",
+  },
 ];

@@ -4,6 +4,9 @@ import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { CheckList } from "@/components/ui/CheckList";
 import { Outcomes } from "@/components/ui/Outcomes";
+import { OfficialLink } from "@/components/ui/OfficialLink";
+import { REFERENCE } from "@/lib/finance";
+import { money } from "@/lib/format";
 import { getCategory } from "@/content/categories";
 import {
   ACCOUNT_TYPES,
@@ -128,10 +131,16 @@ export default function Page() {
             <div className={styles.warnBox}>
               <p>
                 Las cuentas de trámite simplificado tienen un límite de cuánto
-                puedes tener guardado y cuánto puedes retirar cada mes. Esos
-                topes están amarrados al salario mínimo, así que cambian todos
-                los años. Si vas a mover cantidades grandes, pregunta en la
-                entidad cuál es el tope vigente antes de abrirla.
+                puedes tener guardado y cuánto puedes sacar al mes. Ese tope se
+                cuenta en salarios mínimos, y en {REFERENCE.year} el salario
+                mínimo es de <strong>{money(REFERENCE.smmlv)}</strong>. Como
+                cambia cada enero, pregunta en la entidad cuál es el tope
+                vigente el día que vayas.
+              </p>
+              <p>
+                Para lo que gana y mueve la mayoría de la gente, ese tope no
+                estorba. Si manejas cantidades más grandes, ahí sí conviene una
+                cuenta de ahorros normal.
               </p>
               <p>
                 También: solo puedes tener <strong>una</strong> cuenta de este
@@ -139,12 +148,25 @@ export default function Page() {
               </p>
             </div>
 
-            <div className={shared.pending}>
+            <div className={styles.protect}>
+              <p className={styles.protectTitle}>Tu plata está protegida</p>
               <p>
-                <strong>Pendiente:</strong> confirmar los topes vigentes de
-                saldo y retiro, y agregar una lista de entidades que ofrecen
-                este producto en Barranquilla, con direcciones verificadas.
+                Lo que tengas en una entidad vigilada está respaldado por
+                Fogafín hasta <strong>{money(REFERENCE.fogafin)}</strong> por
+                persona y por entidad. Si el banco quiebra, esa plata te la
+                devuelven. Debajo del colchón no hay nada de eso.
               </p>
+              <p className={styles.protectNote}>
+                Antes de abrir cuenta en cualquier parte, confirma que la
+                entidad esté vigilada. Se consulta gratis.
+              </p>
+              <div className={styles.linkRow}>
+                <OfficialLink
+                  href="https://www.superfinanciera.gov.co"
+                  label="superfinanciera.gov.co"
+                />
+                <OfficialLink href="https://www.fogafin.gov.co" label="fogafin.gov.co" />
+              </div>
             </div>
           </Reveal>
         </div>

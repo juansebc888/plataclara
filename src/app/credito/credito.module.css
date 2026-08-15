@@ -85,3 +85,57 @@
     gap: 18px 32px;
   }
 }
+
+.bureaus {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.bureau {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: 16px;
+  padding: 20px 22px;
+}
+
+.bureauName {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+
+.bureauNote {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--gray);
+  margin: 0 0 12px;
+}
+
+.scam {
+  background: #fdf4f2;
+  border: 1px solid #f0dcd8;
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-top: 20px;
+}
+.scam p {
+  font-size: 15px;
+  line-height: 1.62;
+  color: #5a2a20;
+  margin: 0;
+  max-width: 66ch;
+}
+.scam strong {
+  color: var(--red);
+}
+
+@media (min-width: 700px) {
+  .bureaus {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

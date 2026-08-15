@@ -85,3 +85,80 @@
     gap: 56px;
   }
 }
+
+.sources {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-top: 28px;
+}
+
+.sourcesTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 16px;
+}
+
+.sourceLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Salidas de una deuda informal (deudas) */
+.exits {
+  list-style: none;
+  counter-reset: exit;
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 68ch;
+}
+
+.exits li {
+  counter-increment: exit;
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px 18px 58px;
+}
+.exits li::before {
+  content: counter(exit);
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #fbe4df;
+  color: var(--red);
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exitT {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.exitD {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0;
+}
+
+.exitLink {
+  margin-top: 24px;
+}

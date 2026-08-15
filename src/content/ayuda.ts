@@ -12,6 +12,8 @@ export type HelpChannel = {
   how: string;
   cost: string;
   tone: "blue" | "green" | "red";
+  url?: string;
+  urlLabel?: string;
 };
 
 export const CHANNELS: HelpChannel[] = [
@@ -22,6 +24,8 @@ export const CHANNELS: HelpChannel[] = [
     how: "Toda entidad vigilada está obligada a tener uno, y es independiente de la entidad. Pregunta por él en la oficina o búscalo en la página del banco.",
     cost: "Gratis. La ley dice expresamente que no puede costarte nada.",
     tone: "green",
+    url: "https://www.superfinanciera.gov.co/publicaciones/11222/defensor-del-consumidor-financiero/",
+    urlLabel: "Registro de defensores",
   },
   {
     name: "La Superintendencia Financiera",
@@ -30,6 +34,8 @@ export const CHANNELS: HelpChannel[] = [
     how: "Puedes poner la queja directamente, sin pasar primero por el Defensor. Son caminos separados y tú eliges.",
     cost: "Gratis.",
     tone: "blue",
+    url: "https://www.superfinanciera.gov.co",
+    urlLabel: "superfinanciera.gov.co",
   },
   {
     name: "Reclamo directo a la entidad",
@@ -45,6 +51,8 @@ export const CHANNELS: HelpChannel[] = [
     how: "Denuncia. No tienes que pagar para poner una denuncia y no necesitas abogado para hacerlo.",
     cost: "Gratis.",
     tone: "red",
+    url: "https://www.fiscalia.gov.co",
+    urlLabel: "fiscalia.gov.co",
   },
 ];
 

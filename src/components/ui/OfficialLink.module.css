@@ -1,0 +1,33 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  padding: 8px 14px;
+  background: var(--blue-soft);
+  border-radius: 99px;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s ease;
+}
+.link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(27, 77, 255, 0.16);
+}
+.link svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.compact {
+  background: transparent;
+  padding: 0;
+  font-size: 13px;
+}
+.compact:hover {
+  transform: none;
+  box-shadow: none;
+  text-decoration: underline;
+}

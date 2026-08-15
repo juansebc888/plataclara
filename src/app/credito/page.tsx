@@ -4,7 +4,8 @@ import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { getCategory } from "@/content/categories";
-import { CREDIT_MYTHS, CREDIT_RIGHTS, CREDIT_STEPS } from "@/content/credito";
+import { OfficialLink } from "@/components/ui/OfficialLink";
+import { BUREAUS, CREDIT_MYTHS, CREDIT_RIGHTS, CREDIT_STEPS } from "@/content/credito";
 import shared from "../subpage.module.css";
 import styles from "./credito.module.css";
 
@@ -117,14 +118,35 @@ export default function Page() {
 
       <section className={shared.body}>
         <div className="shell">
-          <div className={shared.pending}>
-            <p>
-              <strong>Pendiente:</strong> confirmar contra la ley vigente los
-              plazos exactos de permanencia del reporte negativo, y explicar
-              paso a paso cómo consultar el historial sin pagarle a un
-              intermediario.
-            </p>
-          </div>
+          <Reveal>
+            <p className="eyebrow">Dónde consultarlo</p>
+            <h2 className="h2">Ve directo a la fuente.</h2>
+            <div className="prose">
+              <p>
+                Estas son las centrales de riesgo donde vive tu información. Se
+                consulta en su propia página, sin intermediarios.
+              </p>
+            </div>
+
+            <div className={styles.bureaus}>
+              {BUREAUS.map((b) => (
+                <div key={b.name} className={styles.bureau}>
+                  <p className={styles.bureauName}>{b.name}</p>
+                  <p className={styles.bureauNote}>{b.note}</p>
+                  <OfficialLink href={b.url} label={b.urlLabel} compact />
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.scam}>
+              <p>
+                <strong>Cuidado con esto:</strong> nadie puede «borrarte» de las
+                centrales de riesgo por una tarifa. Los reportes salen solos
+                cuando se cumple el plazo de ley. Quien te ofrezca limpiarte el
+                historial a cambio de plata te está estafando.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 

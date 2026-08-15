@@ -3,7 +3,8 @@ import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
-import { ALLIED_KINDS } from "@/content/programas";
+import { OfficialLink } from "@/components/ui/OfficialLink";
+import { ALLIES, getProgram } from "@/content/programas";
 import shared from "../../subpage.module.css";
 import styles from "./banca.module.css";
 
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
   description:
     "Qué es Banca de las Oportunidades, por qué no presta plata directamente, y cómo llegar a un microcrédito para tu propio negocio.",
 };
+
+const PROGRAM = getProgram("banca-de-las-oportunidades")!;
 
 const OUTCOMES = [
   "Por qué Banca de las Oportunidades no te presta plata directamente",
@@ -56,6 +59,9 @@ export default function Page() {
         ]}
       >
         <Outcomes items={OUTCOMES} />
+        <div className={styles.linkRow}>
+          <OfficialLink href={PROGRAM.url} label={PROGRAM.urlLabel} />
+        </div>
       </PageHero>
 
       {/* The single biggest misconception */}
@@ -166,10 +172,13 @@ export default function Page() {
             <p className="eyebrow">Dónde preguntar</p>
             <h2 className="h2">Cuatro tipos de puerta.</h2>
             <div className={styles.allied}>
-              {ALLIED_KINDS.map(([name, desc]) => (
-                <div key={name} className={styles.ally}>
-                  <p className={styles.allyName}>{name}</p>
-                  <p className={styles.allyDesc}>{desc}</p>
+              {ALLIES.map((a) => (
+                <div key={a.name} className={styles.ally}>
+                  <p className={styles.allyName}>{a.name}</p>
+                  <p className={styles.allyDesc}>{a.desc}</p>
+                  {a.url && a.urlLabel ? (
+                    <OfficialLink href={a.url} label={a.urlLabel} compact />
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -183,12 +192,18 @@ export default function Page() {
               </p>
             </div>
 
-            <div className={shared.pending}>
+            <div className={styles.tip}>
               <p>
-                <strong>Pendiente:</strong> confirmar cuáles entidades aliadas
-                atienden microcrédito en Barranquilla, con dirección y horario
-                verificados. No publicar ninguna dirección sin comprobarla.
+                <strong>Antes de entregarle plata a una entidad,</strong>{" "}
+                confirma que esté vigilada por la Superintendencia Financiera.
+                Se consulta gratis en su página y toma un minuto.
               </p>
+              <div className={styles.linkRow}>
+                <OfficialLink
+                  href="https://www.superfinanciera.gov.co"
+                  label="superfinanciera.gov.co"
+                />
+              </div>
             </div>
           </Reveal>
         </div>

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { ArrowRight } from "@/components/ui/Icon";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { LazyGotaAGota } from "@/components/tools/LazyTools";
 import { getCategory } from "@/content/categories";
@@ -56,13 +58,44 @@ export default function Page() {
           <Reveal>
             <p className="eyebrow">Salidas</p>
             <h2 className="h2">Qué se puede hacer si ya estás adentro.</h2>
-            <div className={styles.pending}>
-              <p>
-                <strong>Pendiente:</strong> documentar las salidas reales —
-                refinanciación con entidad formal, programas de la alcaldía,
-                líneas de denuncia y acompañamiento — con nombres, requisitos y
-                direcciones verificadas.
-              </p>
+            <ol className={styles.exits}>
+              <li>
+                <p className={styles.exitT}>Anota el número real</p>
+                <p className={styles.exitD}>
+                  Cuánto pediste, cuánto pagas por cuota, cuántas cuotas llevas.
+                  Mucha gente descubre aquí que ya devolvió más de lo que pidió.
+                </p>
+              </li>
+              <li>
+                <p className={styles.exitT}>Pregunta por refinanciación formal</p>
+                <p className={styles.exitD}>
+                  Un microcrédito en una entidad vigilada, a una tasa muchísimo
+                  menor, para pagar de una vez la deuda informal. No siempre lo
+                  aprueban, pero preguntar no cuesta nada.
+                </p>
+              </li>
+              <li>
+                <p className={styles.exitT}>No tapes un hueco con otro</p>
+                <p className={styles.exitD}>
+                  Pedir prestado a un segundo prestamista para pagarle al
+                  primero es el camino más rápido a una deuda que ya no se puede
+                  pagar. Si ya lo hiciste, con más razón hay que parar ahí.
+                </p>
+              </li>
+              <li>
+                <p className={styles.exitT}>Si hay amenazas, denuncia</p>
+                <p className={styles.exitD}>
+                  Cobrar con intimidación es un delito, aunque tú sí debas la
+                  plata. Denunciar es gratis y no necesitas abogado.
+                </p>
+              </li>
+            </ol>
+
+            <div className={styles.exitLink}>
+              <Link href="/ayuda" className="btn">
+                Ver dónde buscar ayuda
+                <ArrowRight />
+              </Link>
             </div>
           </Reveal>
         </div>

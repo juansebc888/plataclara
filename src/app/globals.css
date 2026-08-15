@@ -304,3 +304,84 @@ a {
     transform: scaleX(1);
   }
 }
+
+
+/* ==================================================================
+   Impresión
+   El navegador por defecto imprime la navegación, el pie y los fondos
+   oscuros, que se comen la tinta y no sirven en papel. Aquí se deja
+   solo el contenido.
+   ================================================================== */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11.5pt;
+  }
+
+  /* Fuera todo lo que no es contenido */
+  header,
+  footer,
+  nav,
+  .skip,
+  .btn,
+  [data-noprint] {
+    display: none !important;
+  }
+
+  .shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  .section {
+    padding: 0;
+  }
+
+  /* Nada de animaciones ni elementos ocultos al imprimir */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Los fondos oscuros gastan tinta y se leen mal */
+  [class*="facts"],
+  [class*="rights"],
+  [class*="cta"] {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    color: #000 !important;
+  }
+
+  li,
+  img,
+  figure,
+  article {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000 !important;
+  }
+}

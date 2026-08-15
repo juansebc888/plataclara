@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
+import { OfficialLink } from "@/components/ui/OfficialLink";
 import { FACTS_SOURCE } from "@/content/facts";
+import { RATES, REFERENCE } from "@/lib/finance";
+import { money, percent } from "@/lib/format";
 import styles from "../subpage.module.css";
 
 export const metadata: Metadata = {
@@ -42,13 +45,34 @@ export default function Page() {
 
               <h2 className="h2">De dónde salen las cifras.</h2>
               <p>{FACTS_SOURCE}</p>
+              <p>
+                Las calculadoras usan una tasa de CDT de{" "}
+                <strong>{percent(RATES.cdtEA)} efectivo anual</strong>. Es a
+                propósito conservadora: en {REFERENCE.year} los bancos
+                tradicionales rondan tasas más altas y los digitales llegan más
+                arriba todavía. Preferimos quedarnos cortos antes que prometer
+                de más.
+              </p>
+              <p>
+                Para los topes de cuentas usamos el salario mínimo de{" "}
+                {REFERENCE.year}, que es {money(REFERENCE.smmlv)}. La cobertura
+                de Fogafín es de {money(REFERENCE.fogafin)} por persona y por
+                entidad.
+              </p>
+              <p>
+                Todo esto cambia. Si ves un dato desactualizado, lo mejor es ir
+                directo a la fuente oficial.
+              </p>
             </div>
 
-            <div className={styles.pending}>
-              <p>
-                <strong>Pendiente:</strong> escribir la sección de autoría y
-                agregar una forma de contacto una vez definida.
-              </p>
+            <div className={styles.sources}>
+              <p className={styles.sourcesTitle}>Fuentes oficiales</p>
+              <div className={styles.sourceLinks}>
+                <OfficialLink href="https://www.superfinanciera.gov.co" label="superfinanciera.gov.co" />
+                <OfficialLink href="https://www.banrep.gov.co" label="banrep.gov.co" />
+                <OfficialLink href="https://www.bancadelasoportunidades.gov.co" label="bancadelasoportunidades.gov.co" />
+                <OfficialLink href="https://www.fogafin.gov.co" label="fogafin.gov.co" />
+              </div>
             </div>
           </Reveal>
         </div>

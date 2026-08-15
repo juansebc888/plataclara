@@ -4,6 +4,7 @@ import { CTA } from "@/components/ui/CTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { getCategory } from "@/content/categories";
+import { OfficialLink } from "@/components/ui/OfficialLink";
 import { CHANNELS, RIGHTS_NOTES } from "@/content/ayuda";
 import shared from "../subpage.module.css";
 import styles from "./ayuda.module.css";
@@ -52,6 +53,11 @@ export default function Page() {
                   <p className={styles.text}>{c.how}</p>
 
                   <p className={styles.cost}>{c.cost}</p>
+                  {c.url && c.urlLabel ? (
+                    <div className={styles.linkRow}>
+                      <OfficialLink href={c.url} label={c.urlLabel} compact />
+                    </div>
+                  ) : null}
                 </article>
               </Reveal>
             ))}
@@ -88,12 +94,16 @@ export default function Page() {
               </p>
             </div>
 
-            <div className={shared.pending}>
+            <div className={styles.sourceNote}>
               <p>
-                <strong>Pendiente:</strong> agregar los puntos de atención de
-                Barranquilla con dirección, horario y teléfono verificados, y
-                la línea nacional vigente para denuncias. No poner ningún número
-                sin confirmarlo primero en la fuente oficial.
+                <strong>Aquí no publicamos teléfonos ni direcciones.</strong>{" "}
+                Cambian, y llamar a un número viejo cuando estás en problemas es
+                peor que no tener el número. Cada entidad tiene su enlace
+                oficial arriba: ahí siempre está el dato correcto y actualizado.
+              </p>
+              <p className={styles.sourceNoteSmall}>
+                Si estás en peligro inmediato, la línea de emergencias nacional
+                es el 123.
               </p>
             </div>
           </Reveal>
