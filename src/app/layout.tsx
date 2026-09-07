@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -61,6 +62,7 @@ export default function RootLayout({
         <Navbar />
         <main id="contenido">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
