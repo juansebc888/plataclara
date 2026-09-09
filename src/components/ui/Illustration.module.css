@@ -1,0 +1,25 @@
+.fig {
+  margin: 26px 0 0;
+}
+
+.frame {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  max-width: 520px;
+}
+
+.frame svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cap {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--gray);
+  margin-top: 10px;
+  max-width: 52ch;
+}
