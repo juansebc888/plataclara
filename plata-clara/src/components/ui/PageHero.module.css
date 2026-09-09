@@ -1,0 +1,41 @@
+.hero {
+  position: relative;
+  padding: 34px 0 clamp(40px, 6vw, 68px);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  animation: rise 0.6s var(--ease) both;
+}
+
+/* A single flat wash instead of a large blurred radial: cheaper to
+   paint on low-end GPUs and visually near-identical at this opacity. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+}
+.blue::before {
+  background: linear-gradient(180deg, var(--wash-blue), transparent 70%);
+}
+.green::before {
+  background: linear-gradient(180deg, var(--wash-green), transparent 70%);
+}
+.red::before {
+  background: linear-gradient(180deg, var(--wash-red), transparent 70%);
+}
+
+.hero > * {
+  position: relative;
+}
+
+.title {
+  font-size: clamp(34px, 5vw, 58px);
+  margin-bottom: 18px;
+  max-width: 18ch;
+}
+
+.intro {
+  max-width: 52ch;
+  margin-bottom: 0;
+}

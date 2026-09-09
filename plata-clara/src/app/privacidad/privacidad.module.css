@@ -1,0 +1,117 @@
+.headline {
+  background: var(--blue-soft);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+}
+.headline p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+  max-width: 58ch;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.col {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+.no {
+  background: #fffcfb;
+  border-color: #f0dcd8;
+}
+.yes {
+  background: #fbfffd;
+  border-color: #cdebdf;
+}
+
+.colHead {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+.no .colHead {
+  color: var(--red-text);
+}
+.yes .colHead {
+  color: var(--green-text);
+}
+
+.col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.col li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.col li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 800;
+}
+.no li::before {
+  content: "✕";
+  color: var(--red-text);
+}
+.yes li::before {
+  content: "✓";
+  color: var(--green-text);
+}
+
+.yesList li strong {
+  display: block;
+  font-weight: 600;
+}
+.yesList li span {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--gray);
+  margin-top: 3px;
+}
+
+.detail {
+  padding: clamp(44px, 6vw, 76px) 0;
+  background: #fff;
+  border-top: 1px solid var(--line);
+}
+
+.note {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-top: 26px;
+}
+.note p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+  max-width: 64ch;
+}
+
+@media (min-width: 780px) {
+  .cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
