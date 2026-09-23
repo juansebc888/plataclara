@@ -1,0 +1,33 @@
+.picto {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.11);
+  transition: background 0.5s var(--ease), transform 0.5s var(--ease),
+    box-shadow 0.5s ease;
+}
+
+.picto[data-on="true"] .red {
+  background: var(--red);
+  box-shadow: 0 0 0 3px rgba(216, 68, 47, 0.18);
+  transform: scale(1.12);
+}
+
+.picto[data-on="true"] .amber {
+  background: var(--amber);
+  box-shadow: 0 0 0 3px rgba(255, 176, 32, 0.16);
+  transform: scale(1.12);
+}
+
+@media (min-width: 620px) {
+  .dot {
+    width: 15px;
+    height: 15px;
+  }
+}
