@@ -8,6 +8,7 @@ export function PageHero({
   title,
   intro,
   trail,
+  tone = "blue",
   children,
 }: {
   eyebrow?: string;
@@ -18,7 +19,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <header className={styles.hero}>
+    <header className={`${styles.hero} ${styles[tone]}`}>
       <div className="shell">
         <Breadcrumb trail={trail} />
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}

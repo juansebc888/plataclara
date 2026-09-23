@@ -13,7 +13,7 @@
   position: relative;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 16px;
   padding: 18px 20px 16px 56px;
 }
 .rules li::before {
@@ -85,7 +85,7 @@
 .tell {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 14px 16px;
   margin-bottom: 18px;
 }
@@ -93,6 +93,8 @@
 .tellLabel {
   font-size: 10.5px;
   font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   color: var(--red-text);
   margin: 0 0 6px;
 }
@@ -108,6 +110,8 @@
 .label {
   font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--gray);
   margin: 0 0 8px;
 }
@@ -156,6 +160,8 @@
 .actTitle {
   font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--amber);
   margin: 0 0 16px;
 }

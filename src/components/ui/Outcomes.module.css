@@ -1,32 +1,45 @@
 .box {
-  border-left: 4px solid var(--amber);
-  background: var(--card);
-  padding: 16px 20px;
-  margin: 24px 0 0;
-  max-width: 60ch;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: 16px;
+  padding: 20px 22px 18px;
+  margin: 26px 0 0;
+  max-width: 62ch;
 }
 
 .title {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--ink);
-  margin: 0 0 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 14px;
 }
 
 .list {
+  list-style: none;
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 }
 
 .list li {
-  font-size: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 15.5px;
   line-height: 1.5;
   color: var(--ink);
 }
 
 .dot {
-  display: none;
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--blue);
+  margin-top: 8px;
 }

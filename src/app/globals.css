@@ -1,43 +1,34 @@
 /* ==================================================================
-   Plata Clara — estilos base
-
-   Dirección: una cartilla práctica, no una página de producto.
-   Papel crema, tinta casi negra, titulares en serif, texto en
-   Atkinson Hyperlegible (diseñada por el Braille Institute para
-   lectores con baja visión), enlaces subrayados como enlaces,
-   y un solo gesto de color: el resaltador amarillo.
-   Sin animaciones decorativas.
+   Plata Clara — design tokens + primitives
+   Every animation here is CSS-only and runs on the compositor
+   (transform / opacity), so it holds 60fps on low-end Android.
    ================================================================== */
 
 :root {
-  --ink: #1d1d1b;
-  --paper: #fbf8f1;
-  --card: #ffffff;
-  --gray: #57544e;
-  --line: #ddd5c6;
+  --ink: #0a1725;
+  --blue: #1b4dff;
+  --blue-soft: #e4ebff;
+  --paper: #faf9f7;
+  --gray: #68737f;
+  --line: #e6e2dc;
+  --amber: #ffb020;
+  --red: #d8442f;
+  --green: #0fa36b;
 
-  /* Acento: azul de enlace, sobrio y reconocible */
-  --blue: #1d4f91;
-  --blue-soft: #e8eef6;
+  /* Variantes accesibles para TEXTO sobre fondo claro.
+     Las de arriba se quedan para barras, iconos y rellenos, donde
+     el requisito de contraste es menor. Verificado contra WCAG AA:
+     verde 4.84:1 y rojo 6.35:1 sobre blanco. */
+  --green-text: #0c8255;
+  --red-text: #ac3625;
 
-  /* Resaltador */
-  --amber: #ffd23f;
+  --wash-blue: #f2f5ff;
+  --wash-green: #f0faf6;
+  --wash-red: #fdf4f2;
 
-  /* Rellenos (barras, puntos). */
-  --red: #c8412c;
-  --green: #1f8a5b;
-
-  /* Texto sobre fondo claro — verificados contra WCAG AA */
-  --green-text: #16663f;
-  --red-text: #a3321f;
-
-  --wash-blue: #eef2f8;
-  --wash-green: #eef6f0;
-  --wash-red: #fbf0ec;
-
-  --shell: 1040px;
-  --ease: ease;
-  --radius: 8px;
+  --shell: 1140px;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --radius: 22px;
 }
 
 *,
@@ -47,6 +38,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -55,8 +47,6 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 17px;
-  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -66,8 +56,9 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 2.5px solid var(--blue);
   outline-offset: 3px;
+  border-radius: 6px;
 }
 
 /* ---------- layout ---------- */
@@ -76,11 +67,11 @@ a {
   width: 100%;
   max-width: var(--shell);
   margin: 0 auto;
-  padding: 0 22px;
+  padding: 0 24px;
 }
 
 .section {
-  padding: clamp(44px, 6vw, 72px) 0;
+  padding: clamp(56px, 8vw, 104px) 0;
 }
 
 .skip {
@@ -90,95 +81,107 @@ a {
   background: var(--ink);
   color: #fff;
   padding: 12px 18px;
+  border-radius: 0 0 10px 0;
   z-index: 100;
 }
 .skip:focus {
   left: 0;
 }
 
-/* ---------- tipografía ---------- */
+/* ---------- type ---------- */
 
 .eyebrow {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--blue);
-  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin: 0 0 18px;
 }
 .eyebrow-light {
-  color: var(--amber);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .h1 {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 700;
-  font-size: clamp(34px, 5vw, 54px);
-  line-height: 1.1;
-  margin: 0 0 20px;
-  max-width: 20ch;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(38px, 6.2vw, 78px);
+  line-height: 0.96;
+  letter-spacing: -0.042em;
+  margin: 0 0 24px;
 }
 
 .h2 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), sans-serif;
   font-weight: 700;
-  font-size: clamp(25px, 3vw, 34px);
-  line-height: 1.2;
-  margin: 0 0 6px;
-  max-width: 28ch;
+  font-size: clamp(27px, 3.5vw, 42px);
+  line-height: 1.07;
+  letter-spacing: -0.033em;
+  margin: 0;
+  max-width: 20ch;
 }
 .h2-light {
   color: #fff;
-  max-width: 30ch;
+  max-width: 26ch;
 }
 
 .h3 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), sans-serif;
   font-weight: 700;
-  font-size: 21px;
-  line-height: 1.25;
+  font-size: clamp(19px, 2vw, 22px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
   margin: 0 0 8px;
 }
 
 .sub {
-  font-size: clamp(17px, 1.6vw, 19px);
-  line-height: 1.6;
+  font-size: clamp(16px, 1.55vw, 18.5px);
+  line-height: 1.58;
   color: var(--gray);
-  margin: 0 0 24px;
-  max-width: 50ch;
+  margin: 0 0 32px;
+  max-width: 46ch;
 }
 
 .lede {
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.62;
   color: var(--gray);
   margin: 0;
-  max-width: 52ch;
+  max-width: 44ch;
 }
 
 .prose p {
-  font-size: 17px;
-  line-height: 1.7;
-  color: #33312d;
-  margin: 12px 0 16px;
-  max-width: 64ch;
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: #38434f;
+  margin: 0 0 18px;
+  max-width: 62ch;
 }
 .prose strong {
   color: var(--ink);
-}
-.prose a {
-  color: var(--blue);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  font-weight: 600;
 }
 
-/* El resaltador: el único adorno del sitio */
-.underline-mark,
-mark {
-  background: linear-gradient(transparent 55%, var(--amber) 55%);
-  color: inherit;
-  padding: 0 2px;
+.underline-mark {
+  position: relative;
+  display: inline-block;
+}
+.underline-mark::after {
+  content: "";
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  bottom: 0.08em;
+  height: 0.14em;
+  background: var(--amber);
+  border-radius: 99px;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: wipe 0.75s var(--ease) 0.7s forwards;
 }
 
-/* ---------- botones ---------- */
+/* ---------- buttons ---------- */
 
 .btn {
   display: inline-flex;
@@ -187,41 +190,134 @@ mark {
   background: var(--ink);
   color: #fff;
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 12px 20px;
-  border-radius: 6px;
-  border: 2px solid var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 23px;
+  border-radius: 99px;
+  border: none;
   cursor: pointer;
   white-space: nowrap;
-  font-family: inherit;
+  transition: transform 0.24s var(--ease), box-shadow 0.24s ease,
+    background 0.24s ease;
 }
 .btn:hover {
-  background: #000;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  background: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(27, 77, 255, 0.28);
+}
+.btn svg {
+  transition: transform 0.24s var(--ease);
+}
+.btn:hover svg {
+  transform: translateX(3px);
 }
 
 .btn-sm {
-  padding: 8px 14px;
-  font-size: 15px;
+  padding: 9px 18px;
+  font-size: 14px;
 }
 
 .btn-ghost {
   background: transparent;
   color: var(--ink);
+  border: 1.5px solid var(--line);
 }
 .btn-ghost:hover {
-  background: var(--card);
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 0 10px 26px rgba(10, 23, 37, 0.08);
 }
 
-/* Reveal ya no anima: el contenido se ve desde el principio. */
-[data-reveal] {
-  opacity: 1;
+/* ---------- motion ---------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wipe {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Page transition — applied by app/template.tsx on every route change.
+   Opacity + transform only: no layout thrash, no JS. */
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: pageIn 0.28s var(--ease) both;
+}
+
+.rise {
+  animation: rise 0.7s var(--ease) both;
+}
+
+/* Scroll reveal. The element starts hidden and the Reveal client
+   component flips `data-shown` once it intersects. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+[data-reveal][data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  .underline-mark::after {
+    transform: scaleX(1);
+  }
+}
+
 
 /* ==================================================================
    Impresión
+   El navegador por defecto imprime la navegación, el pie y los fondos
+   oscuros, que se comen la tinta y no sirven en papel. Aquí se deja
+   solo el contenido.
    ================================================================== */
 @media print {
   @page {
@@ -235,6 +331,7 @@ mark {
     font-size: 11.5pt;
   }
 
+  /* Fuera todo lo que no es contenido */
   header,
   footer,
   nav,
@@ -253,12 +350,22 @@ mark {
     padding: 0;
   }
 
+  /* Nada de animaciones ni elementos ocultos al imprimir */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   *,
   *::before,
   *::after {
+    animation: none !important;
+    transition: none !important;
     box-shadow: none !important;
+    text-shadow: none !important;
   }
 
+  /* Los fondos oscuros gastan tinta y se leen mal */
   [class*="facts"],
   [class*="rights"],
   [class*="cta"] {
@@ -274,6 +381,7 @@ mark {
   }
 
   li,
+  img,
   figure,
   article {
     break-inside: avoid;

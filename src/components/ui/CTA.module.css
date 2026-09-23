@@ -1,32 +1,31 @@
 .cta {
   background: var(--ink);
   color: #fff;
-  padding: clamp(40px, 5vw, 60px) 0;
+  padding: clamp(48px, 6vw, 76px) 0;
 }
 
 .inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
   flex-wrap: wrap;
 }
 
 .body {
-  font-size: 17px;
+  font-size: 15.5px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 10px 0 0;
-  max-width: 50ch;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 14px 0 0;
+  max-width: 48ch;
 }
 
 .btn {
-  background: var(--amber);
+  background: #fff;
   color: var(--ink);
-  border-color: var(--amber);
   flex-shrink: 0;
 }
 .btn:hover {
-  background: #ffe07a;
-  color: var(--ink);
+  background: var(--blue);
+  color: #fff;
 }

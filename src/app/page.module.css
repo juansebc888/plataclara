@@ -1,100 +1,88 @@
 .hero {
-  padding: clamp(40px, 6vw, 72px) 0 clamp(28px, 4vw, 40px);
+  padding: clamp(40px, 7vw, 88px) 0 clamp(44px, 7vw, 88px);
 }
 
-.questions {
-  padding: 8px 0 clamp(40px, 5vw, 60px);
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
 }
 
-.qList {
-  list-style: none;
-  margin: 22px 0 0;
-  padding: 0;
-  border-top: 2px solid var(--ink);
+.title {
+  max-width: 14ch;
 }
 
-.qList li {
-  border-bottom: 1px solid var(--line);
-}
-
-.q {
+.ctaRow {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 4px;
-  text-decoration: none;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-.q:hover .qText {
-  text-decoration: underline;
-  text-decoration-color: var(--amber);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 5px;
+.ctaRow > * {
+  flex: 1 1 auto;
+  justify-content: center;
 }
 
-.qText {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 600;
-  font-size: clamp(19px, 2vw, 22px);
-  line-height: 1.35;
-  color: var(--ink);
+/* The calculator is the widest fixed element on the page; on narrow
+   screens it needs to be free to shrink rather than force a scrollbar. */
+.heroViz {
+  min-width: 0;
 }
 
-.qPage {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--blue);
+.head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: end;
 }
 
-.note {
-  padding: 0 0 clamp(40px, 5vw, 60px);
+@media (min-width: 700px) {
+  .ctaRow > * {
+    flex: 0 0 auto;
+  }
 }
 
-.letter {
-  background: var(--card);
-  border: 1px solid var(--line);
-  padding: 24px 26px;
-  max-width: 62ch;
-}
-.letter p {
-  font-size: 17px;
-  line-height: 1.7;
-  margin: 0 0 14px;
-}
-.sign {
-  font-family: var(--font-display), Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  margin-bottom: 0 !important;
+@media (min-width: 980px) {
+  .heroGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .head {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+  }
 }
 
-.calc {
-  padding: clamp(40px, 5vw, 60px) 0;
-  background: var(--card);
+.hook {
+  padding: clamp(40px, 5vw, 64px) 0;
+  background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
-.calcBox {
-  margin-top: 22px;
-  max-width: 620px;
+.hookInner {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: flex-start;
 }
 
-.plan {
-  padding: clamp(40px, 5vw, 60px) 0;
+.hookBody {
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--gray);
+  margin: 16px 0 0;
+  max-width: 54ch;
 }
 
-.planLink {
-  margin: 20px 0 0;
-}
-
-@media (min-width: 760px) {
-  .q {
+@media (min-width: 900px) {
+  .hookInner {
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
-    gap: 24px;
+    align-items: center;
+    gap: 40px;
   }
-  .qPage {
+  .hookInner > :last-child {
     flex-shrink: 0;
   }
 }
