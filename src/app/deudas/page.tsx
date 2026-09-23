@@ -6,7 +6,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ArrowRight } from "@/components/ui/Icon";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { LazyGotaAGota } from "@/components/tools/LazyTools";
-import { Illustration } from "@/components/ui/Illustration";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { RATES, REFERENCE, monthlyToEA } from "@/lib/finance";
 import { percent } from "@/lib/format";
@@ -53,10 +52,6 @@ export default function Page() {
 
           <Reveal delay={100}>
             <LazyGotaAGota />
-            <Illustration
-              name="deuda-crece"
-              caption="La línea roja no sube en línea recta. Por eso una cuota que al principio parecía posible se vuelve impagable a los pocos meses."
-            />
           </Reveal>
         </div>
       </section>
@@ -93,10 +88,6 @@ export default function Page() {
               </p>
             </div>
 
-            <Illustration
-              name="usura"
-              caption="La barra del centro es el máximo que la ley permite. Todo lo que la pase es ilegal."
-            />
 
             <div className={styles.check}>
               <p className={styles.checkTitle}>Cómo saber si te están cobrando de más</p>

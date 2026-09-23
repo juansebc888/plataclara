@@ -11,14 +11,11 @@ export function Outcomes({ items }: { items: string[] }) {
   return (
     <aside className={styles.box} aria-labelledby="outcomes-title">
       <p className={styles.title} id="outcomes-title">
-        Al terminar esta página vas a saber
+        En esta página vas a aprender:
       </p>
       <ul className={styles.list}>
         {items.map((t) => (
-          <li key={t}>
-            <span className={styles.dot} aria-hidden="true" />
-            {t}
-          </li>
+          <li key={t}>{t}</li>
         ))}
       </ul>
     </aside>

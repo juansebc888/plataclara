@@ -24,14 +24,12 @@
   align-items: flex-start;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 18px 20px;
   transition: transform 0.26s var(--ease), box-shadow 0.26s ease,
     border-color 0.26s ease;
 }
 .steps li:hover {
-  transform: translateX(5px);
-  box-shadow: 0 12px 28px rgba(10, 23, 37, 0.07);
   border-color: #d6d0c8;
 }
 
@@ -62,7 +60,7 @@
 
 .pending {
   border: 1px dashed var(--line);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 20px 22px;
   background: #fff;
   margin-top: 28px;
@@ -97,8 +95,6 @@
 .sourcesTitle {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--gray);
   margin: 0 0 16px;
 }
@@ -126,7 +122,7 @@
   position: relative;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 20px 22px 18px 58px;
 }
 .exits li::before {
@@ -186,8 +182,6 @@
 .checkTitle {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--red-text);
   margin: 0 0 14px;
 }
@@ -222,8 +216,6 @@
 .insolvenciaTitle {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--blue);
   margin: 0 0 12px;
 }

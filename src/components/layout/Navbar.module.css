@@ -1,121 +1,74 @@
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(250, 249, 247, 0.82);
-  border-bottom: 1px solid transparent;
-  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  animation: drop 0.6s var(--ease) both;
-}
-
-/* backdrop-filter is expensive on low-end GPUs, so it is opt-in only
-   where the device reports support and the user has not asked for
-   reduced motion. */
-@supports (backdrop-filter: blur(12px)) {
-  @media (min-width: 700px) {
-    .nav {
-      background: rgba(250, 249, 247, 0.6);
-      backdrop-filter: blur(12px) saturate(1.5);
-    }
-  }
-}
-
-.solid {
-  background: rgba(250, 249, 247, 0.94);
-  border-bottom-color: var(--line);
-  box-shadow: 0 1px 20px rgba(10, 23, 37, 0.05);
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
 }
 
 .inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  min-height: 62px;
   gap: 20px;
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  flex-shrink: 0;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
   text-decoration: none;
-}
-
-.mark {
-  width: 15px;
-  height: 15px;
-  border-radius: 5px;
-  background: var(--blue);
-  box-shadow: 5px 0 0 -1px var(--amber);
+  flex-shrink: 0;
+  background: linear-gradient(transparent 58%, var(--amber) 58%);
+  padding: 0 3px;
 }
 
 .links {
   display: none;
-  gap: 24px;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .link {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--gray);
+  font-size: 15px;
+  color: var(--ink);
   text-decoration: none;
-  position: relative;
   padding: 4px 0;
-  transition: color 0.2s ease;
   white-space: nowrap;
 }
-.link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 1.5px;
-  width: 0;
-  background: var(--blue);
-  transition: width 0.28s var(--ease);
-}
 .link:hover {
-  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
-.link:hover::after,
-.active::after {
-  width: 100%;
-}
+
 .active {
-  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--amber);
+  text-underline-offset: 6px;
 }
 
 .toggle {
   font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--ink);
-  background: transparent;
-  border: 1.5px solid var(--line);
-  border-radius: 99px;
-  padding: 8px 16px;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 7px 14px;
   cursor: pointer;
 }
 
 .drawer {
   border-top: 1px solid var(--line);
-  background: var(--paper);
-  padding: 10px 0 18px;
-}
-.drawerOpen {
-  animation: rise 0.24s var(--ease) both;
+  padding: 6px 0 14px;
 }
 
 .drawerLink {
   display: block;
   padding: 13px 0;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 17px;
   text-decoration: none;
   border-bottom: 1px solid var(--line);
 }
@@ -123,15 +76,12 @@
   border-bottom: none;
 }
 
-@media (min-width: 860px) {
+@media (min-width: 980px) {
   .links {
     display: flex;
   }
   .toggle,
   .drawer {
     display: none;
-  }
-  .inner {
-    height: 68px;
   }
 }

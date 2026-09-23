@@ -6,30 +6,17 @@ import { useEffect, useState } from "react";
 import { NAV, SITE } from "@/content/site";
 import styles from "./Navbar.module.css";
 
-/**
- * Client Component — needs scroll position and the active route.
- * Kept deliberately small; it is the only always-on JS on the page.
- */
+/** Client Component — needs the active route and the mobile menu state. */
 export function Navbar() {
-  const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Close the drawer whenever the route changes.
   useEffect(() => setOpen(false), [pathname]);
 
   return (
-    <header className={`${styles.nav} ${solid ? styles.solid : ""}`}>
+    <header className={styles.nav}>
       <div className={`shell ${styles.inner}`}>
         <Link href="/" className={styles.brand}>
-          <span className={styles.mark} aria-hidden="true" />
           {SITE.name}
         </Link>
 
@@ -60,19 +47,17 @@ export function Navbar() {
         </button>
       </div>
 
-      <div
-        id="menu-movil"
-        className={`${styles.drawer} ${open ? styles.drawerOpen : ""}`}
-        hidden={!open}
-      >
-        <div className="shell">
-          {NAV.map((l) => (
-            <Link key={l.href} href={l.href} className={styles.drawerLink}>
-              {l.label}
-            </Link>
-          ))}
+      {open ? (
+        <div id="menu-movil" className={styles.drawer}>
+          <div className="shell">
+            {NAV.map((l) => (
+              <Link key={l.href} href={l.href} className={styles.drawerLink}>
+                {l.label}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
     </header>
   );
 }

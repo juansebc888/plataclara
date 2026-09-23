@@ -1,83 +1,75 @@
 .footer {
   background: var(--ink);
   color: #fff;
-  padding: 60px 0 26px;
+  padding: 52px 0 24px;
 }
 
 .inner {
   display: flex;
   justify-content: space-between;
-  gap: 44px;
+  gap: 40px;
   flex-wrap: wrap;
 }
 
+.about {
+  max-width: 36ch;
+}
+
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: 22px;
   color: #fff;
   text-decoration: none;
 }
 
-.mark {
-  width: 15px;
-  height: 15px;
-  border-radius: 5px;
-  background: var(--blue);
-  box-shadow: 5px 0 0 -1px var(--amber);
-}
-
 .note {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 14px 0 0;
-  max-width: 34ch;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 12px 0 0;
   line-height: 1.6;
 }
 
 .cols {
   display: flex;
-  gap: 48px;
+  gap: 44px;
   flex-wrap: wrap;
 }
 
 .h {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  margin: 0 0 14px;
+  color: var(--amber);
+  margin: 0 0 12px;
 }
 
 .link {
   display: block;
-  font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.74);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  margin-bottom: 9px;
-  transition: color 0.2s ease, transform 0.2s ease;
+  margin-bottom: 8px;
 }
 .link:hover {
   color: #fff;
-  transform: translateX(3px);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
+/* The border lives on this element, which is exactly as wide as the
+   content above it — not on the padded .shell. */
 .base {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  align-items: baseline;
+  gap: 8px 24px;
   flex-wrap: wrap;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 48px;
-  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  margin-top: 40px;
+  padding-top: 18px;
 }
 .base p {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
   margin: 0;
 }

@@ -1,29 +1,29 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Atkinson_Hyperlegible, Source_Serif_4 } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE } from "@/content/site";
 import "./globals.css";
 
 /**
- * next/font self-hosts and preloads both faces at build time:
- * no render-blocking request to Google, no layout shift.
+ * Titulares en serif, como una cartilla impresa. Texto en Atkinson
+ * Hyperlegible, diseñada por el Braille Institute para que las letras
+ * que se confunden (I, l, 1 / 0, O) sean fáciles de distinguir.
+ * next/font las sirve desde el mismo dominio: sin petición a Google.
  */
-const display = Bricolage_Grotesque({
+const display = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["600", "700"],
   variable: "--font-display",
   display: "swap",
-  preload: true,
 });
 
-const body = Inter({
+const body = Atkinson_Hyperlegible({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
   variable: "--font-body",
   display: "swap",
-  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf9f7",
+  themeColor: "#fbf8f1",
   width: "device-width",
   initialScale: 1,
 };
