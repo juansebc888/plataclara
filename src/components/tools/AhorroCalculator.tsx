@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useReducer } from "react";
-import { RATES, futureValue } from "@/lib/finance";
+import { RATES, REFERENCE, simulateCdtSavings } from "@/lib/finance";
 import { money, percent } from "@/lib/format";
 import styles from "./Calculator.module.css";
 
@@ -59,6 +59,11 @@ function reducer(s: State, a: Action): State {
 /**
  * Client Component, lazy-loaded.
  *
+ * Compares keeping the money at home with what actually happens when
+ * you move it to CDTs: a CDT takes a lump sum (there is a minimum),
+ * pays interest only when it matures a year later, and the bank keeps
+ * a withholding tax on that interest. See `simulateCdtSavings`.
+ *
  * The animation runs on a fixed 60-frame budget regardless of the time
  * horizon, so a 10-year projection costs exactly what a 1-year one
  * does on a slow device.
@@ -67,7 +72,9 @@ export function AhorroCalculator() {
   const [s, dispatch] = useReducer(reducer, {
     amount: 5000,
     freq: "dia",
-    years: 1,
+    // One year shows no gain on purpose (no CDT has matured yet), but it
+    // makes a poor first impression; three years shows the mechanism.
+    years: 3,
     step: 0,
     running: false,
   });
@@ -85,19 +92,22 @@ export function AhorroCalculator() {
 
   const freq = FREQS.find((f) => f.key === s.freq)!;
   const totalPeriods = Math.round(freq.perYear * s.years);
-  const rate = useMemo(
-    () => Math.pow(1 + RATES.cdtEA, 1 / freq.perYear) - 1,
-    [freq.perYear]
+  const series = useMemo(
+    () =>
+      simulateCdtSavings({
+        deposit: s.amount,
+        periodsPerYear: freq.perYear,
+        periods: totalPeriods,
+      }),
+    [s.amount, freq.perYear, totalPeriods]
   );
 
   const shown = Math.round((s.step / STEPS) * totalPeriods);
-  const saved = s.amount * shown;
-  const invested = futureValue(s.amount, rate, shown);
+  const { saved, withCdt: invested } = series[shown];
 
-  const finalSaved = s.amount * totalPeriods;
-  const finalInvested = futureValue(s.amount, rate, totalPeriods);
+  const { saved: finalSaved, withCdt: finalInvested } = series[totalPeriods];
   const gap = finalInvested - finalSaved;
-  const max = finalInvested || 1;
+  const max = Math.max(finalInvested, finalSaved) || 1;
 
   const elapsedYears = (shown / freq.perYear).toFixed(1).replace(".", ",");
 
@@ -185,8 +195,8 @@ export function AhorroCalculator() {
           variant="flat"
         />
         <Bar
-          name="En un CDT"
-          hint={`~${percent(RATES.cdtEA)} al año`}
+          name="Pasándolo a CDTs"
+          hint={`~${percent(RATES.cdtEA)} al año, desde ${money(REFERENCE.cdtMinimoDigital)}`}
           amount={invested}
           pct={(invested / max) * 100}
           variant="grow"
@@ -196,15 +206,28 @@ export function AhorroCalculator() {
       <p className={styles.foot}>
         Con {money(s.amount)} {freq.label}, en {s.years}{" "}
         {s.years === 1 ? "año" : "años"} juntas{" "}
-        <strong className={styles.neutral}>{money(finalSaved)}</strong>. En un
-        CDT serían <strong>{money(finalInvested)}</strong>, o sea{" "}
-        <strong>{money(gap)}</strong> más sin poner un peso adicional.
+        <strong className={styles.neutral}>{money(finalSaved)}</strong>.{" "}
+        {gap > 0 ? (
+          <>
+            Si cada vez que juntas {money(REFERENCE.cdtMinimoDigital)} los
+            pasas a un CDT a un año, tendrías{" "}
+            <strong>{money(finalInvested)}</strong>, o sea{" "}
+            <strong>{money(gap)}</strong> más sin poner un peso adicional.
+          </>
+        ) : (
+          <>
+            Un CDT paga los intereses cuando se cumple el año, así que en este
+            plazo todavía no ha vencido ninguno. Prueba con más años.
+          </>
+        )}
       </p>
 
       <p className={styles.warn}>
         Un CDT lo abres en un banco vigilado por la Superfinanciera y te dicen
         la tasa antes de que pongas la plata. Si alguien te promete ganancias
-        rápidas o seguras, eso no es una inversión.
+        rápidas o seguras, eso no es una inversión. Las cifras ya descuentan la
+        retención en la fuente ({percent(RATES.retencionCDT, 0)} de los
+        intereses).
       </p>
     </figure>
   );

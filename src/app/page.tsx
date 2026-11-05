@@ -44,7 +44,7 @@ export default function Home() {
           <Reveal>
             <div className={styles.head}>
               <div>
-                <p className="eyebrow">Seis cosas que puedes resolver</p>
+                <p className="eyebrow">Ocho cosas que puedes resolver</p>
                 <h2 className="h2">¿Qué necesitas hacer?</h2>
               </div>
               <p className="lede">

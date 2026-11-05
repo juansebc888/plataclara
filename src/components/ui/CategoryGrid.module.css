@@ -124,3 +124,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* Eight topics: 4 × 2 on wide screens instead of 3 + 3 + 2. */
+@media (min-width: 1140px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

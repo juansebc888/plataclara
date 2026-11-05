@@ -9,9 +9,6 @@ const nextConfig = {
     deviceSizes: [360, 414, 640, 828, 1080, 1200],
     imageSizes: [64, 96, 128, 256],
   },
-  experimental: {
-    optimizePackageImports: ["lucide-react"],
-  },
 };
 
 export default nextConfig;

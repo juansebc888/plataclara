@@ -12,6 +12,13 @@ import { percent } from "@/lib/format";
 import { getCategory } from "@/content/categories";
 import styles from "../subpage.module.css";
 
+/** "casi 28 veces" / "más de 27 veces": stays true when the usury rate moves. */
+const ratio = monthlyToEA(RATES.gotaMonthly) / REFERENCE.usuraEA;
+const timesOver =
+  ratio % 1 >= 0.5
+    ? `casi ${Math.ceil(ratio)} veces`
+    : `más de ${Math.floor(ratio)} veces`;
+
 const CATEGORY = getCategory("deudas")!;
 
 export const metadata: Metadata = {
@@ -23,7 +30,7 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Tema"
+        eyebrow="Paso 4"
         title="Salir de deudas"
         intro={CATEGORY.intro}
         tone="red"
@@ -77,8 +84,15 @@ export default function Page() {
                 <strong className={styles.red}>
                   {percent(monthlyToEA(RATES.gotaMonthly), 0)} efectivo anual
                 </strong>
-                . No es «un poco más caro»: está casi{" "}
-                <strong>veintisiete veces</strong> por encima del techo legal.
+                . No es «un poco más caro»: está {timesOver} por encima del
+                techo legal.
+              </p>
+              <p>
+                Ojo: el microcrédito tiene su propio techo, más alto que el de
+                consumo, porque prestar montos pequeños le cuesta más a la
+                entidad. Por eso un microcrédito formal puede pasar de ese{" "}
+                {percent(REFERENCE.usuraEA, 0)} y seguir siendo legal. Lo que
+                ningún crédito legal hace es acercarse a lo del gota a gota.
               </p>
               <p>
                 Y eso tiene nombre. Cobrar por encima de la tasa de usura no es

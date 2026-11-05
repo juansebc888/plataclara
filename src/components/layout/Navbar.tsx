@@ -25,6 +25,14 @@ export function Navbar() {
   // Close the drawer whenever the route changes.
   useEffect(() => setOpen(false), [pathname]);
 
+  // ...and on Escape, as a keyboard user would expect.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header className={`${styles.nav} ${solid ? styles.solid : ""}`}>
       <div className={`shell ${styles.inner}`}>
@@ -67,7 +75,15 @@ export function Navbar() {
       >
         <div className="shell">
           {NAV.map((l) => (
-            <Link key={l.href} href={l.href} className={styles.drawerLink}>
+            <Link
+              key={l.href}
+              href={l.href}
+              className={styles.drawerLink}
+              aria-current={pathname.startsWith(l.href) ? "page" : undefined}
+              // Tapping the page you're already on doesn't change the
+              // route, so the effect above wouldn't close the drawer.
+              onClick={() => setOpen(false)}
+            >
               {l.label}
             </Link>
           ))}

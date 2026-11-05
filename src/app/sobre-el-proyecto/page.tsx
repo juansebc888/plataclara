@@ -57,6 +57,15 @@ export default function Page() {
                 de más.
               </p>
               <p>
+                La calculadora de ahorro no supone que puedas meter{" "}
+                {money(2000)} diarios a un CDT, porque eso no existe. Supone que
+                guardas aparte y, cada vez que juntas{" "}
+                {money(REFERENCE.cdtMinimoDigital)}, abres un CDT a un año. Los
+                intereses solo cuentan cuando el CDT vence, y ya tienen
+                descontada la retención en la fuente de{" "}
+                {percent(RATES.retencionCDT, 0)}.
+              </p>
+              <p>
                 Para los topes de cuentas usamos el salario mínimo de{" "}
                 {REFERENCE.year}, que es {money(REFERENCE.smmlv)}. La cobertura
                 de Fogafín es de {money(REFERENCE.fogafin)} por persona y por

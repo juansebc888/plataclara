@@ -56,6 +56,10 @@ export default function RootLayout({
   return (
     <html lang="es-CO" className={`${display.variable} ${body.variable}`}>
       <body>
+        {/* Without JS the Reveal observer never runs: show everything. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <a href="#contenido" className="skip">
           Saltar al contenido
         </a>

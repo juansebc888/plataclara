@@ -150,6 +150,17 @@ a {
   max-width: 44ch;
 }
 
+/* A heading inside running text needs air before the first paragraph. */
+.prose .h2 {
+  margin-bottom: 16px;
+}
+.prose p + .h2 {
+  margin-top: 40px;
+}
+.h2 + .prose {
+  margin-top: 16px;
+}
+
 .prose p {
   font-size: 16.5px;
   line-height: 1.68;
@@ -162,22 +173,16 @@ a {
   font-weight: 600;
 }
 
+/* Drawn as a background on an inline element (not an inline-block with
+   ::after) so that when the phrase wraps, each line gets its own
+   underline instead of one bar as wide as the whole block. */
 .underline-mark {
-  position: relative;
-  display: inline-block;
-}
-.underline-mark::after {
-  content: "";
-  position: absolute;
-  left: -0.04em;
-  right: -0.04em;
-  bottom: 0.08em;
-  height: 0.14em;
-  background: var(--amber);
-  border-radius: 99px;
-  z-index: -1;
-  transform: scaleX(0);
-  transform-origin: left;
+  background-image: linear-gradient(var(--amber), var(--amber));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 0% 0.14em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   animation: wipe 0.75s var(--ease) 0.7s forwards;
 }
 
@@ -255,7 +260,7 @@ a {
 
 @keyframes wipe {
   to {
-    transform: scaleX(1);
+    background-size: 100% 0.14em;
   }
 }
 
@@ -307,8 +312,8 @@ a {
     opacity: 1;
     transform: none;
   }
-  .underline-mark::after {
-    transform: scaleX(1);
+  .underline-mark {
+    background-size: 100% 0.14em;
   }
 }
 
