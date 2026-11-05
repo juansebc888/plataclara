@@ -81,8 +81,6 @@ const DIAGRAMS: Record<IllustrationKey, React.ReactNode> = {
       <line x1="34" y1="18" x2="34" y2="160" stroke="var(--line)" strokeWidth="1.5" />
       {[0, 2, 4, 6, 8, 10, 12].map((m) => {
         const x = 34 + (m / 12) * 262;
-        const v = Math.pow(1.2, m);
-        const y = 160 - (Math.log(v) / Math.log(Math.pow(1.2, 12))) * 0;
         return (
           <text key={m} x={x} y={174} fontSize="8" fill="var(--gray)" textAnchor="middle">
             {m}
