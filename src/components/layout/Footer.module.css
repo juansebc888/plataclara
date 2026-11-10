@@ -27,14 +27,14 @@
   min-height: 44px;
   font-size: 16px;
   color: #fff;
-  text-decoration: none;
-}
-.link:hover,
-.link:active {
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-color: var(--amber);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
+}
+.link:hover,
+.link:active {
+  text-decoration-thickness: 4px;
 }
 
 .base {

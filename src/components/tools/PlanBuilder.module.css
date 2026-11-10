@@ -192,9 +192,9 @@
 
 .check {
   flex-shrink: 0;
-  width: 15px;
-  height: 15px;
-  border: 1.5px solid var(--ink);
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--ink);
   border-radius: 4px;
   margin-top: 2px;
 }

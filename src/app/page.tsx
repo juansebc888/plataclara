@@ -21,33 +21,31 @@ export default function Home() {
       </section>
 
       <section className={styles.save}>
-        <div className="shell">
-          <h2 className="h2">¿Cuánto juntas guardando un poquito cada día?</h2>
-          <p className={styles.saveLead}>
-            Toca una cantidad. Es plata guardada en la casa, sin banco.
-          </p>
+        <div className={`shell ${styles.saveGrid}`}>
+          <div className={styles.saveText}>
+            <h2 className="h2">¿Cuánto juntas guardando un poquito cada día?</h2>
+            <p className={styles.saveLead}>
+              Toca una cantidad y mira cuánto tendrías en 3 años.
+            </p>
+            <p className={styles.saveMore}>
+              ¿Quieres probar otras cantidades o plazos?{" "}
+              <Link href="/herramientas/ahorro" prefetch={false}>
+                Mira la cuenta completa
+              </Link>
+              .
+            </p>
+            <div className={styles.planBox}>
+              <p className={styles.planText}>
+                ¿Quieres una lista de lo que vas a hacer? No pide datos.
+              </p>
+              <Link href="/mi-plan" prefetch={false} className="btn btn-ghost">
+                Arma tu plan
+              </Link>
+            </div>
+          </div>
           <div className={styles.calc}>
             <LazyAhorroHome />
           </div>
-          <p className={styles.saveMore}>
-            ¿Y si lo guardas en el banco?{" "}
-            <Link href="/herramientas/ahorro" prefetch={false}>
-              Mira la cuenta completa
-            </Link>
-            .
-          </p>
-        </div>
-      </section>
-
-      <section className={styles.plan}>
-        <div className="shell">
-          <p className={styles.planText}>
-            ¿Quieres una lista de lo que vas a hacer?{" "}
-            <Link href="/mi-plan" prefetch={false}>
-              Arma tu plan
-            </Link>
-            . No pide datos.
-          </p>
         </div>
       </section>
     </>

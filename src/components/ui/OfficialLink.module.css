@@ -4,17 +4,20 @@
   gap: 7px;
   font-size: var(--fs-sm);
   font-weight: 600;
-  color: var(--blue);
+  color: var(--ink);
   text-decoration: none;
-  padding: 12px 16px;
+  padding: 11px 16px;
   min-height: 44px;
-  background: var(--blue-soft);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  background: #fff;
+  border: 1.5px solid var(--line-strong, #8f877c);
   border-radius: 99px;
   transition: transform 0.2s var(--ease), box-shadow 0.2s ease;
 }
-.link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(27, 77, 255, 0.16);
+.link:hover,
+.link:active {
+  border-color: var(--ink);
 }
 .link svg {
   width: 13px;
@@ -24,11 +27,15 @@
 
 .compact {
   background: transparent;
+  border: 0;
   padding: 12px 0;
   font-size: var(--fs-sm);
+  text-decoration-line: underline;
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
-.compact:hover {
-  transform: none;
-  box-shadow: none;
-  text-decoration: underline;
+.compact:hover,
+.compact:active {
+  text-decoration-thickness: 4px;
 }

@@ -82,6 +82,16 @@ main a:not([class]) {
   text-underline-offset: 4px;
   transition: text-decoration-thickness 0.15s ease, text-underline-offset 0.15s ease;
 }
+/* Taller tap area for links inside sentences, without moving the text. */
+main p > a:not([class]),
+main li > a:not([class]) {
+  padding-block: 10px;
+  margin-block: -10px;
+}
+/* Less empty space between a page header and its first section. */
+main header + section {
+  padding-top: clamp(24px, 4vw, 40px);
+}
 main a:not([class]):hover,
 main a:not([class]):active {
   text-decoration-thickness: 4px;
@@ -468,6 +478,10 @@ li {
    solo el contenido.
    ================================================================== */
 @media print {
+  a[href="/"][class*="back"],
+  a[class*="back"] {
+    display: none !important;
+  }
   @page {
     margin: 14mm;
   }

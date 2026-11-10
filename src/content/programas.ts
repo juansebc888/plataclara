@@ -35,7 +35,7 @@ export type Program = {
 export const KIND_LABEL: Record<ProgramKind, string> = {
   "no-se-devuelve": "Plata que no se devuelve",
   prestado: "Plata prestada",
-  acceso: "Abre la puerta",
+  acceso: "Te conecta con bancos",
   ahorro: "Ahorro con premio del Estado",
 };
 

@@ -51,6 +51,7 @@
 .brand {
   display: flex;
   align-items: center;
+  min-height: 44px;
   gap: 9px;
   flex-shrink: 0;
   font-family: var(--font-display), sans-serif;
