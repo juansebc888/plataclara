@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Reveal } from "@/components/ui/Reveal";
-import { Outcomes } from "@/components/ui/Outcomes";
+import { NextStep } from "@/components/ui/NextStep";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { KIND_LABEL, PROGRAMS, getProgram } from "@/content/programas";
 import shared from "../../subpage.module.css";
@@ -42,106 +40,87 @@ export default async function Page({
   const p = getProgram(slug);
   if (!p || p.detail.sections.length === 0) notFound();
 
-  // Borrowed money reads blue; everything else (grants, access, savings) green.
-  const tone = p.kind === "prestado" ? "blue" : "green";
-
   return (
     <>
       <PageHero
         eyebrow={KIND_LABEL[p.kind]}
         title={p.name}
-        intro={p.detail.intro}
-        tone={tone}
+        answer={<p>{p.what}</p>}
         trail={[
           { href: "/programas", label: "Ayuda del gobierno" },
           { label: p.name },
         ]}
       >
-        <Outcomes items={p.detail.outcomes} />
         <div className={styles.linkRow}>
           <OfficialLink href={p.url} label={p.urlLabel} />
         </div>
       </PageHero>
 
-      <section className={shared.body}>
+      {p.detail.steps.length > 0 ? (
+        <section className={shared.body}>
+          <div className="shell">
+            <h2 className="h2">Qué hacer, en orden.</h2>
+            <ol className={`${shared.steps} ${shared.gapTopSm}`}>
+              {p.detail.steps.map(([t, d], i) => (
+                <li key={t}>
+                  <span className={shared.stepN}>{i + 1}</span>
+                  <div>
+                    <p className={shared.stepT}>{t}</p>
+                    <p className={shared.stepD}>{d}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            {p.detail.watch.length > 0 ? (
+              <>
+                <h2 className={`h2 ${shared.gapTop}`}>Antes de moverte.</h2>
+                <ul className="list-plain">
+                  {p.detail.watch.map((w) => (
+                    <li key={w}>{w}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      <section className={shared.details}>
         <div className="shell">
-          {p.detail.sections.map((sec, i) => (
-            <Reveal key={sec.title} delay={i * 60} className={styles.block}>
-              <h2 className="h2">{sec.title}</h2>
-              <div className="prose">
+          <details className="more-details">
+            <summary>Ver más sobre {p.name}</summary>
+            <div className="more-body">
+              <p>{p.detail.intro}</p>
+              <p>Para quién: {p.forWhom}</p>
+              <p>{p.reality}</p>
+            </div>
+          </details>
+          {p.detail.sections.map((sec) => (
+            <details key={sec.title} className="more-details">
+              <summary>{sec.title}</summary>
+              <div className="more-body">
                 {sec.body.map((b) => (
                   <p key={b}>{b}</p>
                 ))}
               </div>
-            </Reveal>
+            </details>
           ))}
         </div>
       </section>
 
-      {p.detail.steps.length > 0 ? (
-        <section className={styles.stepsWrap}>
-          <div className={`shell ${shared.split}`}>
-            <Reveal>
-              <p className="eyebrow">El camino</p>
-              <h2 className="h2">Qué hacer, en orden.</h2>
-              <div className="prose">
-                <p>
-                  Nadie te va a llamar a ofrecerte esto. Toca ir a preguntar, y
-                  llegar sabiendo qué preguntar cambia la conversación.
-                </p>
-              </div>
-              <div className={styles.linkRow}>
-                <OfficialLink href={p.url} label={p.urlLabel} />
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-              <ol className={shared.steps}>
-                {p.detail.steps.map(([t, d], i) => (
-                  <li key={t}>
-                    <span className={shared.stepN}>{i + 1}</span>
-                    <div>
-                      <p className={shared.stepT}>{t}</p>
-                      <p className={shared.stepD}>{d}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </Reveal>
-          </div>
-        </section>
-      ) : null}
-
-      {p.detail.watch.length > 0 ? (
-        <section className={shared.body}>
-          <div className="shell">
-            <Reveal>
-              <h2 className="h2">Antes de moverte.</h2>
-              <ul className={styles.watch}>
-                {p.detail.watch.map((w) => (
-                  <li key={w}>{w}</li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-        </section>
-      ) : null}
-
-      {p.kind === "prestado" || p.kind === "no-se-devuelve" ? (
-        <CTA
-          title="Antes de pedir prestado, mira el costo."
-          body="Un microcrédito formal y un gota a gota por el mismo monto no se parecen en nada al año."
-          href="/herramientas/gota-a-gota"
-          label="Ver la calculadora"
-        />
-      ) : (
-        <CTA
-          title="Mira cuánto suma lo que guardas."
-          body="Poco a poco y sin tocarlo, lo que separas cada día se convierte en una cifra que sí sirve."
-          href="/herramientas/ahorro"
-          label="Ver la calculadora"
-        />
-      )}
+      <NextStep
+        links={
+          p.kind === "prestado" || p.kind === "no-se-devuelve"
+            ? [
+                { href: "/herramientas/gota-a-gota", title: "¿Cuánto más caro es un gota a gota?" },
+                { href: "/programas", title: "¿Qué otros programas hay?" },
+              ]
+            : [
+                { href: "/herramientas/ahorro", title: "¿Cuánto junto si guardo un poquito cada día?" },
+                { href: "/programas", title: "¿Qué otros programas hay?" },
+              ]
+        }
+      />
     </>
   );
 }

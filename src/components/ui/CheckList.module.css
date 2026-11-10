@@ -6,26 +6,13 @@
 }
 
 .col {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 22px 22px 20px;
-}
-.yes {
-  border-color: #cdebdf;
-  background: #fbfffd;
-}
-.no {
-  border-color: #f0dcd8;
-  background: #fffcfb;
+  padding: 0;
 }
 
 .head {
-  font-size: var(--fs-label);
+  font-size: 19px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 .yes .head {
   color: var(--green-text);
@@ -51,7 +38,7 @@
 
 .list strong {
   display: block;
-  font-size: var(--fs-sm);
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.35;
   color: var(--ink);
@@ -60,9 +47,9 @@
 .list em {
   display: block;
   font-style: normal;
-  font-size: var(--fs-sm);
+  font-size: 16px;
   line-height: 1.5;
-  color: var(--gray);
+  color: var(--ink);
   margin-top: 3px;
 }
 

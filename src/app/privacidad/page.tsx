@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
+import { NextStep } from "@/components/ui/NextStep";
 import { Reveal } from "@/components/ui/Reveal";
 import shared from "../subpage.module.css";
 import styles from "./privacidad.module.css";
@@ -151,12 +151,7 @@ export default function Page() {
         </div>
       </section>
 
-      <CTA
-        title="Sin cuenta, sin datos, sin costo."
-        body="Empieza por el tema que más te sirva."
-        href="/"
-        label="Ver los temas"
-      />
+      <NextStep links={[{ href: "/", title: "Ver todas las preguntas" }]} />
     </>
   );
 }

@@ -21,7 +21,7 @@ const TOOLS = [
   {
     href: "/herramientas/ahorro",
     name: "Cuánto junto ahorrando",
-    desc: "Mira lo que se acumula guardando una cantidad fija, y qué cambia si cada vez que juntas el mínimo lo pasas a un CDT.",
+    desc: "Mira cuánto juntas guardando un poquito cada día, en la casa o en el banco.",
     tone: "green" as const,
   },
   {
@@ -52,7 +52,7 @@ export default function Page() {
           <div className={styles.grid}>
             {TOOLS.map((t, i) => (
               <Reveal key={t.href} delay={i * 70}>
-                <Link href={t.href} className={`${styles.tile} ${styles[t.tone]}`}>
+                <Link href={t.href} prefetch={false} className={`${styles.tile} ${styles[t.tone]}`}>
                   <h2 className="h3">{t.name}</h2>
                   <p className={styles.desc}>{t.desc}</p>
                   <span className={styles.action}>

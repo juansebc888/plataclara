@@ -1,18 +1,13 @@
-import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Art } from "@/components/ui/Art";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Reveal } from "@/components/ui/Reveal";
-import { Outcomes } from "@/components/ui/Outcomes";
-import { ArrowUpRight } from "@/components/ui/Icon";
-import { getCategory } from "@/content/categories";
+import { NextStep } from "@/components/ui/NextStep";
+import { ArrowRight } from "@/components/ui/Icon";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { ALLIES, KIND_LABEL, PROGRAMS } from "@/content/programas";
 import shared from "../subpage.module.css";
 import styles from "./programas.module.css";
-
-const CATEGORY = getCategory("programas")!;
 
 export const metadata: Metadata = {
   title: "Ayuda del gobierno",
@@ -26,186 +21,125 @@ export const metadata: Metadata = {
   alternates: { canonical: "/programas" },
 };
 
-/** Unknown kinds fall back to the neutral "door" tone. */
-const KIND_TONE: Record<string, string | undefined> = {
-  "no-se-devuelve": styles.free,
-  prestado: styles.loan,
-  acceso: styles.door,
-  ahorro: styles.save,
-};
-
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 5 de 5"
         title="Ayuda del gobierno"
-        intro="Existen programas para montar un negocio, conseguir un primer crédito o ahorrar para la vejez, hechos para quien ningún banco atiende. No son secretos: es que nadie los explica."
-        art={<Art name="programas" priority />}
-        tone="green"
+        answer={
+          <>
+            <p>
+              Sí hay. Unos programas dan plata para el negocio que no se
+              devuelve. Otros prestan barato, sin pedir historial.
+            </p>
+            <p>Ninguno cobra por postularte.</p>
+          </>
+        }
+        art={<Art name="programas" />}
         trail={[{ label: "Ayuda del gobierno" }]}
-      >
-        <Outcomes items={CATEGORY.outcomes} />
-      </PageHero>
+      />
 
-      {/* The distinction that changes everything */}
       <section className={shared.body}>
         <div className="shell">
-          <Reveal>
-            <h2 className="h2">Primero: no toda la plata es prestada.</h2>
-            <div className="prose">
-              <p>
-                Mucha gente ni pregunta porque asume que todo es un préstamo con
-                intereses. No es así. Hay cuatro cosas distintas y conviene saber
-                cuál estás buscando.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className={styles.kinds}>
-            <Reveal delay={60}>
-              <article className={`${styles.kind} ${styles.free}`}>
-                <p className={styles.kindTag}>Plata que no se devuelve</p>
-                <p className={styles.kindText}>
-                  Se llama <strong>capital semilla</strong>. Te la dan para
-                  montar el negocio y, si cumples lo que acordaste, no la
-                  devuelves. A cambio piden un plan y te hacen seguimiento.
-                </p>
-              </article>
-            </Reveal>
-            <Reveal delay={120}>
-              <article className={`${styles.kind} ${styles.loan}`}>
-                <p className={styles.kindTag}>Plata prestada</p>
-                <p className={styles.kindText}>
-                  Se llama <strong>microcrédito</strong> cuando el monto es
-                  pequeño. Sí se devuelve y sí cobra interés, pero muchísimo más
-                  barato que un gota a gota, y sin amenazas.
-                </p>
-              </article>
-            </Reveal>
-            <Reveal delay={180}>
-              <article className={`${styles.kind} ${styles.door}`}>
-                <p className={styles.kindTag}>Programas que abren la puerta</p>
-                <p className={styles.kindText}>
-                  No dan plata directamente. Hacen que los bancos y cooperativas
-                  te ofrezcan productos, o te forman gratis para que puedas
-                  postular a los otros.
-                </p>
-              </article>
-            </Reveal>
-            <Reveal delay={240}>
-              <article className={`${styles.kind} ${styles.save}`}>
-                <p className={styles.kindTag}>{KIND_LABEL.ahorro}</p>
-                <p className={styles.kindText}>
-                  Es <strong>tu propia plata</strong>, ahorrada para la vejez.
-                  No es un regalo ni sirve para el negocio: el Estado le suma
-                  un premio a lo que tú guardas.
-                </p>
-              </article>
-            </Reveal>
+          <div className="warn">
+            <p>
+              <strong>Si alguien te pide plata para «conseguirte» un subsidio
+              o un préstamo del gobierno, es una estafa.</strong>
+            </p>
           </div>
+
+          <h2 className={`h2 ${shared.gapTop}`}>Toca un programa para ver cómo pedirlo.</h2>
+          <ul className={styles.grid}>
+            {PROGRAMS.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/programas/${p.slug}`} prefetch={false} className={styles.card}>
+                  <span>
+                    <span className={styles.cardName}>{p.name}</span>
+                    <span className={styles.cardKind}>{KIND_LABEL[p.kind]}</span>
+                  </span>
+                  <ArrowRight size={22} />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* The programs themselves */}
-      <section className={styles.list}>
+      <section className={shared.details}>
         <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Uno por uno</p>
-            <h2 className="h2">Qué existe y para quién es.</h2>
-          </Reveal>
-
-          <div className={styles.grid}>
-            {PROGRAMS.map((p, i) => {
-              const toneClass = KIND_TONE[p.kind] ?? styles.door;
-
-              return (
-                <Reveal key={p.slug} delay={i * 60}>
-                  <article className={`${styles.card} ${toneClass}`}>
-                    <p className={styles.cardTag}>{KIND_LABEL[p.kind]}</p>
-                    <h3 className="h3">{p.name}</h3>
-                    <p className={styles.who}>{p.who}</p>
-                    <p className={styles.what}>{p.what}</p>
-
-                    <p className={styles.label}>Para quién</p>
-                    <p className={styles.text}>{p.forWhom}</p>
-
-                    <p className={styles.label}>La realidad</p>
-                    <p className={styles.text}>{p.reality}</p>
-
-                    <div className={styles.actions}>
-                      <Link href={`/programas/${p.slug}`} className={styles.more}>
-                        Ver en detalle
-                        <ArrowUpRight />
-                      </Link>
-                      <OfficialLink href={p.url} label={p.urlLabel} compact />
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
-
-          <Reveal delay={200}>
-            <div className={styles.warn}>
+          <details className="more-details">
+            <summary>¿Toda esa plata hay que devolverla?</summary>
+            <div className="more-body">
               <p>
-                <strong>Ojo con esto:</strong> las convocatorias abren y cierran
-                en fechas concretas, y los montos cambian cada año. Antes de
-                hacer cualquier trámite, confirma en la página oficial del
-                programa que siga abierto.
+                <strong>Plata que no se devuelve:</strong> se llama capital
+                semilla. Te la dan para montar el negocio. Si cumples lo
+                acordado, no la devuelves. Piden un plan y te hacen
+                seguimiento.
               </p>
               <p>
-                Y lo más importante: <strong>ninguno de estos programas cobra
-                por postularse.</strong> Si alguien te pide plata para
-                «gestionarte» un subsidio del Gobierno, es una estafa.
+                <strong>Plata prestada:</strong> si es poca se llama
+                microcrédito. Se devuelve con intereses, pero mucho más barato
+                que un gota a gota y sin amenazas.
+              </p>
+              <p>
+                <strong>Programas que abren la puerta:</strong> no dan plata.
+                Hacen que bancos y cooperativas te atiendan, o te enseñan
+                gratis.
+              </p>
+              <p>
+                <strong>{KIND_LABEL.ahorro}:</strong> es tu propia plata,
+                guardada para la vejez. El gobierno le suma un premio.
               </p>
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </details>
 
-      {/* Where you actually go */}
-      <section className={shared.body}>
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">A dónde ir</p>
-            <h2 className="h2">Estos programas se piden en otra parte.</h2>
-            <div className="prose">
-              <p>
-                Casi ninguno atiende al público directamente. La plata se pide
-                en una entidad aliada, y esa entidad sí tiene oficina.
-              </p>
-            </div>
-
-            <div className={styles.allied}>
-              {ALLIES.map((a) => (
-                <div key={a.name} className={styles.ally}>
-                  <p className={styles.allyName}>{a.name}</p>
-                  <p className={styles.allyDesc}>{a.desc}</p>
-                  {a.url && a.urlLabel ? (
-                    <OfficialLink href={a.url} label={a.urlLabel} compact />
-                  ) : null}
+          <details className="more-details">
+            <summary>¿Qué hace cada programa?</summary>
+            <div className="more-body">
+              {PROGRAMS.map((p) => (
+                <div key={p.slug}>
+                  <p>
+                    <strong>{p.name}.</strong> {p.what}
+                  </p>
+                  <p>Para quién: {p.forWhom}</p>
+                  <p>
+                    <OfficialLink href={p.url} label={p.urlLabel} compact />
+                  </p>
                 </div>
               ))}
             </div>
+          </details>
 
-            <div className={styles.sourceNote}>
+          <details className="more-details">
+            <summary>¿A dónde voy a pedirlo?</summary>
+            <div className="more-body">
               <p>
-                <strong>No publicamos direcciones ni teléfonos de sedes.</strong>{" "}
-                Cambian seguido, y un dato viejo te hace perder el día. En cada
-                programa dejamos el enlace a su página oficial, que es donde
-                siempre va a estar la información correcta.
+                Casi ningún programa atiende directo. Se pide en una entidad
+                aliada que sí tiene oficina:
+              </p>
+              {ALLIES.map((a) => (
+                <p key={a.name}>
+                  <strong>{a.name}.</strong> {a.desc}{" "}
+                  {a.url && a.urlLabel ? (
+                    <OfficialLink href={a.url} label={a.urlLabel} compact />
+                  ) : null}
+                </p>
+              ))}
+              <p>
+                Las fechas y los montos cambian cada año. Antes de cualquier
+                trámite, confirma en la página oficial que el programa siga
+                abierto.
               </p>
             </div>
-          </Reveal>
+          </details>
         </div>
       </section>
 
-      <CTA
-        title="Antes de pedir prestado, mira el costo."
-        body="La diferencia entre un microcrédito formal y un gota a gota se ve mejor en números."
-        href="/herramientas/gota-a-gota"
-        label="Ver la calculadora"
+      <NextStep
+        links={[
+          { href: "/herramientas/gota-a-gota", title: "¿Cuánto más caro es un gota a gota?" },
+          { href: "/credito", title: "Nunca he pedido un préstamo. ¿Cómo empiezo?" },
+        ]}
       />
     </>
   );

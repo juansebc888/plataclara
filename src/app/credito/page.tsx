@@ -1,17 +1,10 @@
-import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
+import { Art } from "@/components/ui/Art";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
 import { NextStep } from "@/components/ui/NextStep";
-import { Reveal } from "@/components/ui/Reveal";
-import { Outcomes } from "@/components/ui/Outcomes";
-import { getCategory } from "@/content/categories";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { BUREAUS, CREDIT_MYTHS, CREDIT_RIGHTS, CREDIT_STEPS } from "@/content/credito";
 import shared from "../subpage.module.css";
-import styles from "./credito.module.css";
-
-const CATEGORY = getCategory("credito")!;
 
 export const metadata: Metadata = {
   title: "Pedir prestado",
@@ -29,143 +22,103 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 3 de 5"
         title="Pedir prestado"
-        intro="Sin historial los bancos no prestan, y sin que presten no se construye historial. Ese círculo tiene una salida, y empieza más abajo de lo que la gente cree."
-        art={<Art name="credito" priority />}
-        tone="blue"
+        answer={
+          <>
+            <p>
+              Empieza con una cuenta de ahorros y después un préstamo pequeño
+              que sí puedas pagar a tiempo.
+            </p>
+            <p>Pagar a tiempo es lo que hace que después te presten más.</p>
+          </>
+        }
+        art={<Art name="credito" />}
         trail={[{ label: "Pedir prestado" }]}
-      >
-        <Outcomes items={CATEGORY.outcomes} />
-      </PageHero>
+      />
 
       <section className={shared.body}>
         <div className="shell">
-          <Reveal>
-            <h2 className="h2">Qué es el historial, en cristiano.</h2>
-            <div className="prose">
-              <p>
-                Es el registro de si has pagado lo que debes y cuándo lo
-                pagaste. Cuando pides un crédito, la entidad lo consulta para
-                calcular qué tan probable es que le pagues.
-              </p>
-              <p>
-                No mide cuánta plata tienes. Mide si cumples. Por eso alguien
-                con ingresos bajos y pagos puntuales puede tener mejor historial
-                que alguien que gana más y paga tarde.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className={styles.myths}>
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Lo que se dice y lo que es</p>
-            <h2 className="h2">Cuatro creencias que cuestan caro.</h2>
-          </Reveal>
-
-          <div className={styles.mythGrid}>
-            {CREDIT_MYTHS.map(([myth, truth], i) => (
-              <Reveal key={myth} delay={i * 60}>
-                <article className={styles.myth}>
-                  <p className={styles.mythQ}>{myth}</p>
-                  <p className={styles.mythA}>{truth}</p>
-                </article>
-              </Reveal>
+          <h2 className="h2">Paso a paso, desde cero.</h2>
+          <ol className={shared.steps}>
+            {CREDIT_STEPS.map(([t, d], i) => (
+              <li key={t}>
+                <span className={shared.stepN}>{i + 1}</span>
+                <div>
+                  <p className={shared.stepT}>{t}</p>
+                  <p className={shared.stepD}>{d}</p>
+                </div>
+              </li>
             ))}
+          </ol>
+
+          <div className="warn">
+            <p>
+              <strong>Cuidado:</strong> nadie puede «borrarte» de Datacrédito
+              (la lista donde los bancos ven si pagas a tiempo) por una tarifa.
+              Quien te cobre por limpiar tu historial te está estafando.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className={shared.body}>
-        <div className={`shell ${shared.split}`}>
-          <Reveal>
-            <p className="eyebrow">Desde cero</p>
-            <h2 className="h2">Cómo se construye, paso a paso.</h2>
-            <div className="prose">
+      <section className={shared.details}>
+        <div className="shell">
+          <details className="more-details">
+            <summary>¿Qué es el historial de crédito?</summary>
+            <div className="more-body">
               <p>
-                No hay atajo y desconfía de quien te ofrezca uno. Lo que hay es
-                un camino lento que sí funciona, y que empieza con algo que ya
-                puedes hacer hoy.
+                Es el registro de si pagas lo que debes y cuándo. Cuando pides
+                un préstamo, la entidad lo mira para saber si le vas a pagar.
+              </p>
+              <p>
+                No mide cuánta plata tienes. Mide si cumples. Alguien que gana
+                poco y paga a tiempo puede tener mejor historial que alguien
+                que gana más y paga tarde.
               </p>
             </div>
-          </Reveal>
+          </details>
 
-          <Reveal delay={100}>
-            <ol className={shared.steps}>
-              {CREDIT_STEPS.map(([t, d], i) => (
-                <li key={t}>
-                  <span className={shared.stepN}>{i + 1}</span>
-                  <div>
-                    <p className={shared.stepT}>{t}</p>
-                    <p className={shared.stepD}>{d}</p>
-                  </div>
-                </li>
+          <details className="more-details">
+            <summary>Cuatro creencias que no son ciertas</summary>
+            <div className="more-body">
+              {CREDIT_MYTHS.map(([myth, truth]) => (
+                <p key={myth}>
+                  <strong>{myth}</strong> {truth}
+                </p>
               ))}
-            </ol>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className={styles.rights} data-tone="dark">
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow eyebrow-light">Tus derechos</p>
-            <h2 className="h2 h2-light">
-              Tu información es tuya, y puedes verla.
-            </h2>
-            <ul className={styles.rightsList}>
-              {CREDIT_RIGHTS.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className={shared.body}>
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Dónde consultarlo</p>
-            <h2 className="h2">Ve directo a la fuente.</h2>
-            <div className="prose">
-              <p>
-                Estas son las centrales de riesgo donde vive tu información. Se
-                consulta en su propia página, sin intermediarios.
-              </p>
             </div>
+          </details>
 
-            <div className={styles.bureaus}>
+          <details className="more-details">
+            <summary>Tus derechos sobre tu información</summary>
+            <div className="more-body">
+              <ul className="list-plain">
+                {CREDIT_RIGHTS.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
+            </div>
+          </details>
+
+          <details className="more-details">
+            <summary>¿Dónde reviso mi historial gratis?</summary>
+            <div className="more-body">
               {BUREAUS.map((b) => (
-                <div key={b.name} className={styles.bureau}>
-                  <p className={styles.bureauName}>{b.name}</p>
-                  <p className={styles.bureauNote}>{b.note}</p>
+                <p key={b.name}>
+                  <strong>{b.name}.</strong> {b.note}{" "}
                   <OfficialLink href={b.url} label={b.urlLabel} compact />
-                </div>
+                </p>
               ))}
             </div>
-
-            <div className={styles.scam}>
-              <p>
-                <strong>Cuidado con esto:</strong> nadie puede «borrarte» de las
-                centrales de riesgo por una tarifa. Los reportes salen solos
-                cuando se cumple el plazo de ley. Quien te ofrezca limpiarte el
-                historial a cambio de plata te está estafando.
-              </p>
-            </div>
-          </Reveal>
+          </details>
         </div>
       </section>
 
-      <NextStep step={4} href="/deudas" title="Salir de deudas" />
-
-      <CTA
-        title="Antes de pedir, mira cuánto cuesta."
-        body="La diferencia entre un crédito formal y uno informal es más grande de lo que parece."
-        href="/herramientas/gota-a-gota"
-        label="Ver la comparación"
+      <NextStep
+        links={[
+          { href: "/herramientas/gota-a-gota", title: "¿Cuánto cuesta de verdad un gota a gota?" },
+          { href: "/programas", title: "¿Hay préstamos del gobierno para mí?" },
+        ]}
       />
     </>
   );

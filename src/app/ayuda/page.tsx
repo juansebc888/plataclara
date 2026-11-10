@@ -1,16 +1,10 @@
-import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
+import { Art } from "@/components/ui/Art";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Reveal } from "@/components/ui/Reveal";
-import { Outcomes } from "@/components/ui/Outcomes";
-import { getCategory } from "@/content/categories";
+import { NextStep } from "@/components/ui/NextStep";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { CHANNELS, RIGHTS_NOTES } from "@/content/ayuda";
 import shared from "../subpage.module.css";
-import styles from "./ayuda.module.css";
-
-const CATEGORY = getCategory("ayuda")!;
 
 export const metadata: Metadata = {
   title: "Hablar con alguien",
@@ -28,101 +22,82 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Cuando la página no alcanza"
         title="Hablar con alguien"
-        intro="Hay problemas que no se resuelven leyendo. Estos son los lugares donde atiende una persona, y ninguno te puede cobrar por atenderte."
-        art={<Art name="ayuda" priority />}
-        tone="blue"
-        trail={[{ label: "Hablar con alguien" }]}
-      >
-        <Outcomes items={CATEGORY.outcomes} />
-      </PageHero>
-
-      <section className={shared.body}>
-        <div className="shell">
-          <Reveal>
-            <h2 className="h2">Cada problema tiene su puerta.</h2>
-            <p className="lede">
-              Ir al lugar equivocado hace perder semanas. Esto es qué resuelve
-              cada quién.
+        answer={
+          <>
+            <p>
+              Si un banco te cobró algo raro, reclama primero por escrito al
+              banco. Si no responde, ve al Defensor del Consumidor.
             </p>
-          </Reveal>
-
-          <div className={styles.grid}>
-            {CHANNELS.map((c, i) => (
-              <Reveal key={c.name} delay={i * 70}>
-                <article className={`${styles.card} ${styles[c.tone]}`}>
-                  <h3 className="h3">{c.name}</h3>
-
-                  <p className={styles.label}>Para qué sirve</p>
-                  <p className={styles.text}>{c.forWhat}</p>
-
-                  <p className={styles.label}>Cómo llegar</p>
-                  <p className={styles.text}>{c.how}</p>
-
-                  <p className={styles.cost}>{c.cost}</p>
-                  {c.url && c.urlLabel ? (
-                    <div className={styles.linkRow}>
-                      <OfficialLink href={c.url} label={c.urlLabel} compact />
-                    </div>
-                  ) : null}
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.notes}>
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Bueno saberlo</p>
-            <h2 className="h2">Tres cosas que casi nadie te dice.</h2>
-            <ul className={styles.noteList}>
-              {RIGHTS_NOTES.map((n) => (
-                <li key={n}>{n}</li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
+            <p>Todo es gratis. Nadie te puede cobrar por atenderte.</p>
+          </>
+        }
+        art={<Art name="ayuda" />}
+        trail={[{ label: "Hablar con alguien" }]}
+      />
 
       <section className={shared.body}>
         <div className="shell">
-          <Reveal>
-            <h2 className="h2">Si te están amenazando, eso no es una deuda.</h2>
-            <div className="prose">
-              <p>
-                Cobrar con amenazas, intimidación o presión sobre tu familia es
-                un delito, aunque tú sí debas la plata. Deber no le da a nadie
-                derecho a asustarte.
-              </p>
-              <p>
-                Denunciar no cuesta y no necesitas abogado para hacerlo.
-              </p>
-            </div>
+          <div className="warn">
+            <p>
+              <strong>Si un prestamista te amenaza:</strong> eso es un delito,
+              aunque sí debas la plata. Si estás en peligro ahora, llama al{" "}
+              <strong>123</strong>. Después denuncia en la Policía o la
+              Fiscalía. Es gratis.
+            </p>
+            <OfficialLink href="https://www.fiscalia.gov.co" label="fiscalia.gov.co" />
+          </div>
 
-            <div className={styles.sourceNote}>
-              <p>
-                <strong>Aquí no publicamos teléfonos ni direcciones.</strong>{" "}
-                Cambian, y llamar a un número viejo cuando estás en problemas es
-                peor que no tener el número. Cada entidad tiene su enlace
-                oficial arriba: ahí siempre está el dato correcto y actualizado.
-              </p>
-              <p className={styles.sourceNoteSmall}>
-                Si estás en peligro inmediato, la línea de emergencias nacional
-                es el 123.
-              </p>
-            </div>
-          </Reveal>
+          <h2 className={`h2 ${shared.gapTop}`}>A dónde ir, según el problema.</h2>
+          <ol className="list-plain">
+            {CHANNELS.map((c) => (
+              <li key={c.name}>
+                <strong>{c.name}.</strong> {c.forWhat}
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      <CTA
-        title="¿Todavía no tienes cuenta?"
-        body="Casi todo lo demás empieza ahí, y pide menos requisitos de los que crees."
-        href="/empezando"
-        label="Ver cómo abrir una"
+      <section className={shared.details}>
+        <div className="shell">
+          {CHANNELS.map((c) => (
+            <details key={c.name} className="more-details">
+              <summary>Cómo llegar: {c.name}</summary>
+              <div className="more-body">
+                <p>{c.how}</p>
+                <p>{c.cost}</p>
+                {c.url && c.urlLabel ? (
+                  <p>
+                    <OfficialLink href={c.url} label={c.urlLabel} compact />
+                  </p>
+                ) : null}
+              </div>
+            </details>
+          ))}
+
+          <details className="more-details">
+            <summary>Tres cosas que casi nadie te dice</summary>
+            <div className="more-body">
+              <ul className="list-plain">
+                {RIGHTS_NOTES.map((n) => (
+                  <li key={n}>{n}</li>
+                ))}
+              </ul>
+              <p className={shared.gapTop}>
+                No publicamos teléfonos ni direcciones de oficinas: cambian.
+                El dato correcto está en cada enlace oficial.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <NextStep
+        links={[
+          { href: "/deudas", title: "Le debo a un gota a gota. ¿Qué hago?" },
+          { href: "/estafas", title: "¿Cómo sé si es una estafa?" },
+        ]}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Reveal } from "@/components/ui/Reveal";
+import { NextStep } from "@/components/ui/NextStep";
 import { LazyAhorro } from "@/components/tools/LazyTools";
 import { REFERENCE } from "@/lib/finance";
 import { money } from "@/lib/format";
@@ -23,52 +23,70 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Herramienta"
         title="Cuánto junto ahorrando"
-        intro="No hace falta ganar más para empezar a juntar. Cambia cuánto guardas y por cuánto tiempo, y mira qué pasa."
-        tone="green"
+        answer={
+          <p>
+            Escribe cuánto puedes guardar y por cuánto tiempo. La cuenta sale
+            abajo.
+          </p>
+        }
         trail={[
-          { href: "/herramientas", label: "Herramientas" },
+          { href: "/herramientas", label: "Calculadoras" },
           { label: "Cuánto junto ahorrando" },
         ]}
       />
 
       <section className={styles.body}>
-        <div className={`shell ${styles.split}`}>
-          <LazyAhorro />
+        <div className="shell">
+          <div className={styles.calcWrap}>
+            <LazyAhorro />
+          </div>
 
-          <Reveal delay={100}>
-            <div className="prose">
-              <h2 className="h2">Por qué el primer año importa menos.</h2>
+          <details className={`more-details ${styles.gapTop}`}>
+            <summary>¿Qué es un CDT?</summary>
+            <div className="more-body">
               <p>
-                Un CDT no recibe plata de a poquitos: se abre con una suma
-                completa, y en las entidades digitales el mínimo suele ser{" "}
-                <strong>{money(REFERENCE.cdtMinimoDigital)}</strong>. Por eso la
-                calculadora va juntando lo que guardas y, cada vez que alcanza,
-                lo pasa a un CDT a un año.
+                Un CDT es un ahorro en el banco donde dejas la plata quieta un
+                tiempo (por ejemplo, un año). Al final te la devuelven con
+                intereses.
               </p>
               <p>
-                Los intereses se pagan cuando el CDT vence, no antes. En el
-                primer año todavía no ha vencido ninguno, así que la diferencia
-                es cero. Eso sorprende a mucha gente, y es justamente lo útil de
-                verlo: al principio lo que construye el ahorro es la constancia,
-                no la tasa.
+                No recibe plata de a poquitos. Se abre con una suma completa.
+                En los bancos por internet el mínimo suele ser{" "}
+                <strong>{money(REFERENCE.cdtMinimoDigital)}</strong>. Por eso
+                la calculadora junta lo que guardas y, cada vez que alcanza, lo
+                pasa a un CDT a un año.
               </p>
               <p>
-                El interés se vuelve importante con el tiempo. Cambia a cinco o
-                diez años y vas a ver que la brecha se abre sin que hayas
-                guardado un peso más.
+                Para abrir un CDT necesitas una cuenta en el banco.{" "}
+                <Link href="/empezando" prefetch={false}>
+                  Mira cómo abrirla solo con la cédula
+                </Link>
+                .
               </p>
             </div>
-          </Reveal>
+          </details>
+          <details className="more-details">
+            <summary>¿Por qué el primer año sale igual?</summary>
+            <div className="more-body">
+              <p>
+                Los intereses se pagan cuando el CDT termina, no antes. En el
+                primer año todavía no ha terminado ninguno. Al principio lo que
+                hace crecer el ahorro es guardar seguido, no los intereses.
+              </p>
+              <p>
+                Cambia a cinco o diez años y mira cómo se abre la diferencia.
+              </p>
+            </div>
+          </details>
         </div>
       </section>
 
-      <CTA
-        title="Para guardar en un CDT hace falta una cuenta."
-        body="Abrir una cuenta básica pide menos requisitos de los que la mayoría cree."
-        href="/empezando"
-        label="Ver cómo abrir una"
+      <NextStep
+        links={[
+          { href: "/presupuesto", title: "¿Cómo separo la plata si gano distinto cada día?" },
+          { href: "/empezando", title: "¿Puedo abrir una cuenta sin trabajo fijo?" },
+        ]}
       />
     </>
   );

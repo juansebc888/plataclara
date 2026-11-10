@@ -1,103 +1,61 @@
 .hero {
-  padding: clamp(40px, 7vw, 88px) 0 clamp(32px, 5vw, 56px);
-}
-
-.heroGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 36px;
-  align-items: center;
+  padding: 20px 0 36px;
 }
 
 .title {
-  max-width: 14ch;
+  font-size: clamp(32px, 5.4vw, 60px);
+  line-height: 1.02;
+  max-width: 16ch;
+  margin-bottom: 10px;
 }
 
-.ctaRow {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.ctaRow > * {
-  flex: 1 1 auto;
-  justify-content: center;
+.trust {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--green-text);
+  margin: 0 0 16px;
 }
 
-/* The calculator is the widest fixed element on the page; on narrow
-   screens it needs to be free to shrink rather than force a scrollbar. */
-.heroViz {
-  min-width: 0;
-}
-
-.head {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-items: end;
-}
-
-@media (min-width: 700px) {
-  .ctaRow > * {
-    flex: 0 0 auto;
-  }
-}
-
-@media (min-width: 980px) {
-  .heroGrid {
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-  }
-  .head {
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 48px;
-  }
-}
-
-.hook {
-  padding: var(--section-y) 0;
-  background: #fff;
-}
-
-.hookInner {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  align-items: flex-start;
-}
-
-.hookBody {
-  font-size: var(--fs-lede);
-  line-height: 1.62;
-  color: var(--gray);
-  margin: 16px 0 0;
-  max-width: 54ch;
-}
-
-.hookBtn {
-  margin-top: 24px;
-}
-.hookArt {
-  width: 100%;
-  max-width: 260px;
-}
-.hookArt figure {
+.pick {
+  font-size: 17px;
+  color: var(--ink);
   margin: 0;
 }
-
-/* The questions follow the hero directly: no double gap. */
-.questions {
-  padding-top: 0;
+.pick + * > ul {
+  margin-top: 10px;
 }
 
-@media (min-width: 900px) {
-  .hookInner {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-  }
-  .hookArt {
-    flex-shrink: 0;
-    max-width: 320px;
-  }
+.save {
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+}
+
+.saveLead {
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 12px 0 18px;
+}
+
+/* The calculator must be free to shrink on narrow phones. */
+.calc {
+  min-width: 0;
+  max-width: 560px;
+}
+
+.saveMore,
+.planText {
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 18px 0 0;
+}
+.saveMore a,
+.planText a {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.plan {
+  padding: 8px 0 40px;
 }

@@ -1,14 +1,10 @@
-import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
+import { Art } from "@/components/ui/Art";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Illustration } from "@/components/ui/Illustration";
-import { Reveal } from "@/components/ui/Reveal";
-import { Outcomes } from "@/components/ui/Outcomes";
+import { NextStep } from "@/components/ui/NextStep";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { GOLDEN_RULES, SCAMS } from "@/content/estafas";
 import shared from "../subpage.module.css";
-import styles from "./estafas.module.css";
 
 export const metadata: Metadata = {
   title: "No caer en estafas",
@@ -22,129 +18,105 @@ export const metadata: Metadata = {
   alternates: { canonical: "/estafas" },
 };
 
-const OUTCOMES = [
-  "Reconocer las cinco estafas más comunes antes de perder plata",
-  "Las cinco señales que aparecen en todas, sin excepción",
-  "Qué hacer de inmediato si ya consignaste o diste tus datos",
-];
-
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Antes de mover plata"
         title="No caer en estafas"
-        intro="A quien nunca ha podido acceder a un crédito le ofrecen préstamos fáciles todo el tiempo. Casi ninguno es real. Estas son las trampas y cómo se reconocen."
-        tone="red"
+        answer={
+          <>
+            <p>
+              Si te piden plata antes de prestarte, es estafa. Ningún préstamo
+              de verdad cobra por adelantado.
+            </p>
+            <p>No consignes nada. Pregúntale a alguien de confianza.</p>
+          </>
+        }
+        art={<Art name="estafas" />}
         trail={[{ label: "No caer en estafas" }]}
-        art={<Art name="estafas" priority />}
-      >
-        <Outcomes items={OUTCOMES} />
-      </PageHero>
+      />
 
-      {/* Rules first: they cover scams we haven't listed yet */}
       <section className={shared.body}>
         <div className="shell">
-          <Reveal>
-            <h2 className="h2">Cinco señales que valen para todas.</h2>
-            <div className="prose">
-              <p>
-                Las estafas cambian de nombre cada año, pero el mecanismo es
-                siempre el mismo. Si te aprendes estas cinco, reconoces incluso
-                las que todavía no existen.
-              </p>
-            </div>
-
-            <ol className={styles.rules}>
-              {GOLDEN_RULES.map(([t, d]) => (
-                <li key={t}>
-                  <p className={styles.ruleT}>{t}</p>
-                  <p className={styles.ruleD}>{d}</p>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* The five scams */}
-      <section className={styles.list}>
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Una por una</p>
-            <h2 className="h2">Así se ven por dentro.</h2>
-          </Reveal>
-
-          <div className={styles.grid}>
-            {SCAMS.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 50}>
-                <article className={styles.card}>
-                  <h3 className="h3">{s.name}</h3>
-
-                  <blockquote className={styles.quote}>{s.looksLike}</blockquote>
-
-                  <div className={styles.tell}>
-                    <p className={styles.tellLabel}>Lo que la delata</p>
-                    <p className={styles.tellText}>{s.tell}</p>
-                  </div>
-
-                  <p className={styles.label}>Cómo funciona</p>
-                  <ul className={styles.how}>
-                    {s.how.map((h) => (
-                      <li key={h}>{h}</li>
-                    ))}
-                  </ul>
-
-                  <p className={styles.label}>Si ya caíste</p>
-                  <p className={styles.text}>{s.ifCaught}</p>
-                </article>
-              </Reveal>
+          <h2 className="h2">Cinco señales de estafa.</h2>
+          <ol className="list-plain">
+            {GOLDEN_RULES.map(([t, d]) => (
+              <li key={t}>
+                <strong>{t}.</strong> {d}
+              </li>
             ))}
+          </ol>
+
+          <div className="warn">
+            <p>
+              <strong>Si ya consignaste o diste tu clave, hoy mismo:</strong>
+            </p>
+            <ol>
+              <li>No consignes más. Eso no te devuelve lo anterior.</li>
+              <li>
+                Si diste la clave o el código, llama a tu banco al número que
+                está en la tarjeta y bloquéala.
+              </li>
+              <li>Guarda los chats, los números y los comprobantes.</li>
+              <li>Denuncia en la Fiscalía. Es gratis y no necesitas abogado.</li>
+            </ol>
+            <OfficialLink href="https://www.fiscalia.gov.co" label="fiscalia.gov.co" />
           </div>
         </div>
       </section>
 
-      {/* If it already happened */}
-      <section className={shared.body}>
+      <section className={shared.details}>
         <div className="shell">
-          <Reveal>
-            <h2 className="h2">Si ya te pasó, no es culpa tuya.</h2>
-            <div className="prose">
-              <p>
-                Los estafadores son profesionales y trabajan con prisa, susto y
-                esperanza. Caer no significa que seas ingenuo: significa que te
-                agarraron en el momento en que necesitabas que fuera cierto.
-              </p>
-              <p>
-                Lo único que sí es un error es callarse por vergüenza. Denunciar
-                es gratis, no necesitas abogado, y es lo que permite que agarren
-                al que lo hizo antes de que se lo haga a otro.
-              </p>
-            </div>
-
-            <div className={styles.act} data-tone="dark">
-              <p className={styles.actTitle}>Qué hacer hoy mismo</p>
-              <ol>
-                <li>Deja de consignar. Nada de lo que pidan va a devolverte lo anterior.</li>
-                <li>Guarda todo: chats, números, comprobantes, nombres.</li>
-                <li>Si diste claves o códigos, llama a tu banco al número de la tarjeta y bloquea.</li>
-                <li>Denuncia ante la Fiscalía.</li>
-                <li>Si la entidad involucrada es vigilada, pon también la queja en la Superfinanciera.</li>
-              </ol>
-              <div className={styles.links}>
-                <OfficialLink href="https://www.fiscalia.gov.co" label="fiscalia.gov.co" />
-                <OfficialLink href="https://www.superfinanciera.gov.co" label="superfinanciera.gov.co" />
+          <h2 className={`h2 ${shared.detailsHead}`}>Las estafas más comunes.</h2>
+          {SCAMS.map((s) => (
+            <details key={s.slug} className="more-details">
+              <summary>{s.name}</summary>
+              <div className="more-body">
+                <blockquote className={shared.quote}>{s.looksLike}</blockquote>
+                <p>
+                  <strong>La señal:</strong> {s.tell}
+                </p>
+                <ul className="list-plain">
+                  {s.how.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+                <p className={shared.gapTop}>
+                  <strong>Si ya caíste:</strong> {s.ifCaught}
+                </p>
               </div>
+            </details>
+          ))}
+
+          <details className="more-details">
+            <summary>Si ya te pasó, no es culpa tuya</summary>
+            <div className="more-body">
+              <p>
+                Los estafadores son profesionales. Usan la prisa, el susto y
+                la esperanza. Caer no te hace ingenuo.
+              </p>
+              <p>
+                Lo único que sí es un error es callarse por vergüenza.
+                Denunciar ayuda a que agarren al que lo hizo.
+              </p>
+              <p>
+                Si la estafa usó un banco o una entidad vigilada, pon también
+                la queja en la Superfinanciera (la oficina del gobierno que
+                vigila a los bancos).
+              </p>
+              <p>
+                <OfficialLink href="https://www.superfinanciera.gov.co" label="superfinanciera.gov.co" />
+              </p>
             </div>
-          </Reveal>
+          </details>
         </div>
       </section>
 
-      <CTA
-        title="Los préstamos de verdad se ven distinto."
-        body="Existen programas públicos y microcrédito formal para quien no tiene historial. No cobran por adelantado."
-        href="/programas"
-        label="Ver los programas reales"
+      <NextStep
+        links={[
+          { href: "/programas", title: "¿Dónde pido un préstamo de verdad?" },
+          { href: "/ayuda", title: "¿A quién le reclamo?" },
+        ]}
       />
     </>
   );

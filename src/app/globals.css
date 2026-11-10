@@ -10,10 +10,10 @@
   --blue-soft: #e4ebff;
   --paper: #faf9f7;
   /* text greys: contrast on #fff / --paper / --blue-soft */
-  --ink-2: #4a5562; /* secondary text: 7.59 / 7.21 / 6.37 */
+  --ink-2: #2f3a46; /* secondary text: 7.59 / 7.21 / 6.37 */
   --ink-3: #5b6672; /* meta: labels, breadcrumbs, hints: 5.85 / 5.56 / 4.91 */
   --gray: var(--ink-2);
-  --prose: #38434f;
+  --prose: #1c2733;
   --line: #e6e2dc;
   --line-strong: #8f877c; /* borders of interactive controls (WCAG 1.4.11) */
   --amber: #ffb020;
@@ -37,8 +37,8 @@
   --radius-sm: 12px;
 
   /* type scale (mobile first; nothing in body copy below 15px) */
-  --fs-label: 13px;
-  --fs-sm: 15px;
+  --fs-label: 14px;
+  --fs-sm: 16px;
   --fs-base: 17px;
   --fs-lede: clamp(17px, 1.6vw, 19px);
   --lh-sm: 1.55;
@@ -218,10 +218,112 @@ li {
   background-image: linear-gradient(var(--amber), var(--amber));
   background-repeat: no-repeat;
   background-position: 0 88%;
-  background-size: 0% 0.14em;
+  background-size: 100% 0.14em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  animation: wipe 0.75s var(--ease) 0.3s forwards;
+}
+
+/* ---------- shared content patterns ----------
+   One list, one warning, one "ver más". Every page uses these. */
+
+.list-plain {
+  margin: 20px 0 0;
+  padding-left: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 62ch;
+}
+.list-plain li {
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--ink);
+  padding-left: 4px;
+}
+.list-plain li::marker {
+  font-weight: 700;
+  color: var(--ink);
+}
+.list-plain strong {
+  font-weight: 700;
+}
+
+/* The one warning style: only for genuine danger. */
+.warn {
+  border-left: 5px solid var(--red);
+  background: var(--wash-red);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 18px;
+  margin: 24px 0 0;
+  max-width: 62ch;
+}
+.warn p,
+.warn li {
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.warn > :last-child {
+  margin-bottom: 0;
+}
+.warn ol,
+.warn ul {
+  margin: 0 0 12px;
+  padding-left: 1.3em;
+}
+
+/* "Ver más sobre…": secondary material, collapsed. */
+.more-details {
+  border-top: 1px solid var(--line);
+  max-width: 68ch;
+}
+.more-details:last-of-type {
+  border-bottom: 1px solid var(--line);
+}
+.more-details > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.more-details > summary::-webkit-details-marker {
+  display: none;
+}
+.more-details > summary::after {
+  content: "+";
+  flex-shrink: 0;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--blue);
+  line-height: 1;
+}
+.more-details[open] > summary::after {
+  content: "–";
+}
+.more-details > .more-body {
+  padding: 0 0 24px;
+}
+.more-body > p,
+.more-body li {
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 62ch;
+}
+.more-body > p {
+  margin: 0 0 14px;
+}
+
+.section-tight {
+  padding: 32px 0;
 }
 
 /* ---------- buttons ---------- */
@@ -233,8 +335,9 @@ li {
   background: var(--ink);
   color: #fff;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
+  min-height: 48px;
   padding: 13px 23px;
   border-radius: 99px;
   border: none;
@@ -300,33 +403,6 @@ li {
   }
 }
 
-@keyframes wipe {
-  to {
-    background-size: 100% 0.14em;
-  }
-}
-
-/* Page transition — applied by app/template.tsx on every route change.
-   Opacity + transform only: no layout thrash, no JS. */
-@keyframes pageIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.page-enter {
-  animation: pageIn 0.28s var(--ease) both;
-}
-
-.rise {
-  animation: rise 0.7s var(--ease) both;
-}
-
 /* Scroll reveal. Hidden state is opt-in: an inline script in the
    layout adds `js` to <html> before paint. Without it (JS blocked or a
    chunk that never loads) content is simply visible. A failsafe
@@ -364,9 +440,6 @@ li {
   .js [data-reveal] {
     opacity: 1;
     transform: none;
-  }
-  .underline-mark {
-    background-size: 100% 0.14em;
   }
 }
 

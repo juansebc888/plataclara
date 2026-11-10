@@ -1,7 +1,7 @@
-import { CATEGORIES } from "@/content/categories";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
+import { NextStep } from "@/components/ui/NextStep";
+import { Facts } from "@/components/ui/Facts";
 import { Reveal } from "@/components/ui/Reveal";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { FACTS_SOURCE } from "@/content/facts";
@@ -98,12 +98,9 @@ export default function Page() {
         </div>
       </section>
 
-      <CTA
-        title="Empieza por lo que más te sirva."
-        body={`${CATEGORIES.length} temas, cada uno con un primer paso concreto.`}
-        href="/"
-        label="Ver los temas"
-      />
+      <Facts />
+
+      <NextStep links={[{ href: "/", title: "Ver todas las preguntas" }]} />
     </>
   );
 }

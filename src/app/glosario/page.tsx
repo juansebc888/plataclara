@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
+import { NextStep } from "@/components/ui/NextStep";
 import { Reveal } from "@/components/ui/Reveal";
 import { GROUPS, TERMS } from "@/content/glosario";
 import shared from "../subpage.module.css";
@@ -31,9 +31,8 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Diccionario"
         title="Qué significa cada palabra"
-        intro="Buena parte del problema no es la plata: es el idioma. Estas son las palabras que aparecen en cualquier oficina bancaria, explicadas sin usar otras palabras raras."
+        answer={<p>Las palabras que usan en el banco, explicadas fácil. Toca un grupo para ir directo.</p>}
         tone="blue"
         trail={[{ label: "Qué significa cada palabra" }]}
       >
@@ -76,11 +75,11 @@ export default function Page() {
         </div>
       </section>
 
-      <CTA
-        title="Con las palabras claras, la ventanilla asusta menos."
-        body="Ya puedes preguntar sin miedo a que te vean cara de no entender."
-        href="/empezando"
-        label="Abrir una cuenta"
+      <NextStep
+        links={[
+          { href: "/empezando", title: "¿Puedo abrir una cuenta sin trabajo fijo?" },
+          { href: "/ayuda", title: "Un banco me cobró algo raro. ¿A quién le reclamo?" },
+        ]}
       />
     </>
   );

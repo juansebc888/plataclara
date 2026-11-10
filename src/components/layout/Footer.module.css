@@ -1,100 +1,42 @@
 .footer {
   background: var(--ink);
   color: #fff;
-  padding: 60px 0 26px;
-}
-
-.inner {
-  display: flex;
-  justify-content: space-between;
-  gap: 44px;
-  flex-wrap: wrap;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: -0.025em;
-  color: #fff;
-  text-decoration: none;
-}
-
-.mark {
-  width: 15px;
-  height: 15px;
-  border-radius: 5px;
-  background: var(--blue);
-  box-shadow: 5px 0 0 -1px var(--amber);
+  padding: 32px 0 28px;
 }
 
 .note {
-  font-size: var(--fs-sm);
-  color: rgba(255, 255, 255, 0.75);
-  margin: 14px 0 0;
-  max-width: 34ch;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #fff;
+  margin: 0 0 12px;
+  max-width: 52ch;
 }
 
-.cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px 20px;
-  width: 100%;
-}
-.cols > :last-child {
-  grid-column: 1 / -1;
-}
-
-@media (min-width: 620px) {
-  .cols {
-    display: flex;
-    gap: 48px;
-    width: auto;
-  }
-  .link {
-    padding: 5px 0;
-  }
-}
-
-.h {
-  font-size: var(--fs-label);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0 0 8px;
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
 }
 
 .link {
-  display: block;
-  font-size: var(--fs-sm);
-  line-height: 1.35;
-  color: rgba(255, 255, 255, 0.86);
-  text-decoration: none;
-  padding: 12px 0;
-  transition: color 0.2s ease;
-}
-.link:hover {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 16px;
   color: #fff;
   text-decoration: underline;
   text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+}
+.link:hover {
+  text-decoration-color: #fff;
 }
 
 .base {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 48px;
-  padding-top: 22px;
-}
-.base p {
-  font-size: var(--fs-sm);
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 12px 0 0;
 }
