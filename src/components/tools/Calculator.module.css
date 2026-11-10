@@ -326,7 +326,15 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--blue);
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.homeMore a:hover,
+.homeMore a:active {
+  text-decoration-thickness: 4px;
 }
 
 .homeNote {
