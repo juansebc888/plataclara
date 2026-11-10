@@ -155,7 +155,7 @@ export function AhorroCalculator({
       // makes a poor first impression; three years shows the mechanism.
       years: HOME_YEARS,
     };
-    return { ...initial, step: 0, running: false, reduce: false, run: 0, settled: initial };
+    return { ...initial, step: STEPS, running: false, reduce: false, run: 0, settled: initial };
   });
 
   useEffect(() => {
@@ -165,13 +165,9 @@ export function AhorroCalculator({
       onChange();
     }
     mq.addEventListener("change", onChange);
-    const t = mq.matches
-      ? undefined
-      : setTimeout(() => dispatch({ type: "start" }), 400);
-    return () => {
-      mq.removeEventListener("change", onChange);
-      if (t) clearTimeout(t);
-    };
+    // Show the real figures straight away; animate only when the reader
+    // changes something.
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   // A new run starts whenever `running` goes true with step 0. Time-based,

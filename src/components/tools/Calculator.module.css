@@ -326,12 +326,20 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--blue);
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.homeMore a:hover,
+.homeMore a:active {
+  text-decoration-thickness: 4px;
 }
 
 .homeNote {
-  font-size: 14px;
-  color: var(--ink-3, #5b6672);
+  font-size: 15px;
+  color: var(--ink-2, #4a5562);
   margin: 0;
 }
 

@@ -71,6 +71,33 @@ a {
   color: inherit;
 }
 
+/* Text links inside content: dark and bold with a soft amber underline,
+   not the browser's blue. Buttons, cards and nav carry their own class. */
+main a:not([class]) {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-thickness 0.15s ease, text-underline-offset 0.15s ease;
+}
+/* Taller tap area for links inside sentences, without moving the text. */
+main p > a:not([class]),
+main li > a:not([class]) {
+  padding-block: 10px;
+  margin-block: -10px;
+}
+/* Less empty space between a page header and its first section. */
+main header + section {
+  padding-top: clamp(24px, 4vw, 40px);
+}
+main a:not([class]):hover,
+main a:not([class]):active {
+  text-decoration-thickness: 4px;
+  text-underline-offset: 3px;
+}
+
 :focus-visible {
   outline: 2.5px solid var(--blue);
   outline-offset: 3px;
@@ -451,6 +478,10 @@ li {
    solo el contenido.
    ================================================================== */
 @media print {
+  a[href="/"][class*="back"],
+  a[class*="back"] {
+    display: none !important;
+  }
   @page {
     margin: 14mm;
   }

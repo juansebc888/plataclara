@@ -39,7 +39,10 @@
   margin-bottom: 0;
 }
 .answer a {
-  color: var(--blue);
+  color: var(--ink);
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .intro {
