@@ -19,11 +19,13 @@ export function GotaAGotaCalculator() {
   const max = gota || 1;
 
   return (
-    <figure className={styles.card}>
-      <figcaption className={styles.head}>
+    <div className={styles.card} role="group" aria-label="Calculadora gota a gota">
+      <div className={styles.head}>
         <div className={styles.row}>
-          <p className={styles.q}>Si pides prestado</p>
-          <div className={styles.picks} role="group" aria-label="Cuánto pides prestado">
+          <p className={styles.q} id="pc-prestamo">
+            Si pides prestado
+          </p>
+          <div className={styles.picks} role="group" aria-labelledby="pc-prestamo">
             {PRINCIPALS.map((p) => (
               <button
                 key={p}
@@ -37,10 +39,8 @@ export function GotaAGotaCalculator() {
             ))}
           </div>
         </div>
-        <p className={`${styles.q} ${styles.qMute}`}>
-          Esto es lo que deberías al cabo de un año
-        </p>
-      </figcaption>
+        <p className={styles.q}>Esto es lo que deberías al cabo de un año</p>
+      </div>
 
       <div className={styles.bars}>
         <div className={styles.barRow}>
@@ -51,7 +51,7 @@ export function GotaAGotaCalculator() {
             </p>
             <p className={`${styles.barAmt} ${styles.bad}`}>{money(gota)}</p>
           </div>
-          <div className={styles.track}>
+          <div className={styles.track} aria-hidden="true">
             <div
               className={`${styles.fill} ${styles.danger}`}
               style={{ width: `${(gota / max) * 100}%` }}
@@ -67,7 +67,7 @@ export function GotaAGotaCalculator() {
             </p>
             <p className={`${styles.barAmt} ${styles.good}`}>{money(formal)}</p>
           </div>
-          <div className={styles.track}>
+          <div className={styles.track} aria-hidden="true">
             <div
               className={`${styles.fill} ${styles.grow}`}
               style={{ width: `${(formal / max) * 100}%` }}
@@ -76,7 +76,7 @@ export function GotaAGotaCalculator() {
         </div>
       </div>
 
-      <p className={styles.foot}>
+      <p className={styles.foot} aria-live="polite">
         Por los mismos {money(principal)} terminarías pagando{" "}
         <strong className={styles.badText}>{money(gota - formal)}</strong> de
         más. No es que el gota a gota cobre un poco más caro: cobra varias veces
@@ -89,6 +89,6 @@ export function GotaAGotaCalculator() {
         práctica. Si a ti te cobran distinto, el cálculo cambia — pero el patrón
         es el mismo.
       </p>
-    </figure>
+    </div>
   );
 }

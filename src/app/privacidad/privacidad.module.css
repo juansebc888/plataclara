@@ -33,7 +33,7 @@
 }
 
 .colHead {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -57,7 +57,7 @@
 .col li {
   position: relative;
   padding-left: 22px;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.5;
   color: var(--ink);
 }
@@ -82,14 +82,14 @@
 }
 .yesList li span {
   display: block;
-  font-size: 13.5px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin-top: 3px;
 }
 
 .detail {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
 }
@@ -102,7 +102,7 @@
   margin-top: 26px;
 }
 .note p {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--ink);
   margin: 0;

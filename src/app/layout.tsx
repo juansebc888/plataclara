@@ -34,7 +34,8 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   openGraph: {
-    title: SITE.name,
+    title: `${SITE.name} — ${SITE.tagline}`,
+    siteName: SITE.name,
     description: SITE.description,
     locale: "es_CO",
     type: "website",
@@ -54,8 +55,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-CO" className={`${display.variable} ${body.variable}`}>
+    <html
+      lang="es-CO"
+      className={`${display.variable} ${body.variable}`}
+      // The inline script below adds `js` before hydration.
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Opt in to the scroll-reveal hidden state only when JS runs. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+      </head>
       <body>
+        {/* Without JS the Reveal observer never runs: show everything. */}
+        <noscript>
+          <style>{`.js [data-reveal],[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <a href="#contenido" className="skip">
           Saltar al contenido
         </a>

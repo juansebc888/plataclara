@@ -1,13 +1,18 @@
 .fig {
-  margin: 26px 0 0;
+  margin: 24px 0 0;
 }
 
 .frame {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 18px;
+  padding: 14px;
   max-width: 520px;
+}
+.bare {
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .frame svg {
@@ -17,9 +22,24 @@
 }
 
 .cap {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--gray);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--ink-2);
   margin-top: 10px;
   max-width: 52ch;
+}
+
+@media (min-width: 620px) {
+  .frame {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 980px) {
+  .right {
+    margin: 0;
+    justify-self: end;
+    width: 100%;
+    max-width: 460px;
+  }
 }

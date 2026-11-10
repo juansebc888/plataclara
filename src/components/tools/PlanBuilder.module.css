@@ -12,8 +12,11 @@
 }
 
 .pickerTitle {
-  font-size: 15px;
+  font-family: inherit;
+  font-size: var(--fs-base, 17px);
   font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.35;
   margin: 0 0 16px;
 }
 
@@ -31,16 +34,19 @@
   text-align: left;
   font-family: inherit;
   background: var(--paper);
-  border: 1.5px solid var(--line);
+  border: 1.5px solid var(--line-strong, #8f877c);
   border-radius: 14px;
   padding: 14px 16px;
+  min-height: 56px;
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease,
-    transform 0.2s var(--ease);
+    transform 0.12s var(--ease);
 }
 .goal:hover {
-  transform: translateY(-2px);
-  border-color: var(--gray);
+  border-color: var(--ink);
+}
+.goal:active {
+  transform: scale(0.98);
 }
 .goalOn {
   border-color: var(--blue);
@@ -57,8 +63,8 @@
 .goal em {
   display: block;
   font-style: normal;
-  font-size: 13px;
-  color: var(--gray);
+  font-size: var(--fs-sm, 15px);
+  color: var(--ink-2, #4a5562);
   margin-top: 3px;
   line-height: 1.4;
 }
@@ -68,7 +74,7 @@
   width: 21px;
   height: 21px;
   border-radius: 6px;
-  border: 1.5px solid var(--line);
+  border: 1.5px solid var(--line-strong, #8f877c);
   background: #fff;
   display: flex;
   align-items: center;
@@ -85,6 +91,8 @@
 .print {
   width: 100%;
   justify-content: center;
+  min-height: 52px;
+  font-size: 16px;
 }
 .print:disabled {
   opacity: 0.45;
@@ -93,10 +101,23 @@
 }
 
 .privacy {
-  font-size: 12.5px;
-  color: var(--gray);
+  font-size: var(--fs-sm, 15px);
+  line-height: 1.5;
+  color: var(--ink-2, #4a5562);
   text-align: center;
   margin: 12px 0 0;
+}
+.privacy + .privacy {
+  margin-top: 4px;
+}
+
+.previewLabel {
+  font-size: var(--fs-label, 13px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3, #5b6672);
+  margin: 0 0 10px;
 }
 
 /* --- the printable sheet --- */
@@ -115,11 +136,11 @@
 }
 
 .sheetBrand {
-  font-size: 11.5px;
+  font-size: var(--fs-label, 13px);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--gray);
+  color: var(--ink-3, #5b6672);
   margin: 0 0 6px;
 }
 
@@ -132,8 +153,8 @@
 }
 
 .sheetName {
-  font-size: 14px;
-  color: var(--gray);
+  font-size: var(--fs-sm, 15px);
+  color: var(--ink-2, #4a5562);
   margin: 0;
 }
 
@@ -165,8 +186,8 @@
   display: flex;
   gap: 11px;
   align-items: flex-start;
-  font-size: 14.5px;
-  line-height: 1.45;
+  font-size: var(--fs-sm, 15px);
+  line-height: 1.5;
 }
 
 .check {
@@ -179,8 +200,8 @@
 }
 
 .empty {
-  font-size: 14.5px;
-  color: var(--gray);
+  font-size: var(--fs-sm, 15px);
+  color: var(--ink-2, #4a5562);
   margin: 0;
 }
 
@@ -190,9 +211,9 @@
   margin-top: 8px;
 }
 .sheetFoot p {
-  font-size: 13px;
+  font-size: var(--fs-sm, 15px);
   line-height: 1.55;
-  color: var(--gray);
+  color: var(--ink-2, #4a5562);
   margin: 0;
 }
 .sheetFoot strong {
@@ -217,9 +238,50 @@
   .picker {
     display: none;
   }
+  .previewLabel {
+    display: none;
+  }
   .sheet {
     border: none;
     border-radius: 0;
     padding: 0;
+  }
+  .sheetHead {
+    margin-bottom: 12px;
+  }
+  .sheetTitle {
+    font-size: 24pt;
+  }
+  .block {
+    margin-bottom: 10px;
+  }
+  .blockTitle {
+    border-bottom-color: #999;
+  }
+  .tasks {
+    gap: 2px;
+  }
+  .tasks li {
+    font-size: 11pt;
+    padding: 3px 0;
+  }
+  .check {
+    border: 1.5px solid #000;
+  }
+  .sheetFoot {
+    break-inside: avoid;
+  }
+  .sheetFoot p,
+  .sheetName {
+    color: #000;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .goal {
+    transition: none;
+  }
+  .goal:active {
+    transform: none;
   }
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
+import { Illustration } from "@/components/ui/Illustration";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { OfficialLink } from "@/components/ui/OfficialLink";
@@ -12,6 +13,12 @@ export const metadata: Metadata = {
   title: "No caer en estafas",
   description:
     "Las cinco estafas financieras más comunes en Colombia, cómo se ven por dentro y qué hacer si ya caíste.",
+  openGraph: {
+    title: "No caer en estafas",
+    description: "Las cinco estafas financieras más comunes en Colombia, cómo se ven por dentro y qué hacer si ya caíste.",
+    url: "/estafas",
+  },
+  alternates: { canonical: "/estafas" },
 };
 
 const OUTCOMES = [
@@ -29,6 +36,7 @@ export default function Page() {
         intro="A quien nunca ha podido acceder a un crédito le ofrecen préstamos fáciles todo el tiempo. Casi ninguno es real. Estas son las trampas y cómo se reconocen."
         tone="red"
         trail={[{ label: "No caer en estafas" }]}
+        art={<Illustration name="chat-estafa" bare />}
       >
         <Outcomes items={OUTCOMES} />
       </PageHero>
@@ -113,7 +121,7 @@ export default function Page() {
               </p>
             </div>
 
-            <div className={styles.act}>
+            <div className={styles.act} data-tone="dark">
               <p className={styles.actTitle}>Qué hacer hoy mismo</p>
               <ol>
                 <li>Deja de consignar. Nada de lo que pidan va a devolverte lo anterior.</li>

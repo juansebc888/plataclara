@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
+import { Illustration } from "@/components/ui/Illustration";
+import { NextStep } from "@/components/ui/NextStep";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { ArrowRight } from "@/components/ui/Icon";
@@ -16,17 +18,24 @@ export const metadata: Metadata = {
   title: "Organizar tu plata",
   description:
     "Un método de presupuesto para quien cobra distinto cada día: separar apenas entra, calcular con el día malo y no con el bueno.",
+  openGraph: {
+    title: "Organizar tu plata",
+    description: "Un método de presupuesto para quien cobra distinto cada día: separar apenas entra, calcular con el día malo y no con el bueno.",
+    url: "/presupuesto",
+  },
+  alternates: { canonical: "/presupuesto" },
 };
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 2"
+        eyebrow="Paso 2 de 5"
         title="Organizar tu plata"
         intro="Los consejos normales de presupuesto asumen un sueldo fijo que llega el día 30. Si tu plata entra distinta cada día, ese método no sirve. Este sí."
         tone="green"
         trail={[{ label: "Organizar tu plata" }]}
+        art={<Illustration name="tres-bolsillos" bare />}
       >
         <Outcomes items={CATEGORY.outcomes} />
       </PageHero>
@@ -115,9 +124,11 @@ export default function Page() {
         </div>
       </section>
 
+      <NextStep step={3} href="/credito" title="Pedir prestado" />
+
       <CTA
         title="Mira qué pasa con lo que separas."
-        body="Aunque sea poco al día, en un año la cifra sorprende."
+        body="Aunque sea poco al día, en unos años la cifra sorprende."
         href="/herramientas/ahorro"
         label="Ver la calculadora"
       />

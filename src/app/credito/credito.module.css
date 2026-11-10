@@ -1,5 +1,5 @@
 .myths {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -36,7 +36,7 @@
 }
 
 .mythA {
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--gray);
   margin: 0;
@@ -45,7 +45,7 @@
 .rights {
   background: var(--ink);
   color: #fff;
-  padding: clamp(48px, 6vw, 80px) 0;
+  padding: var(--section-y) 0;
 }
 
 .rightsList {
@@ -60,9 +60,9 @@
 .rightsList li {
   position: relative;
   padding-left: 26px;
-  font-size: 15.5px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(255, 255, 255, 0.82);
 }
 .rightsList li::before {
   content: "";
@@ -110,7 +110,7 @@
 }
 
 .bureauNote {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0 0 12px;
@@ -124,7 +124,7 @@
   margin-top: 20px;
 }
 .scam p {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: #5a2a20;
   margin: 0;

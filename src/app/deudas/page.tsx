@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
+import { Illustration } from "@/components/ui/Illustration";
+import { NextStep } from "@/components/ui/NextStep";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowRight } from "@/components/ui/Icon";
@@ -12,18 +14,31 @@ import { percent } from "@/lib/format";
 import { getCategory } from "@/content/categories";
 import styles from "../subpage.module.css";
 
+/** "casi 28 veces" / "más de 27 veces": stays true when the usury rate moves. */
+const ratio = monthlyToEA(RATES.gotaMonthly) / REFERENCE.usuraEA;
+const timesOver =
+  ratio % 1 >= 0.5
+    ? `casi ${Math.ceil(ratio)} veces`
+    : `más de ${Math.floor(ratio)} veces`;
+
 const CATEGORY = getCategory("deudas")!;
 
 export const metadata: Metadata = {
   title: CATEGORY.name,
   description: CATEGORY.desc,
+  openGraph: {
+    title: CATEGORY.name,
+    description: CATEGORY.desc,
+    url: "/deudas",
+  },
+  alternates: { canonical: "/deudas" },
 };
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Tema"
+        eyebrow="Paso 4 de 5"
         title="Salir de deudas"
         intro={CATEGORY.intro}
         tone="red"
@@ -44,21 +59,19 @@ export default function Page() {
                 lo que ya debes, mes tras mes.
               </p>
               <p>
-                Mueve el monto y mira cuánto deberías al año por el mismo
+                Escoge un monto y mira cuánto deberías al año por el mismo
                 préstamo.
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={100}>
-            <LazyGotaAGota />
-          </Reveal>
+          <LazyGotaAGota />
         </div>
       </section>
 
       {/* The fact that reframes everything: it is not expensive, it is a crime */}
       <section className={styles.usura}>
-        <div className="shell">
+        <div className={`shell ${styles.split}`}>
           <Reveal>
             <p className="eyebrow">Lo que casi nadie sabe</p>
             <h2 className="h2">Existe un techo legal, y el gota a gota lo pasa por encima.</h2>
@@ -77,8 +90,15 @@ export default function Page() {
                 <strong className={styles.red}>
                   {percent(monthlyToEA(RATES.gotaMonthly), 0)} efectivo anual
                 </strong>
-                . No es «un poco más caro»: está casi{" "}
-                <strong>veintisiete veces</strong> por encima del techo legal.
+                . No es «un poco más caro»: está {timesOver} por encima del
+                techo legal.
+              </p>
+              <p>
+                Ojo: el microcrédito tiene su propio techo, más alto que el de
+                consumo, porque prestar montos pequeños le cuesta más a la
+                entidad. Por eso un microcrédito formal puede pasar de ese{" "}
+                {percent(REFERENCE.usuraEA, 0)} y seguir siendo legal. Lo que
+                ningún crédito legal hace es acercarse a lo del gota a gota.
               </p>
               <p>
                 Y eso tiene nombre. Cobrar por encima de la tasa de usura no es
@@ -87,8 +107,15 @@ export default function Page() {
                 así está cometiendo un delito, aunque tú hayas aceptado.
               </p>
             </div>
-
-
+          </Reveal>
+          <Illustration
+            name="usura"
+            align="right"
+            caption="Por encima de la línea roja, cobrar intereses es un delito."
+          />
+        </div>
+        <div className="shell">
+          <Reveal>
             <div className={styles.check}>
               <p className={styles.checkTitle}>Cómo saber si te están cobrando de más</p>
               <ol>
@@ -169,6 +196,8 @@ export default function Page() {
           </Reveal>
         </div>
       </section>
+
+      <NextStep step={5} href="/programas" title="Ayuda del gobierno" />
 
       <CTA
         title="Existe crédito formal para quien empieza de cero."

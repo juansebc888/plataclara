@@ -62,7 +62,7 @@ export function PlanBuilder() {
   return (
     <div className={styles.wrap}>
       <div className={styles.picker}>
-        <p className={styles.pickerTitle}>¿Qué quieres hacer? Marca lo que aplique.</p>
+        <h2 className={styles.pickerTitle}>¿Qué quieres hacer? Marca lo que aplique.</h2>
         <div className={styles.goals}>
           {GOALS.map((g) => {
             const on = picked.includes(g.key);
@@ -95,16 +95,22 @@ export function PlanBuilder() {
           Imprimir mi plan
         </button>
         <p className={styles.privacy}>
-          Nada de esto sale de tu teléfono. Se imprime y ya.
+          Si no tienes impresora, guárdala como PDF o tómale captura de
+          pantalla.
         </p>
+        <p className={styles.privacy}>Nada de esto sale de tu teléfono.</p>
       </div>
 
       {/* This is what actually goes on paper. */}
+      <div>
+      <p className={styles.previewLabel}>Así queda tu hoja</p>
       <div className={styles.sheet} id="plan-imprimible">
         <div className={styles.sheetHead}>
           <p className={styles.sheetBrand}>Plata Clara</p>
-          <p className={styles.sheetTitle}>Mi plan</p>
-          <p className={styles.sheetName}>Nombre: ______________________________</p>
+          <h2 className={styles.sheetTitle}>Mi plan</h2>
+          <p className={styles.sheetName}>
+            Nombre: ______________________ Fecha: ___________
+          </p>
         </div>
 
         {ordered.length === 0 ? (
@@ -133,6 +139,7 @@ export function PlanBuilder() {
           </p>
           <p className={styles.sheetUrl}>plataclara.co</p>
         </div>
+      </div>
       </div>
     </div>
   );

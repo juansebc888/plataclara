@@ -1,5 +1,5 @@
 .body {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
 }
 
 .split {
@@ -25,39 +25,35 @@
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 18px 20px;
-  transition: transform 0.26s var(--ease), box-shadow 0.26s ease,
-    border-color 0.26s ease;
-}
-.steps li:hover {
-  transform: translateX(5px);
-  box-shadow: 0 12px 28px rgba(10, 23, 37, 0.07);
-  border-color: #d6d0c8;
+  padding: 18px;
 }
 
 .stepN {
   flex-shrink: 0;
-  width: 27px;
-  height: 27px;
+  width: 30px;
+  height: 30px;
   border-radius: 9px;
+  font-variant-numeric: tabular-nums;
   background: var(--blue-soft);
   color: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 13.5px;
+  font-size: var(--fs-sm);
 }
 
 .stepT {
   font-weight: 600;
-  font-size: 15px;
-  margin: 0 0 2px;
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 2px 0 0;
 }
 .stepD {
-  font-size: 13.5px;
-  color: var(--gray);
-  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 4px 0 0;
 }
 
 .pending {
@@ -69,13 +65,13 @@
 }
 .pending p {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--gray);
 }
 
 .more {
-  padding: clamp(44px, 6vw, 72px) 0;
+  padding: var(--section-y) 0;
   border-top: 1px solid var(--line);
 }
 
@@ -83,6 +79,9 @@
   .split {
     grid-template-columns: 1.05fr 0.95fr;
     gap: 56px;
+  }
+  .steps li {
+    padding: 18px 20px;
   }
 }
 
@@ -95,7 +94,7 @@
 }
 
 .sourcesTitle {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -140,7 +139,7 @@
   background: #fbe4df;
   color: var(--red-text);
   font-weight: 700;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,7 +152,7 @@
 }
 
 .exitD {
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--gray);
   margin: 0;
@@ -165,7 +164,7 @@
 
 /* Usura (deudas) */
 .usura {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -184,7 +183,7 @@
 }
 
 .checkTitle {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -200,7 +199,7 @@
   gap: 9px;
 }
 .check li {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: #5a2a20;
 }
@@ -220,7 +219,7 @@
 }
 
 .insolvenciaTitle {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -229,7 +228,7 @@
 }
 
 .insolvencia p {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: var(--ink);
   margin: 0 0 12px;

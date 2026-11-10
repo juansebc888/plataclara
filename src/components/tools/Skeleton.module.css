@@ -1,13 +1,32 @@
+/*
+ * Placeholder while a calculator's code loads. Each size matches the
+ * rendered component (measured at 360px and ≥620px), so the page does
+ * not jump when it arrives. Static on purpose: no shimmer.
+ */
 .skeleton {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 24px;
   padding: 24px;
-  min-height: 300px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   justify-content: center;
+  box-shadow: 0 16px 44px rgba(10, 23, 37, 0.08);
+}
+
+.home {
+  min-height: 536px;
+}
+.ahorro {
+  min-height: 1165px;
+}
+.gota {
+  min-height: 703px;
+}
+.plan {
+  min-height: 1477px;
+  box-shadow: none;
 }
 
 .skeleton span {
@@ -25,4 +44,40 @@
 }
 .skeleton span:nth-child(3) {
   width: 40%;
+}
+
+@media (min-width: 620px) {
+  .home {
+    min-height: 484px;
+  }
+  .ahorro {
+    min-height: 758px;
+  }
+  .gota {
+    min-height: 569px;
+  }
+}
+
+/* Tablet: the calculators sit in a wider single column. */
+@media (min-width: 620px) and (max-width: 979px) {
+  .home {
+    min-height: 460px;
+  }
+  .ahorro {
+    min-height: 736px;
+  }
+  .gota {
+    min-height: 471px;
+  }
+}
+@media (min-width: 620px) and (max-width: 899px) {
+  .plan {
+    min-height: 1104px;
+  }
+}
+
+@media (min-width: 900px) {
+  .plan {
+    min-height: 564px;
+  }
 }

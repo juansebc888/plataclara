@@ -5,6 +5,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CheckList } from "@/components/ui/CheckList";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { OfficialLink } from "@/components/ui/OfficialLink";
+import { Illustration } from "@/components/ui/Illustration";
+import { NextStep } from "@/components/ui/NextStep";
 import { REFERENCE } from "@/lib/finance";
 import { money } from "@/lib/format";
 import { getCategory } from "@/content/categories";
@@ -21,13 +23,19 @@ export const metadata: Metadata = {
   title: "Abrir tu primera cuenta",
   description:
     "Qué necesitas de verdad para abrir una cuenta de ahorros en Colombia: solo la cédula. Sin fiador, sin contrato de trabajo y sin saldo mínimo.",
+  openGraph: {
+    title: "Abrir tu primera cuenta",
+    description: "Qué necesitas de verdad para abrir una cuenta de ahorros en Colombia: solo la cédula. Sin fiador, sin contrato de trabajo y sin saldo mínimo.",
+    url: "/empezando",
+  },
+  alternates: { canonical: "/empezando" },
 };
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 1"
+        eyebrow="Paso 1 de 5"
         title="Abrir tu primera cuenta"
         intro="La mayoría de la gente cree que le van a pedir un fiador, un contrato de trabajo o una plata que no tiene. Para una cuenta básica, nada de eso es cierto."
         tone="blue"
@@ -38,7 +46,7 @@ export default function Page() {
 
       {/* 1 — the myth, first, because it is the actual barrier */}
       <section className={shared.body}>
-        <div className="shell">
+        <div className={`shell ${shared.split}`}>
           <Reveal>
             <h2 className="h2">Lo primero: qué te van a pedir.</h2>
             <div className="prose">
@@ -48,8 +56,15 @@ export default function Page() {
                 ingresos fijos ni quién responde por ti.
               </p>
             </div>
-            <CheckList yes={NEEDED} no={NOT_NEEDED} />
           </Reveal>
+          <Illustration
+            name="cedula"
+            align="right"
+            caption="Para una cuenta básica, con la cédula basta."
+          />
+        </div>
+        <div className="shell">
+          <CheckList yes={NEEDED} no={NOT_NEEDED} />
         </div>
       </section>
 
@@ -105,27 +120,29 @@ export default function Page() {
                 fuera.
               </p>
             </div>
+            <Illustration
+              name="sim-menu"
+              caption="El menú de la SIM funciona sin datos ni wifi."
+            />
           </Reveal>
 
-          <Reveal delay={100}>
-            <ol className={shared.steps}>
-              {BASIC_PHONE_STEPS.map(([t, d], i) => (
-                <li key={t}>
-                  <span className={shared.stepN}>{i + 1}</span>
-                  <div>
-                    <p className={shared.stepT}>{t}</p>
-                    <p className={shared.stepD}>{d}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
+          <ol className={shared.steps}>
+            {BASIC_PHONE_STEPS.map(([t, d], i) => (
+              <li key={t}>
+                <span className={shared.stepN}>{i + 1}</span>
+                <div>
+                  <p className={shared.stepT}>{t}</p>
+                  <p className={shared.stepD}>{d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
       {/* 4 — corresponsales: kills the "toca ir al banco" barrier */}
       <section className={styles.corresponsales}>
-        <div className="shell">
+        <div className={`shell ${shared.split}`}>
           <Reveal>
             <p className="eyebrow">No toca ir al banco</p>
             <h2 className="h2">La tienda del barrio también es el banco.</h2>
@@ -142,6 +159,11 @@ export default function Page() {
               </p>
             </div>
           </Reveal>
+          <Illustration
+            name="corresponsal"
+            align="right"
+            caption="Busca el letrero del banco en la tienda, la droguería o la papelería."
+          />
         </div>
       </section>
 
@@ -193,6 +215,8 @@ export default function Page() {
           </Reveal>
         </div>
       </section>
+
+      <NextStep step={2} href="/presupuesto" title="Organizar tu plata" />
 
       <CTA
         title="Ya con cuenta, guardar rinde más."

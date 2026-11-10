@@ -58,6 +58,6 @@ export const CHANNELS: HelpChannel[] = [
 
 export const RIGHTS_NOTES: string[] = [
   "Puedes escoger a dónde ir: a la entidad, al Defensor del Consumidor Financiero o a la Superintendencia. No tienes que agotar uno para pasar al otro.",
-  "Para pleitos de monto menor contra una entidad vigilada, la Superintendencia Financiera puede resolver sin que necesites abogado.",
+  "Para pleitos de monto menor contra un banco u otra entidad que ella vigila, la Superintendencia Financiera puede resolver sin que necesites abogado.",
   "Ninguno de estos trámites cuesta plata. Si alguien te ofrece gestionarlos por una tarifa, desconfía.",
 ];

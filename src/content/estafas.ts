@@ -63,7 +63,7 @@ export const SCAMS: Scam[] = [
       "Rentabilidad alta, rápida y garantizada no existe. Y si te pagan por traer gente, la plata sale de los que entran después, no de un negocio.",
     how: [
       "Al principio sí pagan, y eso hace que la gente meta más y convenza a la familia.",
-      "El negocio nunca produce nada: le pagan a los viejos con la plata de los nuevos.",
+      "El negocio nunca produce nada: les pagan a los viejos con la plata de los nuevos.",
       "Cuando dejan de entrar personas, se cae y la plata desaparece.",
       "Los últimos en entrar, que suelen ser los vecinos y familiares de quienes ya estaban, lo pierden todo.",
     ],

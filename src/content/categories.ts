@@ -1,5 +1,13 @@
 export type Tone = "blue" | "green" | "red";
-export type IconKey = "wallet" | "budget" | "credit" | "debt" | "gov" | "help";
+export type IconKey =
+  | "wallet"
+  | "budget"
+  | "credit"
+  | "debt"
+  | "shield"
+  | "gov"
+  | "help"
+  | "book";
 
 export type Category = {
   slug: string;
@@ -83,7 +91,7 @@ export const CATEGORIES: Category[] = [
     intro:
       "A quien nunca ha podido acceder a un crédito le ofrecen préstamos fáciles todo el tiempo. Casi ninguno es real.",
     tone: "red",
-    icon: "debt",
+    icon: "shield",
     outcomes: [
       "Reconocer las cinco estafas más comunes antes de perder plata",
       "Las cinco señales que aparecen en todas, sin excepción",
@@ -128,7 +136,7 @@ export const CATEGORIES: Category[] = [
     intro:
       "Buena parte del problema no es la plata: es el idioma.",
     tone: "blue",
-    icon: "help",
+    icon: "book",
     outcomes: [
       "Qué quieren decir las palabras que usan en la oficina del banco",
       "La diferencia entre tasa efectiva y tasa nominal",

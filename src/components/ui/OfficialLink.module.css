@@ -2,11 +2,12 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 13.5px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--blue);
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 12px 16px;
+  min-height: 44px;
   background: var(--blue-soft);
   border-radius: 99px;
   transition: transform 0.2s var(--ease), box-shadow 0.2s ease;
@@ -23,8 +24,8 @@
 
 .compact {
   background: transparent;
-  padding: 0;
-  font-size: 13px;
+  padding: 12px 0;
+  font-size: var(--fs-sm);
 }
 .compact:hover {
   transform: none;

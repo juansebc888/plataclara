@@ -1,3 +1,4 @@
+import { CATEGORIES } from "@/content/categories";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
@@ -12,13 +13,18 @@ export const metadata: Metadata = {
   title: "Sobre el proyecto",
   description:
     "Qué es Plata Clara, para quién está hecho, y de dónde salen las cifras que aparecen en el sitio.",
+  openGraph: {
+    title: "Sobre el proyecto",
+    description: "Qué es Plata Clara, para quién está hecho, y de dónde salen las cifras que aparecen en el sitio.",
+    url: "/sobre-el-proyecto",
+  },
+  alternates: { canonical: "/sobre-el-proyecto" },
 };
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Sobre el proyecto"
         title="Quién hace esto y por qué"
         intro="Plata Clara es un proyecto independiente, sin publicidad y sin venta de productos financieros."
         trail={[{ label: "Sobre el proyecto" }]}
@@ -52,13 +58,24 @@ export default function Page() {
                 Las calculadoras usan una tasa de CDT de{" "}
                 <strong>{percent(RATES.cdtEA)} efectivo anual</strong>. Es a
                 propósito conservadora: en {REFERENCE.year} los bancos
-                tradicionales rondan tasas más altas y los digitales llegan más
-                arriba todavía. Preferimos quedarnos cortos antes que prometer
+                tradicionales rondan entre {percent(RATES.cdtEA)} y 11,25%, y
+                los digitales llegan más arriba todavía. Preferimos quedarnos cortos antes que prometer
                 de más.
               </p>
               <p>
-                Para los topes de cuentas usamos el salario mínimo de{" "}
-                {REFERENCE.year}, que es {money(REFERENCE.smmlv)}. La cobertura
+                La calculadora de ahorro no supone que puedas meter{" "}
+                {money(2000)} diarios a un CDT, porque eso no existe. Supone que
+                guardas aparte y, cada vez que juntas{" "}
+                {money(REFERENCE.cdtMinimoDigital)}, abres un CDT a un año. Los
+                intereses solo cuentan cuando el CDT vence, y ya tienen
+                descontada la retención en la fuente de{" "}
+                {percent(RATES.retencionCDT, 0)}.
+              </p>
+              <p>
+                Cuando mencionamos el salario mínimo usamos el de{" "}
+                {REFERENCE.year}, que es {money(REFERENCE.smmlv)}. Los topes
+                exactos de cada cuenta los fija cada entidad, así que conviene
+                preguntarlos. La cobertura
                 de Fogafín es de {money(REFERENCE.fogafin)} por persona y por
                 entidad.
               </p>
@@ -83,7 +100,7 @@ export default function Page() {
 
       <CTA
         title="Empieza por lo que más te sirva."
-        body="Seis temas, cada uno con un primer paso concreto."
+        body={`${CATEGORIES.length} temas, cada uno con un primer paso concreto.`}
         href="/"
         label="Ver los temas"
       />

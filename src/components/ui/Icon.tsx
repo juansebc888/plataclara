@@ -1,7 +1,7 @@
 import type { IconKey } from "@/content/categories";
 
 /**
- * Inline SVG instead of an icon library: six icons ship as ~1kb of
+ * Inline SVG instead of an icon library: eight icons ship as ~1kb of
  * markup rather than pulling a package into the client bundle.
  * Server Component.
  */
@@ -12,12 +12,17 @@ const PATHS: Record<IconKey, string> = {
     "M12 3v9l6.5 3.75M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9Z",
   credit:
     "M3 17.5 9 11l4 4 8-8.5M21 6.5h-5m5 0v5",
+  // A line going down: the debt getting smaller.
   debt:
+    "M3 6.5 9 13l4-4 8 8.5M21 17.5h-5m5 0v-5",
+  shield:
     "M12 3 3.5 6.5v5c0 4.5 3.6 8.7 8.5 10 4.9-1.3 8.5-5.5 8.5-10v-5L12 3Zm0 5.5v4m0 3.2v.1",
   gov:
     "M3.5 9.5 12 4l8.5 5.5M5.5 10v7m4-7v7m5-7v7m4-7v7M3.5 20h17",
   help:
     "M12 21a9 9 0 1 0-9-9 9 9 0 0 0 9 9Zm0-13.2a2.2 2.2 0 0 1 1.6 3.7c-.7.7-1.6 1-1.6 2m0 2.7v.1",
+  book:
+    "M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2m0-13c1.5-1.5 4-2 8-2v13c-4 0-6.5.5-8 2m0-13v13",
 };
 
 export function Icon({
