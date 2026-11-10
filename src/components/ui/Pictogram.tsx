@@ -41,8 +41,8 @@ export function Pictogram({
     <div
       ref={ref}
       className={styles.picto}
-      role="img"
-      aria-label={`${filled} de cada 10`}
+      // The number is already in the visible text next to it.
+      aria-hidden="true"
     >
       {Array.from({ length: 10 }, (_, i) => (
         <span

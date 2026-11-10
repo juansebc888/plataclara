@@ -15,6 +15,12 @@ export const metadata: Metadata = {
   title: "Hablar con alguien",
   description:
     "Dónde acudir cuando una entidad financiera no responde, te cobró de más o un prestamista te está amenazando. Todos estos canales son gratuitos.",
+  openGraph: {
+    title: "Hablar con alguien",
+    description: "Dónde acudir cuando una entidad financiera no responde, te cobró de más o un prestamista te está amenazando. Todos estos canales son gratuitos.",
+    url: "/ayuda",
+  },
+  alternates: { canonical: "/ayuda" },
 };
 
 export default function Page() {

@@ -1,8 +1,25 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 14px;
-  margin-top: 40px;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* Phones: icon in its own column, so each tile is a short row. */
+@media (max-width: 619px) {
+  .tile {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    column-gap: 14px;
+    padding: 18px;
+  }
+  .icon {
+    grid-row: 1 / span 3;
+    margin-bottom: 0;
+  }
+  .desc {
+    margin-bottom: 10px;
+  }
 }
 
 .tile {
@@ -45,7 +62,7 @@
 .tile:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 46px rgba(10, 23, 37, 0.1);
-  border-color: #d6d0c8;
+  border-color: var(--line-strong);
 }
 .tile:hover::before {
   opacity: 1;
@@ -74,7 +91,6 @@
   color: var(--red);
 }
 .tile:hover .icon {
-  transform: scale(1.07) rotate(-5deg);
   background: #fff;
   border-color: currentColor;
 }
@@ -84,7 +100,7 @@
 }
 
 .desc {
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0 0 18px;
@@ -94,7 +110,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-weight: 600;
 }
 .blue .action {

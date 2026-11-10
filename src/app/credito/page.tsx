@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
+import { NextStep } from "@/components/ui/NextStep";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { getCategory } from "@/content/categories";
@@ -15,13 +16,19 @@ export const metadata: Metadata = {
   title: "Pedir prestado",
   description:
     "Qué es el historial crediticio, cómo empezar uno desde cero y qué derechos tienes sobre tu propia información.",
+  openGraph: {
+    title: "Pedir prestado",
+    description: "Qué es el historial crediticio, cómo empezar uno desde cero y qué derechos tienes sobre tu propia información.",
+    url: "/credito",
+  },
+  alternates: { canonical: "/credito" },
 };
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 3"
+        eyebrow="Paso 3 de 5"
         title="Pedir prestado"
         intro="Sin historial los bancos no prestan, y sin que presten no se construye historial. Ese círculo tiene una salida, y empieza más abajo de lo que la gente cree."
         tone="blue"
@@ -100,7 +107,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className={styles.rights}>
+      <section className={styles.rights} data-tone="dark">
         <div className="shell">
           <Reveal>
             <p className="eyebrow eyebrow-light">Tus derechos</p>
@@ -150,10 +157,12 @@ export default function Page() {
         </div>
       </section>
 
+      <NextStep step={4} href="/deudas" title="Salir de deudas" />
+
       <CTA
         title="Antes de pedir, mira cuánto cuesta."
         body="La diferencia entre un crédito formal y uno informal es más grande de lo que parece."
-        href="/deudas"
+        href="/herramientas/gota-a-gota"
         label="Ver la comparación"
       />
     </>

@@ -1,5 +1,5 @@
 .types {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -32,14 +32,14 @@
 }
 
 .what {
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0 0 18px;
 }
 
 .row {
-  font-size: 13.5px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0 0 10px;
@@ -51,7 +51,7 @@
 .tagGood,
 .tagWatch {
   display: inline-block;
-  font-size: 10.5px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -70,7 +70,7 @@
 }
 
 .limits {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
 }
 
 .warnBox {
@@ -81,7 +81,7 @@
   margin-top: 24px;
 }
 .warnBox p {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: #4a3d22;
   margin: 0 0 12px;
@@ -115,7 +115,7 @@
 }
 
 .protectTitle {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -124,16 +124,17 @@
 }
 
 .protect p {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: var(--ink);
   margin: 0 0 12px;
   max-width: 62ch;
 }
 
-.protectNote {
-  color: var(--gray) !important;
-  font-size: 14px !important;
+p.protectNote.protectNote {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
 }
 
 .linkRow {
@@ -144,7 +145,7 @@
 }
 
 .corresponsales {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);

@@ -10,7 +10,7 @@
 }
 
 .stepsWrap {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -31,7 +31,7 @@
   background: #fff9ec;
   border: 1px solid #f4e4c0;
   border-radius: 14px;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: #4a3d22;
 }
@@ -45,7 +45,7 @@
   border-radius: 99px;
   background: var(--amber);
   color: #4a3d22;
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 800;
   display: flex;
   align-items: center;

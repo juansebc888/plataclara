@@ -21,9 +21,20 @@
 .door {
   border-top: 3px solid var(--amber);
 }
+.save {
+  border-top: 3px solid var(--ink);
+}
+.save .kindTag {
+  color: var(--ink);
+}
+.save .cardTag {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
 
 .kindTag {
-  font-size: 11.5px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -40,7 +51,7 @@
 }
 
 .kindText {
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--gray);
   margin: 0;
@@ -51,7 +62,7 @@
 }
 
 .list {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -86,7 +97,7 @@
 
 .cardTag {
   display: inline-block;
-  font-size: 10.5px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -108,13 +119,13 @@
 }
 
 .who {
-  font-size: 12.5px;
+  font-size: var(--fs-sm);
   color: var(--gray);
   margin: 0 0 12px;
 }
 
 .what {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--ink);
   margin: 0 0 4px;
@@ -122,7 +133,7 @@
 }
 
 .label {
-  font-size: 11px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -131,7 +142,7 @@
 }
 
 .text {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0;
@@ -141,7 +152,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 13.5px;
+  font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--ink);
   text-decoration: none;
@@ -172,7 +183,7 @@
   margin-top: 24px;
 }
 .sourceNote p {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: var(--ink);
   margin: 0;
@@ -187,7 +198,7 @@
   margin-top: 24px;
 }
 .warn p {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: #4a3d22;
   margin: 0 0 12px;
@@ -214,12 +225,12 @@
 
 .allyName {
   font-weight: 600;
-  font-size: 15.5px;
+  font-size: var(--fs-sm);
   margin: 0 0 5px;
 }
 
 .allyDesc {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0;
@@ -227,7 +238,7 @@
 
 @media (min-width: 700px) {
   .kinds {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
   .allied {
@@ -238,5 +249,11 @@
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .kinds {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

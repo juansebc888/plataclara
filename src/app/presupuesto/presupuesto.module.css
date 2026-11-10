@@ -39,20 +39,20 @@
   border: 1px solid var(--line);
   font-family: var(--font-display), sans-serif;
   font-weight: 700;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   color: var(--gray);
   margin-bottom: 14px;
 }
 
 .what {
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0 0 14px;
 }
 
 .rule {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--ink);
   margin: 0;
@@ -62,7 +62,7 @@
 }
 
 .method {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -83,7 +83,7 @@
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 14px;
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--ink);
 }
@@ -113,7 +113,7 @@
 }
 
 .paperTitle {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -122,7 +122,7 @@
 }
 
 .paper p {
-  font-size: 15.5px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: var(--ink);
   margin: 0 0 18px;

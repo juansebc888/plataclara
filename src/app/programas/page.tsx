@@ -17,15 +17,29 @@ export const metadata: Metadata = {
   title: "Ayuda del gobierno",
   description:
     "Qué programas públicos existen para conseguir plata para tu negocio en Colombia, cuáles se devuelven y cuáles no, y a dónde ir a preguntar.",
+  openGraph: {
+    title: "Ayuda del gobierno",
+    description: "Qué programas públicos existen para conseguir plata para tu negocio en Colombia, cuáles se devuelven y cuáles no, y a dónde ir a preguntar.",
+    url: "/programas",
+  },
+  alternates: { canonical: "/programas" },
+};
+
+/** Unknown kinds fall back to the neutral "door" tone. */
+const KIND_TONE: Record<string, string | undefined> = {
+  "no-se-devuelve": styles.free,
+  prestado: styles.loan,
+  acceso: styles.door,
+  ahorro: styles.save,
 };
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 5"
+        eyebrow="Paso 5 de 5"
         title="Ayuda del gobierno"
-        intro="Existen programas hechos para darle plata a quien quiere montar un negocio y ningún banco atiende. No son secretos: es que nadie los explica."
+        intro="Existen programas para montar un negocio, conseguir un primer crédito o ahorrar para la vejez, hechos para quien ningún banco atiende. No son secretos: es que nadie los explica."
         tone="green"
         trail={[{ label: "Ayuda del gobierno" }]}
       >
@@ -40,7 +54,7 @@ export default function Page() {
             <div className="prose">
               <p>
                 Mucha gente ni pregunta porque asume que todo es un préstamo con
-                intereses. No es así. Hay tres cosas distintas y conviene saber
+                intereses. No es así. Hay cuatro cosas distintas y conviene saber
                 cuál estás buscando.
               </p>
             </div>
@@ -73,7 +87,17 @@ export default function Page() {
                 <p className={styles.kindText}>
                   No dan plata directamente. Hacen que los bancos y cooperativas
                   te ofrezcan productos, o te forman gratis para que puedas
-                  postular a los otros dos.
+                  postular a los otros.
+                </p>
+              </article>
+            </Reveal>
+            <Reveal delay={240}>
+              <article className={`${styles.kind} ${styles.save}`}>
+                <p className={styles.kindTag}>{KIND_LABEL.ahorro}</p>
+                <p className={styles.kindText}>
+                  Es <strong>tu propia plata</strong>, ahorrada para la vejez.
+                  No es un regalo ni sirve para el negocio: el Estado le suma
+                  un premio a lo que tú guardas.
                 </p>
               </article>
             </Reveal>
@@ -91,12 +115,7 @@ export default function Page() {
 
           <div className={styles.grid}>
             {PROGRAMS.map((p, i) => {
-              const toneClass =
-                p.kind === "no-se-devuelve"
-                  ? styles.free
-                  : p.kind === "prestado"
-                    ? styles.loan
-                    : styles.door;
+              const toneClass = KIND_TONE[p.kind] ?? styles.door;
 
               return (
                 <Reveal key={p.slug} delay={i * 60}>

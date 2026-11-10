@@ -39,3 +39,21 @@
   max-width: 52ch;
   margin-bottom: 0;
 }
+
+.art {
+  display: none;
+}
+@media (min-width: 980px) {
+  .withArt {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: end;
+  }
+  .art {
+    display: block;
+    max-width: 380px;
+    justify-self: end;
+    width: 100%;
+  }
+}

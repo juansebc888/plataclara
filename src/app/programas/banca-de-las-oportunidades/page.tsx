@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   title: "Banca de las Oportunidades",
   description:
     "Qué es Banca de las Oportunidades, por qué no presta plata directamente, y cómo llegar a un microcrédito para tu propio negocio.",
+  openGraph: {
+    title: "Banca de las Oportunidades",
+    description: "Qué es Banca de las Oportunidades, por qué no presta plata directamente, y cómo llegar a un microcrédito para tu propio negocio.",
+    url: "/programas/banca-de-las-oportunidades",
+  },
+  alternates: { canonical: "/programas/banca-de-las-oportunidades" },
 };
 
 const PROGRAM = getProgram("banca-de-las-oportunidades")!;
@@ -115,7 +121,7 @@ export default function Page() {
                 <ul>
                   <li>Te dicen la tasa antes de firmar</li>
                   <li>Queda un contrato por escrito</li>
-                  <li>La entidad está vigilada por la Superfinanciera</li>
+                  <li>La entidad es formal y está vigilada (Superfinanciera o, si es cooperativa, Supersolidaria)</li>
                   <li>Pagar a tiempo te construye historial</li>
                   <li>Si te tratan mal, hay a quién quejarse gratis</li>
                 </ul>
@@ -195,13 +201,23 @@ export default function Page() {
             <div className={styles.tip}>
               <p>
                 <strong>Antes de entregarle plata a una entidad,</strong>{" "}
-                confirma que esté vigilada por la Superintendencia Financiera.
-                Se consulta gratis en su página y toma un minuto.
+                confirma que sea formal. Los bancos y las financieras los
+                vigila la Superintendencia Financiera; las cooperativas de
+                ahorro y crédito, casi siempre la Superintendencia de la
+                Economía Solidaria (sus ahorros los respalda Fogacoop, no
+                Fogafín). Las ONG microfinancieras que solo prestan no captan
+                ahorros, así que no aparecen en ninguna de las dos: ahí
+                pregunta por su trayectoria y nunca consignes plata para que
+                te aprueben. Se consulta gratis y toma un minuto.
               </p>
               <div className={styles.linkRow}>
                 <OfficialLink
                   href="https://www.superfinanciera.gov.co"
                   label="superfinanciera.gov.co"
+                />
+                <OfficialLink
+                  href="https://www.supersolidaria.gov.co"
+                  label="supersolidaria.gov.co"
                 />
               </div>
             </div>

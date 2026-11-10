@@ -30,7 +30,7 @@ export function Footer() {
             ))}
           </div>
           <div>
-            <p className={styles.h}>Más</p>
+            <p className={styles.h}>Otros temas</p>
             {CATEGORIES.slice(4).map((c) => (
               <Link key={c.slug} href={`/${c.slug}`} className={styles.link}>
                 {c.name}
@@ -39,7 +39,8 @@ export function Footer() {
           </div>
           <div>
             <p className={styles.h}>Sitio</p>
-            {FOOTER_EXTRA.map((l) => (
+            {/* Glosario is already under "Otros temas" (from CATEGORIES). */}
+            {FOOTER_EXTRA.filter((l) => l.href !== "/glosario").map((l) => (
               <Link key={l.href} href={l.href} className={styles.link}>
                 {l.label}
               </Link>

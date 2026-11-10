@@ -1,5 +1,5 @@
 .body {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
 }
 
 .grid {
@@ -36,6 +36,9 @@
 .red::before {
   background: var(--wash-red);
 }
+.blue::before {
+  background: var(--wash-blue);
+}
 .tile > * {
   position: relative;
 }
@@ -49,7 +52,7 @@
 }
 
 .desc {
-  font-size: 15px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--gray);
   margin: 0 0 20px;
@@ -60,7 +63,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-weight: 600;
 }
 .green .action {
@@ -68,6 +71,9 @@
 }
 .red .action {
   color: var(--red-text);
+}
+.blue .action {
+  color: var(--blue);
 }
 .action svg {
   transition: transform 0.26s var(--ease);
@@ -79,5 +85,10 @@
 @media (min-width: 780px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

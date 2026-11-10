@@ -13,12 +13,14 @@
     box-shadow 0.5s ease;
 }
 
+:global(html:not(.js)) .red,
 .picto[data-on="true"] .red {
   background: var(--red);
   box-shadow: 0 0 0 3px rgba(216, 68, 47, 0.18);
   transform: scale(1.12);
 }
 
+:global(html:not(.js)) .amber,
 .picto[data-on="true"] .amber {
   background: var(--amber);
   box-shadow: 0 0 0 3px rgba(255, 176, 32, 0.16);

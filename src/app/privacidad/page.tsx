@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   title: "Privacidad",
   description:
     "Qué datos recoge Plata Clara y cuáles no. Sin cuentas, sin formularios, sin cookies de seguimiento y sin publicidad.",
+  openGraph: {
+    title: "Privacidad",
+    description: "Qué datos recoge Plata Clara y cuáles no. Sin cuentas, sin formularios, sin cookies de seguimiento y sin publicidad.",
+    url: "/privacidad",
+  },
+  alternates: { canonical: "/privacidad" },
 };
 
 const NO: string[] = [
@@ -42,7 +48,6 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Privacidad"
         title="Qué sabemos de ti"
         intro="La respuesta corta: casi nada, y nada que te identifique. Aquí está el detalle completo, en español claro."
         tone="blue"
@@ -136,9 +141,10 @@ export default function Page() {
 
             <div className={styles.note}>
               <p>
-                <strong>Cómo verificarlo tú mismo:</strong> el código de este
-                sitio es público en GitHub. Cualquiera puede revisarlo y
-                comprobar que lo que dice esta página es cierto.
+                <strong>Cómo verificarlo tú mismo:</strong> el sitio no tiene
+                formularios, no pide registro y funciona igual con las cookies
+                bloqueadas. Tu plan se arma en tu teléfono y no se envía a
+                ninguna parte.
               </p>
             </div>
           </Reveal>

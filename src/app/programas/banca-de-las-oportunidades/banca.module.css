@@ -6,7 +6,7 @@
 }
 
 .bustTag {
-  font-size: 11.5px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -30,7 +30,7 @@
 }
 
 .micro {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -58,7 +58,7 @@
 }
 
 .colHead {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -82,7 +82,7 @@
 .col li {
   position: relative;
   padding-left: 22px;
-  font-size: 14.5px;
+  font-size: var(--fs-sm);
   line-height: 1.5;
   color: var(--ink);
 }
@@ -102,7 +102,7 @@
 }
 
 .where {
-  padding: clamp(44px, 6vw, 76px) 0;
+  padding: var(--section-y) 0;
 }
 
 .allied {
@@ -122,12 +122,12 @@
 
 .allyName {
   font-weight: 600;
-  font-size: 15.5px;
+  font-size: var(--fs-sm);
   margin: 0 0 5px;
 }
 
 .allyDesc {
-  font-size: 14px;
+  font-size: var(--fs-sm);
   line-height: 1.55;
   color: var(--gray);
   margin: 0;
@@ -140,7 +140,7 @@
   margin-top: 22px;
 }
 .tip p {
-  font-size: 15.5px;
+  font-size: var(--fs-sm);
   line-height: 1.62;
   color: var(--ink);
   margin: 0;

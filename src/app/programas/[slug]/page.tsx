@@ -24,7 +24,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const p = getProgram(slug);
   if (!p) return {};
-  return { title: p.name, description: p.what };
+  const url = `/programas/${p.slug}`;
+  return {
+    title: p.name,
+    description: p.what,
+    openGraph: { title: p.name, description: p.what, url },
+    alternates: { canonical: url },
+  };
 }
 
 export default async function Page({
@@ -36,7 +42,8 @@ export default async function Page({
   const p = getProgram(slug);
   if (!p || p.detail.sections.length === 0) notFound();
 
-  const tone = p.kind === "no-se-devuelve" ? "green" : p.kind === "prestado" ? "blue" : "green";
+  // Borrowed money reads blue; everything else (grants, access, savings) green.
+  const tone = p.kind === "prestado" ? "blue" : "green";
 
   return (
     <>
@@ -59,14 +66,12 @@ export default async function Page({
       <section className={shared.body}>
         <div className="shell">
           {p.detail.sections.map((sec, i) => (
-            <Reveal key={sec.title} delay={i * 60}>
-              <div className={styles.block}>
-                <h2 className="h2">{sec.title}</h2>
-                <div className="prose">
-                  {sec.body.map((b) => (
-                    <p key={b}>{b}</p>
-                  ))}
-                </div>
+            <Reveal key={sec.title} delay={i * 60} className={styles.block}>
+              <h2 className="h2">{sec.title}</h2>
+              <div className="prose">
+                {sec.body.map((b) => (
+                  <p key={b}>{b}</p>
+                ))}
               </div>
             </Reveal>
           ))}
@@ -122,12 +127,21 @@ export default async function Page({
         </section>
       ) : null}
 
-      <CTA
-        title="Antes de pedir prestado, mira el costo."
-        body="Un microcrédito formal y un gota a gota por el mismo monto no se parecen en nada al año."
-        href="/herramientas/gota-a-gota"
-        label="Ver la calculadora"
-      />
+      {p.kind === "prestado" || p.kind === "no-se-devuelve" ? (
+        <CTA
+          title="Antes de pedir prestado, mira el costo."
+          body="Un microcrédito formal y un gota a gota por el mismo monto no se parecen en nada al año."
+          href="/herramientas/gota-a-gota"
+          label="Ver la calculadora"
+        />
+      ) : (
+        <CTA
+          title="Mira cuánto suma lo que guardas."
+          body="Poco a poco y sin tocarlo, lo que separas cada día se convierte en una cifra que sí sirve."
+          href="/herramientas/ahorro"
+          label="Ver la calculadora"
+        />
+      )}
     </>
   );
 }

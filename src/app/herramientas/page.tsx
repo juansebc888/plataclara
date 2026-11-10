@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   title: "Herramientas",
   description:
     "Calculadoras sencillas para ver qué pasa con tu plata: cuánto se acumula ahorrando y cuánto cuesta de verdad un préstamo informal.",
+  openGraph: {
+    title: "Herramientas",
+    description: "Calculadoras sencillas para ver qué pasa con tu plata: cuánto se acumula ahorrando y cuánto cuesta de verdad un préstamo informal.",
+    url: "/herramientas",
+  },
+  alternates: { canonical: "/herramientas" },
 };
 
 const TOOLS = [
@@ -24,14 +30,19 @@ const TOOLS = [
     desc: "Compara lo que terminas debiendo por el mismo préstamo con un prestamista informal y con crédito formal.",
     tone: "red" as const,
   },
+  {
+    href: "/mi-plan",
+    name: "Mi plan en una hoja",
+    desc: "Marca lo que quieres hacer y sale una lista para imprimir o guardar en el teléfono. No se envía a ninguna parte.",
+    tone: "blue" as const,
+  },
 ];
 
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Herramientas"
-        title="Calculadoras"
+        title="Calculadoras y tu plan"
         intro="Números en vez de explicaciones. Cambia las cantidades y mira qué pasa."
         trail={[{ label: "Herramientas" }]}
       />

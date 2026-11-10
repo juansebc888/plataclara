@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   title: "Cuánto junto ahorrando",
   description:
     "Calculadora: cuánto se acumula guardando una cantidad fija, y qué cambia si cada vez que juntas el mínimo lo pasas a un CDT.",
+  openGraph: {
+    title: "Cuánto junto ahorrando",
+    description: "Calculadora: cuánto se acumula guardando una cantidad fija, y qué cambia si cada vez que juntas el mínimo lo pasas a un CDT.",
+    url: "/herramientas/ahorro",
+  },
+  alternates: { canonical: "/herramientas/ahorro" },
 };
 
 export default function Page() {
@@ -29,9 +35,7 @@ export default function Page() {
 
       <section className={styles.body}>
         <div className={`shell ${styles.split}`}>
-          <Reveal>
-            <LazyAhorro />
-          </Reveal>
+          <LazyAhorro />
 
           <Reveal delay={100}>
             <div className="prose">

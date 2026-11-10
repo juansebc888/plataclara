@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { CategoryGrid } from "@/components/ui/CategoryGrid";
 import { Facts } from "@/components/ui/Facts";
+import { Illustration } from "@/components/ui/Illustration";
+import { Questions } from "@/components/ui/Questions";
 import { Reveal } from "@/components/ui/Reveal";
-import { LazyAhorro } from "@/components/tools/LazyTools";
+import { LazyAhorroHome } from "@/components/tools/LazyTools";
 import { ArrowRight } from "@/components/ui/Icon";
 import styles from "./page.module.css";
 
@@ -34,8 +36,14 @@ export default function Home() {
           </div>
 
           <div className={styles.heroViz}>
-            <LazyAhorro />
+            <LazyAhorroHome />
           </div>
+        </div>
+      </section>
+
+      <section className={`section ${styles.questions}`}>
+        <div className="shell">
+          <Questions />
         </div>
       </section>
 
@@ -57,31 +65,32 @@ export default function Home() {
         </div>
       </section>
 
+      <Facts />
+
       <section className={styles.hook}>
         <div className="shell">
           <Reveal>
             <div className={styles.hookInner}>
               <div>
                 <p className="eyebrow">Para llevar</p>
-                <h2 className="h2">
-                  Arma tu plan y llévatelo impreso.
-                </h2>
+                <h2 className="h2">Arma tu plan y llévatelo impreso.</h2>
                 <p className={styles.hookBody}>
                   Marcas lo que necesitas hacer y sale una lista concreta en una
                   hoja. Sin registrarte, sin dejar tus datos y sin tener que
                   volver a entrar. Funciona aunque después te quedes sin datos.
                 </p>
+                <Link href="/mi-plan" className={`btn ${styles.hookBtn}`}>
+                  Armar mi plan
+                  <ArrowRight />
+                </Link>
               </div>
-              <Link href="/mi-plan" className="btn">
-                Armar mi plan
-                <ArrowRight />
-              </Link>
+              <div className={styles.hookArt}>
+                <Illustration name="hoja-plan" bare />
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
-
-      <Facts />
     </>
   );
 }

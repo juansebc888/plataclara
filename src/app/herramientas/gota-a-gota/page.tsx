@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
+import { Illustration } from "@/components/ui/Illustration";
 import { Reveal } from "@/components/ui/Reveal";
 import { LazyGotaAGota } from "@/components/tools/LazyTools";
 import styles from "../../subpage.module.css";
@@ -9,6 +10,12 @@ export const metadata: Metadata = {
   title: "Cuánto cuesta el gota a gota",
   description:
     "Calculadora: cuánto terminas debiendo por el mismo préstamo con un prestamista informal y con crédito formal.",
+  openGraph: {
+    title: "Cuánto cuesta el gota a gota",
+    description: "Calculadora: cuánto terminas debiendo por el mismo préstamo con un prestamista informal y con crédito formal.",
+    url: "/herramientas/gota-a-gota",
+  },
+  alternates: { canonical: "/herramientas/gota-a-gota" },
 };
 
 export default function Page() {
@@ -17,7 +24,7 @@ export default function Page() {
       <PageHero
         eyebrow="Herramienta"
         title="Cuánto cuesta el gota a gota"
-        intro="La cuota diaria se ve pequeña. El total del año, no. Aquí están los dos números juntos."
+        intro="El 20% al mes suena a poco. Lo que debes al cabo de un año, no. Aquí está lo que pagarías con un gota a gota y con un crédito formal, por el mismo monto."
         tone="red"
         trail={[
           { href: "/herramientas", label: "Herramientas" },
@@ -27,9 +34,7 @@ export default function Page() {
 
       <section className={styles.body}>
         <div className={`shell ${styles.split}`}>
-          <Reveal>
-            <LazyGotaAGota />
-          </Reveal>
+          <LazyGotaAGota />
 
           <Reveal delay={100}>
             <div className="prose">
@@ -45,6 +50,10 @@ export default function Page() {
                 cómo está construido el préstamo.
               </p>
             </div>
+            <Illustration
+              name="deuda-crece"
+              caption="Al 20% mensual, en un año debes casi 9 veces lo que pediste."
+            />
           </Reveal>
         </div>
       </section>

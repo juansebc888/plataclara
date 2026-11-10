@@ -1,5 +1,5 @@
 .hero {
-  padding: clamp(40px, 7vw, 88px) 0 clamp(44px, 7vw, 88px);
+  padding: clamp(40px, 7vw, 88px) 0 clamp(32px, 5vw, 56px);
 }
 
 .heroGrid {
@@ -54,10 +54,8 @@
 }
 
 .hook {
-  padding: clamp(40px, 5vw, 64px) 0;
+  padding: var(--section-y) 0;
   background: #fff;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
 }
 
 .hookInner {
@@ -68,11 +66,27 @@
 }
 
 .hookBody {
-  font-size: 16px;
+  font-size: var(--fs-lede);
   line-height: 1.62;
   color: var(--gray);
   margin: 16px 0 0;
   max-width: 54ch;
+}
+
+.hookBtn {
+  margin-top: 24px;
+}
+.hookArt {
+  width: 100%;
+  max-width: 260px;
+}
+.hookArt figure {
+  margin: 0;
+}
+
+/* The questions follow the hero directly: no double gap. */
+.questions {
+  padding-top: 0;
 }
 
 @media (min-width: 900px) {
@@ -82,7 +96,8 @@
     align-items: center;
     gap: 40px;
   }
-  .hookInner > :last-child {
+  .hookArt {
     flex-shrink: 0;
+    max-width: 320px;
   }
 }

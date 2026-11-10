@@ -9,7 +9,7 @@
 }
 
 .title {
-  font-size: 12px;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -30,7 +30,7 @@
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  font-size: 15.5px;
+  font-size: var(--fs-sm);
   line-height: 1.5;
   color: var(--ink);
 }

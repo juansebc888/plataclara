@@ -6,7 +6,7 @@ import styles from "./Facts.module.css";
 /** Server Component. */
 export function Facts() {
   return (
-    <section className={styles.facts}>
+    <section className={styles.facts} data-tone="dark">
       <div className="shell">
         <div className={styles.head}>
           <Reveal>
