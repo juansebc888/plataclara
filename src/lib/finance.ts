@@ -48,8 +48,9 @@ export const REFERENCE = {
    */
   usuraVigencia: { year: 2026, month: 11 },
   /**
-   * BEPS (Colpensiones). VERIFICAR cada enero en colpensiones.gov.co:
-   * el mínimo históricamente ha sido por aporte, no mensual.
+   * BEPS (Colpensiones). Confirmado en el comunicado de Colpensiones del
+   * 26 de enero de 2026: aporte mínimo por transacción y tope anual.
+   * ACTUALIZAR cada enero.
    */
   bepsAporteMinimo: 20_000,
   bepsTopeAnual: 2_450_000,

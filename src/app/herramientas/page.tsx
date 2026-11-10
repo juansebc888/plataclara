@@ -33,7 +33,7 @@ const TOOLS = [
   {
     href: "/mi-plan",
     name: "Mi plan en una hoja",
-    desc: "Marca lo que quieres hacer y sale una lista para imprimir o guardar en el teléfono. No se envía a ninguna parte.",
+    desc: "Marca lo que quieres hacer y sale una lista que te mandas al WhatsApp o guardas como imagen. No pide datos.",
     tone: "blue" as const,
   },
 ];

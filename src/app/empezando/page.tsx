@@ -133,11 +133,11 @@ export default function Page() {
             <summary>¿La cuenta sencilla tiene límites?</summary>
             <div className="more-body">
               <p>
-                Sí. Tiene un tope de cuánto puedes tener guardado y cuánto
-                puedes sacar al mes. El tope se cuenta en salarios mínimos. En{" "}
-                {REFERENCE.year} el salario mínimo es{" "}
-                <strong>{money(REFERENCE.smmlv)}</strong>. Cambia cada enero:
-                pregunta el tope el día que vayas.
+                Sí. Lo que puedes tener guardado suele llegar hasta{" "}
+                <strong>8 salarios mínimos</strong>, unos{" "}
+                <strong>{money(REFERENCE.smmlv * 8)}</strong> en {REFERENCE.year}.
+                Cuánto puedes mover al mes cambia según el banco: pregúntalo el
+                día que vayas.
               </p>
               <p>
                 Para lo que mueve la mayoría de la gente, el tope no estorba.
