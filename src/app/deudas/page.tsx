@@ -1,3 +1,4 @@
+import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
@@ -41,6 +42,7 @@ export default function Page() {
         eyebrow="Paso 4 de 5"
         title="Salir de deudas"
         intro={CATEGORY.intro}
+        art={<Art name="deudas" priority />}
         tone="red"
         trail={[{ label: "Salir de deudas" }]}
       >

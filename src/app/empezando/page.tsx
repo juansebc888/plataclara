@@ -1,3 +1,4 @@
+import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
@@ -38,6 +39,7 @@ export default function Page() {
         eyebrow="Paso 1 de 5"
         title="Abrir tu primera cuenta"
         intro="La mayoría de la gente cree que le van a pedir un fiador, un contrato de trabajo o una plata que no tiene. Para una cuenta básica, nada de eso es cierto."
+        art={<Art name="empezando" priority />}
         tone="blue"
         trail={[{ label: "Abrir una cuenta" }]}
       >

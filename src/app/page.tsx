@@ -1,7 +1,7 @@
+import { Art } from "@/components/ui/Art";
 import Link from "next/link";
 import { CategoryGrid } from "@/components/ui/CategoryGrid";
 import { Facts } from "@/components/ui/Facts";
-import { Illustration } from "@/components/ui/Illustration";
 import { Questions } from "@/components/ui/Questions";
 import { Reveal } from "@/components/ui/Reveal";
 import { LazyAhorroHome } from "@/components/tools/LazyTools";
@@ -85,7 +85,7 @@ export default function Home() {
                 </Link>
               </div>
               <div className={styles.hookArt}>
-                <Illustration name="hoja-plan" bare />
+                <Art name="home-plan" />
               </div>
             </div>
           </Reveal>

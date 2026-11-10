@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@/components/ui/Icon";
+import { Art } from "@/components/ui/Art";
 import { Questions } from "@/components/ui/Questions";
 
 export const metadata: Metadata = {
@@ -12,7 +13,8 @@ export default function NotFound() {
   return (
     <>
       <section className="section">
-        <div className="shell">
+        <div className="shell" style={{ display: "grid", gap: 32, alignItems: "center", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))" }}>
+          <div>
           <p className="eyebrow">Error 404</p>
           <h1 className="h1">Esta página no existe.</h1>
           <p className="sub">
@@ -27,6 +29,10 @@ export default function NotFound() {
             <Link href="/ayuda" className="btn btn-ghost">
               Hablar con alguien
             </Link>
+          </div>
+          </div>
+          <div style={{ maxWidth: 360, justifySelf: "center", width: "100%" }}>
+            <Art name="perdido" priority />
           </div>
         </div>
       </section>

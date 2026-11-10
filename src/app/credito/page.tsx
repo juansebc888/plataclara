@@ -1,3 +1,4 @@
+import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
@@ -31,6 +32,7 @@ export default function Page() {
         eyebrow="Paso 3 de 5"
         title="Pedir prestado"
         intro="Sin historial los bancos no prestan, y sin que presten no se construye historial. Ese círculo tiene una salida, y empieza más abajo de lo que la gente cree."
+        art={<Art name="credito" priority />}
         tone="blue"
         trail={[{ label: "Pedir prestado" }]}
       >

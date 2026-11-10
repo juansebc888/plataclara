@@ -1,3 +1,4 @@
+import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
@@ -40,6 +41,7 @@ export default function Page() {
         eyebrow="Paso 5 de 5"
         title="Ayuda del gobierno"
         intro="Existen programas para montar un negocio, conseguir un primer crédito o ahorrar para la vejez, hechos para quien ningún banco atiende. No son secretos: es que nadie los explica."
+        art={<Art name="programas" priority />}
         tone="green"
         trail={[{ label: "Ayuda del gobierno" }]}
       >

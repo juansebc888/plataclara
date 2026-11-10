@@ -1,7 +1,7 @@
+import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
-import { Illustration } from "@/components/ui/Illustration";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
 import { OfficialLink } from "@/components/ui/OfficialLink";
@@ -36,7 +36,7 @@ export default function Page() {
         intro="A quien nunca ha podido acceder a un crédito le ofrecen préstamos fáciles todo el tiempo. Casi ninguno es real. Estas son las trampas y cómo se reconocen."
         tone="red"
         trail={[{ label: "No caer en estafas" }]}
-        art={<Illustration name="chat-estafa" bare />}
+        art={<Art name="estafas" priority />}
       >
         <Outcomes items={OUTCOMES} />
       </PageHero>

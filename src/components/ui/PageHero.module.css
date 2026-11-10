@@ -40,8 +40,11 @@
   margin-bottom: 0;
 }
 
+/* Phones: a small picture under the intro, so the page still feels human. */
 .art {
-  display: none;
+  display: block;
+  max-width: 260px;
+  margin-top: 24px;
 }
 @media (min-width: 980px) {
   .withArt {

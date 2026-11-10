@@ -1,8 +1,8 @@
+import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
-import { Illustration } from "@/components/ui/Illustration";
 import { NextStep } from "@/components/ui/NextStep";
 import { Reveal } from "@/components/ui/Reveal";
 import { Outcomes } from "@/components/ui/Outcomes";
@@ -35,7 +35,7 @@ export default function Page() {
         intro="Los consejos normales de presupuesto asumen un sueldo fijo que llega el día 30. Si tu plata entra distinta cada día, ese método no sirve. Este sí."
         tone="green"
         trail={[{ label: "Organizar tu plata" }]}
-        art={<Illustration name="tres-bolsillos" bare />}
+        art={<Art name="presupuesto" priority />}
       >
         <Outcomes items={CATEGORY.outcomes} />
       </PageHero>

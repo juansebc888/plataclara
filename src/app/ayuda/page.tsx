@@ -1,3 +1,4 @@
+import { Art } from "@/components/ui/Art";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { CTA } from "@/components/ui/CTA";
@@ -30,6 +31,7 @@ export default function Page() {
         eyebrow="Cuando la página no alcanza"
         title="Hablar con alguien"
         intro="Hay problemas que no se resuelven leyendo. Estos son los lugares donde atiende una persona, y ninguno te puede cobrar por atenderte."
+        art={<Art name="ayuda" priority />}
         tone="blue"
         trail={[{ label: "Hablar con alguien" }]}
       >
