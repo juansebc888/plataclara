@@ -43,11 +43,11 @@ export const NOT_NEEDED: CheckItem[] = [
   },
   {
     text: "Pagar cuota de manejo",
-    note: "Las cuentas de trámite simplificado no cobran por mantenerla abierta.",
+    note: "La cuenta sencilla (de «trámite simplificado») no cobra por tenerla abierta.",
   },
   {
     text: "Historial crediticio",
-    note: "Abrir una cuenta no es pedir un préstamo. No te revisan Datacrédito para esto.",
+    note: "Abrir una cuenta no es pedir un préstamo. No revisan si debes plata (Datacrédito).",
   },
 ];
 
@@ -61,8 +61,8 @@ export type AccountType = {
 
 export const ACCOUNT_TYPES: AccountType[] = [
   {
-    name: "Cuenta de trámite simplificado",
-    what: "La versión más sencilla de una cuenta de ahorros. Se abre solo con la cédula.",
+    name: "Cuenta sencilla (de «trámite simplificado»)",
+    what: "La cuenta de ahorros más fácil de abrir. Solo con la cédula. Es la que te recomendamos para empezar.",
     good: "Sin cuota de manejo, sin saldo mínimo y se puede activar desde un celular básico.",
     watch:
       "Tiene un tope de cuánto puedes guardar y cuánto puedes sacar al mes. Solo se permite una por persona.",
@@ -79,7 +79,7 @@ export const ACCOUNT_TYPES: AccountType[] = [
   {
     name: "Cuenta de ahorros normal",
     what: "La cuenta tradicional, con tarjeta débito física.",
-    good: "No tiene los topes de las simplificadas y sirve para todo, incluidos los CDT.",
+    good: "No tiene los topes de la cuenta sencilla y sirve para todo, incluidos los CDT (ahorros a plazo fijo que pagan intereses).",
     watch:
       "Algunas cobran cuota de manejo. Pregunta el costo antes de firmar.",
     tone: "blue",

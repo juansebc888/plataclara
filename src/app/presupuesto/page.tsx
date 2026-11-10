@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Art } from "@/components/ui/Art";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Illustration } from "@/components/ui/Illustration";
 import { NextStep } from "@/components/ui/NextStep";
-import { Reveal } from "@/components/ui/Reveal";
-import { Outcomes } from "@/components/ui/Outcomes";
-import { ArrowRight } from "@/components/ui/Icon";
-import { getCategory } from "@/content/categories";
 import { BAD_WEEK, BUCKETS, METHOD_STEPS } from "@/content/presupuesto";
 import shared from "../subpage.module.css";
-import styles from "./presupuesto.module.css";
-
-const CATEGORY = getCategory("presupuesto")!;
 
 export const metadata: Metadata = {
   title: "Organizar tu plata",
@@ -30,107 +22,83 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 2 de 5"
         title="Organizar tu plata"
-        intro="Los consejos normales de presupuesto asumen un sueldo fijo que llega el día 30. Si tu plata entra distinta cada día, ese método no sirve. Este sí."
-        tone="green"
+        answer={
+          <>
+            <p>
+              Todos los días, apenas te pagan, parte la plata en tres: lo de
+              hoy, lo fijo y lo guardado.
+            </p>
+            <p>Haz la cuenta con tu día malo, no con el bueno.</p>
+          </>
+        }
+        art={<Art name="presupuesto" />}
         trail={[{ label: "Organizar tu plata" }]}
-        art={<Illustration name="tres-bolsillos" bare />}
-      >
-        <Outcomes items={CATEGORY.outcomes} />
-      </PageHero>
+      />
 
       <section className={shared.body}>
         <div className="shell">
-          <Reveal>
-            <h2 className="h2">La plata se parte en tres, todos los días.</h2>
-            <div className="prose">
-              <p>
-                No al final del mes: <strong>el mismo día que entra</strong>. Con
-                ingreso variable no hay un momento después; si no lo separas de
-                entrada, se gasta solo.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className={styles.buckets}>
-            {BUCKETS.map((b, i) => (
-              <Reveal key={b.name} delay={i * 70}>
-                <article className={`${styles.bucket} ${styles[b.tone]}`}>
-                  <span className={styles.num}>{i + 1}</span>
-                  <h3 className="h3">{b.name}</h3>
-                  <p className={styles.what}>{b.what}</p>
-                  <p className={styles.rule}>{b.rule}</p>
-                </article>
-              </Reveal>
+          <h2 className="h2">Las tres partes.</h2>
+          <ol className="list-plain">
+            {BUCKETS.map((b) => (
+              <li key={b.name}>
+                <strong>{b.name}:</strong> {b.what} {b.rule}
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      <section className={styles.method}>
-        <div className={`shell ${shared.split}`}>
-          <Reveal>
-            <p className="eyebrow">El método</p>
-            <h2 className="h2">Cinco pasos, una sola vez.</h2>
-            <div className="prose">
-              <p>
-                Lo difícil es el primer cálculo. Después es repetir el mismo
-                gesto todos los días, y eso sí se vuelve costumbre.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={100}>
-            <ol className={shared.steps}>
-              {METHOD_STEPS.map(([t, d], i) => (
-                <li key={t}>
-                  <span className={shared.stepN}>{i + 1}</span>
-                  <div>
-                    <p className={shared.stepT}>{t}</p>
-                    <p className={shared.stepD}>{d}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className={shared.body}>
+      <section className={shared.more}>
         <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Cuando la semana viene mala</p>
-            <h2 className="h2">Qué se toca primero y qué no.</h2>
-            <ul className={styles.badWeek}>
-              {BAD_WEEK.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-
-            <div className={styles.paper}>
-              <p className={styles.paperTitle}>Llévatelo en papel</p>
-              <p>
-                Esto funciona mejor escrito que en la cabeza. En «Mi plan»
-                marcas qué quieres hacer y sale una hoja para imprimir, con
-                espacio para anotar tu número.
-              </p>
-              <Link href="/mi-plan" className="btn">
-                Armar mi plan
-                <ArrowRight />
-              </Link>
-            </div>
-          </Reveal>
+          <h2 className="h2">Cómo sacar tu número.</h2>
+          <ol className={shared.steps}>
+            {METHOD_STEPS.map(([t, d], i) => (
+              <li key={t}>
+                <span className={shared.stepN}>{i + 1}</span>
+                <div>
+                  <p className={shared.stepT}>{t}</p>
+                  <p className={shared.stepD}>{d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      <NextStep step={3} href="/credito" title="Pedir prestado" />
+      <section className={shared.details}>
+        <div className="shell">
+          <details className="more-details">
+            <summary>¿Y si la semana viene mala?</summary>
+            <div className="more-body">
+              <ul className="list-plain">
+                {BAD_WEEK.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </div>
+          </details>
+          <details className="more-details">
+            <summary>¿Lo puedo tener anotado?</summary>
+            <div className="more-body">
+              <p>
+                Sí. Funciona mejor escrito que en la cabeza. En{" "}
+                <Link href="/mi-plan" prefetch={false}>
+                  Mi plan
+                </Link>{" "}
+                marcas lo que quieres hacer y sale una lista con espacio para
+                anotar tu número.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
 
-      <CTA
-        title="Mira qué pasa con lo que separas."
-        body="Aunque sea poco al día, en unos años la cifra sorprende."
-        href="/herramientas/ahorro"
-        label="Ver la calculadora"
+      <NextStep
+        links={[
+          { href: "/herramientas/ahorro", title: "¿Cuánto junto si guardo un poquito cada día?" },
+          { href: "/empezando", title: "¿Puedo abrir una cuenta sin trabajo fijo?" },
+        ]}
       />
     </>
   );

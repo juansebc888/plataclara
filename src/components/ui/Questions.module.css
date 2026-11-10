@@ -1,79 +1,53 @@
 .list {
   list-style: none;
-  margin: 28px 0 0;
+  margin: 20px 0 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .bubble {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 60px;
   height: 100%;
   background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 20px 20px 20px 6px;
-  padding: 16px 18px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 16px;
+  padding: 14px 16px 14px 18px;
   text-decoration: none;
   color: var(--ink);
-  transition: border-color 0.2s ease, background 0.2s ease;
 }
 .bubble:hover {
-  border-color: var(--line-strong);
-  background: var(--wash-blue);
+  border-color: var(--ink);
 }
 .bubble:active {
   background: var(--blue-soft);
 }
 
 .q {
-  font-size: var(--fs-base);
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
   text-wrap: pretty;
 }
 
-.to {
-  font-size: 14px;
-  font-weight: 600;
+.arrow {
+  flex-shrink: 0;
+  font-size: 22px;
+  font-weight: 700;
   color: var(--blue);
 }
 
-/* Phones: first five in the main list, the rest behind "Ver más". */
-.fold {
-  margin-top: 12px;
-}
-.fold summary {
-  list-style: none;
-  min-height: 44px;
-}
-.fold summary::-webkit-details-marker {
-  display: none;
-}
-.fold[open] summary {
-  display: none;
-}
-@media (max-width: 619px) {
-  .list > li:nth-child(n + 6) {
-    display: none;
-  }
-  .fold .list > li {
-    display: block;
-  }
-}
-
-@media (min-width: 620px) {
+@media (min-width: 720px) {
   .list {
     grid-template-columns: repeat(2, 1fr);
   }
-  .fold {
-    display: none;
-  }
 }
-@media (min-width: 980px) {
+@media (min-width: 1040px) {
   .list {
     grid-template-columns: repeat(3, 1fr);
   }

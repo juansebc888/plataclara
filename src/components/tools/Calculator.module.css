@@ -207,10 +207,14 @@
 }
 
 .fill {
+  width: 100%;
   height: 100%;
   border-radius: 99px;
-  /* width only — the browser can keep this off the main thread */
-  transition: width 0.12s linear;
+  /* transform only: composited, no layout or paint per frame
+     (animating width would relayout on the main thread every tick). */
+  transform-origin: left center;
+  will-change: transform;
+  transition: transform 0.12s linear;
 }
 .flat {
   background: #aeb4bc;

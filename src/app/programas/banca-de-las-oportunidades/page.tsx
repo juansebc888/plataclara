@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Reveal } from "@/components/ui/Reveal";
-import { Outcomes } from "@/components/ui/Outcomes";
+import { NextStep } from "@/components/ui/NextStep";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { ALLIES, getProgram } from "@/content/programas";
 import shared from "../../subpage.module.css";
@@ -21,12 +19,6 @@ export const metadata: Metadata = {
 };
 
 const PROGRAM = getProgram("banca-de-las-oportunidades")!;
-
-const OUTCOMES = [
-  "Por qué Banca de las Oportunidades no te presta plata directamente",
-  "Qué es un microcrédito y en qué se diferencia de un gota a gota",
-  "A qué entidad ir y qué preguntar cuando llegues",
-];
 
 const STEPS: [string, string][] = [
   [
@@ -57,179 +49,135 @@ export default function Page() {
       <PageHero
         eyebrow="Programa del gobierno"
         title="Plata para tu propio negocio"
-        intro="Banca de las Oportunidades es el programa del Gobierno que existe para que la gente sin cuenta ni historial pueda acceder a crédito. Sobre todo, crédito para trabajar por su cuenta."
-        tone="green"
+        answer={
+          <>
+            <p>
+              Banca de las Oportunidades no presta plata. Te ayuda a que un
+              banco, cooperativa u ONG te dé un microcrédito (un préstamo
+              pequeño para tu negocio).
+            </p>
+            <p>Lo pides en esas entidades, no en una oficina del programa.</p>
+          </>
+        }
         trail={[
           { href: "/programas", label: "Ayuda del gobierno" },
           { label: "Banca de las Oportunidades" },
         ]}
       >
-        <Outcomes items={OUTCOMES} />
         <div className={styles.linkRow}>
           <OfficialLink href={PROGRAM.url} label={PROGRAM.urlLabel} />
         </div>
       </PageHero>
 
-      {/* The single biggest misconception */}
       <section className={shared.body}>
         <div className="shell">
-          <Reveal>
-            <div className={styles.bust}>
-              <p className={styles.bustTag}>Lo que casi todo el mundo entiende mal</p>
-              <p className={styles.bustText}>
-                Banca de las Oportunidades <strong>no es un banco y no te
-                presta plata</strong>. No existe una oficina donde hagas fila
-                para pedirle a ellos.
-              </p>
-              <p className={styles.bustText}>
-                Es una política del Gobierno que trabaja con bancos,
-                cooperativas de ahorro y crédito y ONG microfinancieras para
-                que <strong>ellos</strong> ofrezcan productos a personas de
-                menores ingresos y a microempresas que normalmente quedan por
-                fuera. La plata la pides en esas entidades.
-              </p>
-            </div>
-          </Reveal>
+          <h2 className="h2">Cinco pasos, en orden.</h2>
+          <ol className={`${shared.steps} ${shared.gapTopSm}`}>
+            {STEPS.map(([t, d], i) => (
+              <li key={t}>
+                <span className={shared.stepN}>{i + 1}</span>
+                <div>
+                  <p className={shared.stepT}>{t}</p>
+                  <p className={shared.stepD}>{d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <p className={shared.lead}>
+            <strong>Una frase que sirve al llegar:</strong> «Buenos días, quiero
+            preguntar si ustedes manejan microcrédito para negocio. No tengo
+            historial crediticio.»
+          </p>
+          <div className="warn">
+            <p>
+              <strong>Nunca consignes plata para que te aprueben un
+              préstamo.</strong> Eso es estafa.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* What a microcrédito actually is */}
-      <section className={styles.micro}>
+      <section className={shared.details}>
         <div className="shell">
-          <Reveal>
-            <p className="eyebrow">El producto que te interesa</p>
-            <h2 className="h2">Qué es un microcrédito.</h2>
-            <div className="prose">
+          <details className="more-details">
+            <summary>¿Qué es un microcrédito?</summary>
+            <div className="more-body">
               <p>
-                Es un préstamo pequeño para una persona que trabaja por su
-                cuenta o tiene un negocio chico: una tienda, un puesto, una
-                moto de trabajo, un carrito de comida, una peluquería.
+                Un préstamo pequeño para quien trabaja por su cuenta o tiene un
+                negocio chico: una tienda, un puesto, una moto de trabajo, un
+                carrito de comida, una peluquería.
               </p>
               <p>
-                Está pensado justamente para quien <strong>no tiene contrato de
-                trabajo ni historial bancario</strong>. En vez de una carta
-                laboral, miran tu negocio: cuánto vendes, hace cuánto trabajas
-                en eso, quién te conoce en el barrio.
+                Es para quien <strong>no tiene contrato ni historial</strong>.
+                En vez de una carta laboral, miran tu negocio: cuánto vendes,
+                hace cuánto trabajas en eso, quién te conoce en el barrio.
               </p>
             </div>
-          </Reveal>
+          </details>
 
-          <Reveal delay={100}>
-            <div className={styles.compare}>
-              <div className={`${styles.col} ${styles.good}`}>
-                <p className={styles.colHead}>Microcrédito formal</p>
-                <ul>
-                  <li>Te dicen la tasa antes de firmar</li>
-                  <li>Queda un contrato por escrito</li>
-                  <li>La entidad es formal y está vigilada (Superfinanciera o, si es cooperativa, Supersolidaria)</li>
-                  <li>Pagar a tiempo te construye historial</li>
-                  <li>Si te tratan mal, hay a quién quejarse gratis</li>
-                </ul>
-              </div>
-              <div className={`${styles.col} ${styles.bad}`}>
-                <p className={styles.colHead}>Gota a gota</p>
-                <ul>
-                  <li>Nunca te dicen la tasa real</li>
-                  <li>No hay contrato ni respaldo</li>
-                  <li>Nadie los vigila</li>
-                  <li>Pagar no te sirve de nada después</li>
-                  <li>Si te atrasas, la presión es el método de cobro</li>
-                </ul>
-              </div>
+          <details className="more-details">
+            <summary>¿En qué se diferencia de un gota a gota?</summary>
+            <div className="more-body">
+              <p><strong>Microcrédito formal:</strong></p>
+              <ul className="list-plain">
+                <li>Te dicen la tasa antes de firmar.</li>
+                <li>Queda un contrato por escrito.</li>
+                <li>La entidad está vigilada por el gobierno.</li>
+                <li>Pagar a tiempo te ayuda a que te presten después.</li>
+                <li>Si te tratan mal, puedes quejarte gratis.</li>
+              </ul>
+              <p className={shared.gapTop}><strong>Gota a gota:</strong></p>
+              <ul className="list-plain">
+                <li>Nunca te dicen la tasa real.</li>
+                <li>No hay contrato ni respaldo.</li>
+                <li>Nadie los vigila.</li>
+                <li>Pagar no te sirve de nada después.</li>
+                <li>Si te atrasas, te presionan para cobrar.</li>
+              </ul>
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </details>
 
-      {/* How to actually do it */}
-      <section className={shared.body}>
-        <div className={`shell ${shared.split}`}>
-          <Reveal>
-            <p className="eyebrow">El camino</p>
-            <h2 className="h2">Cinco pasos, en orden.</h2>
-            <div className="prose">
-              <p>
-                Nadie te va a llamar a ofrecerte esto. Hay que ir a preguntar, y
-                llegar sabiendo qué preguntar cambia mucho la conversación.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={100}>
-            <ol className={shared.steps}>
-              {STEPS.map(([t, d], i) => (
-                <li key={t}>
-                  <span className={shared.stepN}>{i + 1}</span>
-                  <div>
-                    <p className={shared.stepT}>{t}</p>
-                    <p className={shared.stepD}>{d}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Where */}
-      <section className={styles.where}>
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Dónde preguntar</p>
-            <h2 className="h2">Cuatro tipos de puerta.</h2>
-            <div className={styles.allied}>
+          <details className="more-details">
+            <summary>¿A dónde voy a preguntar?</summary>
+            <div className="more-body">
               {ALLIES.map((a) => (
-                <div key={a.name} className={styles.ally}>
-                  <p className={styles.allyName}>{a.name}</p>
-                  <p className={styles.allyDesc}>{a.desc}</p>
+                <p key={a.name}>
+                  <strong>{a.name}.</strong> {a.desc}{" "}
                   {a.url && a.urlLabel ? (
                     <OfficialLink href={a.url} label={a.urlLabel} compact />
                   ) : null}
-                </div>
+                </p>
               ))}
             </div>
+          </details>
 
-            <div className={styles.tip}>
+          <details className="more-details">
+            <summary>¿Cómo sé si la entidad es seria?</summary>
+            <div className="more-body">
               <p>
-                <strong>Una frase que sirve al llegar:</strong> «Buenos días,
-                quiero preguntar si ustedes manejan microcrédito para negocio.
-                No tengo historial crediticio.» Decirlo de entrada te ahorra
-                media hora y te dice rápido si ese es el lugar.
+                Los bancos los vigila la Superfinanciera. Las cooperativas, casi
+                siempre la Supersolidaria. Son oficinas del gobierno y se
+                consulta gratis en su página.
               </p>
-            </div>
-
-            <div className={styles.tip}>
               <p>
-                <strong>Antes de entregarle plata a una entidad,</strong>{" "}
-                confirma que sea formal. Los bancos y las financieras los
-                vigila la Superintendencia Financiera; las cooperativas de
-                ahorro y crédito, casi siempre la Superintendencia de la
-                Economía Solidaria (sus ahorros los respalda Fogacoop, no
-                Fogafín). Las ONG microfinancieras que solo prestan no captan
-                ahorros, así que no aparecen en ninguna de las dos: ahí
-                pregunta por su trayectoria y nunca consignes plata para que
-                te aprueben. Se consulta gratis y toma un minuto.
+                Las ONG que solo prestan no aparecen en ninguna de las dos.
+                Pregunta hace cuánto existen y nunca consignes plata para que
+                te aprueben.
               </p>
               <div className={styles.linkRow}>
-                <OfficialLink
-                  href="https://www.superfinanciera.gov.co"
-                  label="superfinanciera.gov.co"
-                />
-                <OfficialLink
-                  href="https://www.supersolidaria.gov.co"
-                  label="supersolidaria.gov.co"
-                />
+                <OfficialLink href="https://www.superfinanciera.gov.co" label="superfinanciera.gov.co" />
+                <OfficialLink href="https://www.supersolidaria.gov.co" label="supersolidaria.gov.co" />
               </div>
             </div>
-          </Reveal>
+          </details>
         </div>
       </section>
 
-      <CTA
-        title="Mira la diferencia en pesos."
-        body="Un microcrédito y un gota a gota por el mismo monto no se parecen en nada al cabo de un año."
-        href="/herramientas/gota-a-gota"
-        label="Ver la calculadora"
+      <NextStep
+        links={[
+          { href: "/herramientas/gota-a-gota", title: "¿Cuánto más caro es un gota a gota?" },
+          { href: "/empezando", title: "¿Cómo abro una cuenta sin trabajo fijo?" },
+        ]}
       />
     </>
   );

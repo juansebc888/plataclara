@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
+import { NextStep } from "@/components/ui/NextStep";
 import { Illustration } from "@/components/ui/Illustration";
 import { Reveal } from "@/components/ui/Reveal";
 import { LazyGotaAGota } from "@/components/tools/LazyTools";
@@ -22,9 +22,8 @@ export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Herramienta"
         title="Cuánto cuesta el gota a gota"
-        intro="El 20% al mes suena a poco. Lo que debes al cabo de un año, no. Aquí está lo que pagarías con un gota a gota y con un crédito formal, por el mismo monto."
+        answer={<p>El 20% al mes suena a poco. Pero en un año debes casi 9 veces lo que pediste. Toca un monto y mira.</p>}
         tone="red"
         trail={[
           { href: "/herramientas", label: "Herramientas" },
@@ -58,11 +57,11 @@ export default function Page() {
         </div>
       </section>
 
-      <CTA
-        title="Hay crédito formal para quien no tiene historial."
-        body="Los programas públicos existen justamente para este caso."
-        href="/programas"
-        label="Ver los programas"
+      <NextStep
+        links={[
+          { href: "/deudas", title: "Le debo a un gota a gota. ¿Qué hago?" },
+          { href: "/programas", title: "¿Hay préstamos del gobierno para mí?" },
+        ]}
       />
     </>
   );

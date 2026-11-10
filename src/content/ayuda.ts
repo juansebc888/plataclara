@@ -28,7 +28,7 @@ export const CHANNELS: HelpChannel[] = [
     urlLabel: "Registro de defensores",
   },
   {
-    name: "La Superintendencia Financiera",
+    name: "La Superfinanciera (la oficina del gobierno que vigila a los bancos)",
     forWhat:
       "Cuando la entidad no responde, o cuando quieres que el reclamo quede en un registro oficial.",
     how: "Puedes poner la queja directamente, sin pasar primero por el Defensor. Son caminos separados y tú eliges.",

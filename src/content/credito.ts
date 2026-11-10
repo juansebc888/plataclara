@@ -9,7 +9,7 @@
 export const CREDIT_MYTHS: [string, string][] = [
   [
     "«Estar en Datacrédito es malo»",
-    "No. Datacrédito es solo el registro de tu comportamiento de pago. Lo malo es aparecer con deudas sin pagar. No aparecer del todo también te cierra puertas.",
+    "No. Datacrédito (la lista donde los bancos ven si pagas a tiempo) es solo el registro de cómo pagas. Lo malo es aparecer con deudas sin pagar. No aparecer del todo también te cierra puertas.",
   ],
   [
     "«Sin historial no me prestan nunca»",

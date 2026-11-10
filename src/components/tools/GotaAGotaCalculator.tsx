@@ -54,7 +54,7 @@ export function GotaAGotaCalculator() {
           <div className={styles.track} aria-hidden="true">
             <div
               className={`${styles.fill} ${styles.danger}`}
-              style={{ width: `${(gota / max) * 100}%` }}
+              style={{ transform: `scaleX(${gota / max})` }}
             />
           </div>
         </div>
@@ -70,7 +70,7 @@ export function GotaAGotaCalculator() {
           <div className={styles.track} aria-hidden="true">
             <div
               className={`${styles.fill} ${styles.grow}`}
-              style={{ width: `${(formal / max) * 100}%` }}
+              style={{ transform: `scaleX(${formal / max})` }}
             />
           </div>
         </div>

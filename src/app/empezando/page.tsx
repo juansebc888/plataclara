@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
+import { Art } from "@/components/ui/Art";
 import { PageHero } from "@/components/ui/PageHero";
-import { CTA } from "@/components/ui/CTA";
-import { Reveal } from "@/components/ui/Reveal";
 import { CheckList } from "@/components/ui/CheckList";
-import { Outcomes } from "@/components/ui/Outcomes";
 import { OfficialLink } from "@/components/ui/OfficialLink";
 import { Illustration } from "@/components/ui/Illustration";
 import { NextStep } from "@/components/ui/NextStep";
 import { REFERENCE } from "@/lib/finance";
 import { money } from "@/lib/format";
-import { getCategory } from "@/content/categories";
 import {
   ACCOUNT_TYPES,
   BASIC_PHONE_STEPS,
@@ -17,7 +14,6 @@ import {
   NOT_NEEDED,
 } from "@/content/empezando";
 import shared from "../subpage.module.css";
-import styles from "./empezando.module.css";
 
 export const metadata: Metadata = {
   title: "Abrir tu primera cuenta",
@@ -31,100 +27,52 @@ export const metadata: Metadata = {
   alternates: { canonical: "/empezando" },
 };
 
+/** Visible list: just the names. The notes live in "Ver más". */
+const short = (items: typeof NEEDED) => items.map(({ text }) => ({ text }));
+
 export default function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Paso 1 de 5"
         title="Abrir tu primera cuenta"
-        intro="La mayoría de la gente cree que le van a pedir un fiador, un contrato de trabajo o una plata que no tiene. Para una cuenta básica, nada de eso es cierto."
-        tone="blue"
+        answer={
+          <>
+            <p>
+              Sí puedes, aunque no tengas trabajo fijo. Solo necesitas tu
+              cédula.
+            </p>
+            <p>No piden fiador, ni contrato, ni plata para abrirla.</p>
+          </>
+        }
+        art={<Art name="empezando" />}
         trail={[{ label: "Abrir una cuenta" }]}
-      >
-        <Outcomes items={getCategory("empezando")!.outcomes} />
-      </PageHero>
+      />
 
-      {/* 1 — the myth, first, because it is the actual barrier */}
       <section className={shared.body}>
-        <div className={`shell ${shared.split}`}>
-          <Reveal>
-            <h2 className="h2">Lo primero: qué te van a pedir.</h2>
-            <div className="prose">
-              <p>
-                Una cuenta de ahorros no es un préstamo. El banco no te está
-                prestando nada, así que no tiene por qué revisar si tienes
-                ingresos fijos ni quién responde por ti.
-              </p>
-            </div>
-          </Reveal>
-          <Illustration
-            name="cedula"
-            align="right"
-            caption="Para una cuenta básica, con la cédula basta."
+        <div className="shell">
+          <h2 className="h2">Lo que te piden.</h2>
+          <CheckList
+            yes={short(NEEDED)}
+            no={short(NOT_NEEDED)}
+            yesLabel="Sí necesitas"
+            noLabel="No necesitas"
           />
         </div>
-        <div className="shell">
-          <CheckList yes={NEEDED} no={NOT_NEEDED} />
-        </div>
       </section>
 
-      {/* 2 — the three kinds of account */}
-      <section className={styles.types}>
-        <div className="shell">
-          <Reveal>
-            <p className="eyebrow">Tres opciones</p>
-            <h2 className="h2">No todas las cuentas son iguales.</h2>
-            <p className="lede">
-              Antes de ir a una oficina conviene saber cuál te sirve. Estas son
-              las tres más comunes.
-            </p>
-          </Reveal>
-
-          <div className={styles.grid}>
-            {ACCOUNT_TYPES.map((t, i) => (
-              <Reveal key={t.name} delay={i * 70}>
-                <article className={`${styles.card} ${styles[t.tone]}`}>
-                  <h3 className="h3">{t.name}</h3>
-                  <p className={styles.what}>{t.what}</p>
-                  <p className={styles.row}>
-                    <span className={styles.tagGood}>A favor</span>
-                    {t.good}
-                  </p>
-                  <p className={styles.row}>
-                    <span className={styles.tagWatch}>Ojo</span>
-                    {t.watch}
-                  </p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3 — the detail nobody explains */}
-      <section className={shared.body}>
+      <section className={shared.more}>
         <div className={`shell ${shared.split}`}>
-          <Reveal>
-            <p className="eyebrow">Sin teléfono inteligente</p>
-            <h2 className="h2">Se puede abrir desde un celular básico.</h2>
-            <div className="prose">
-              <p>
-                Esto casi nadie lo explica: una cuenta de trámite simplificado
-                se puede activar desde el menú de la SIM de un celular
-                corriente. <strong>No necesitas plan de datos ni wifi</strong>, y
-                el trámite no cuesta nada.
-              </p>
-              <p>
-                Si tienes teléfono inteligente, el camino más rápido suele ser
-                la aplicación del banco. Pero si no lo tienes, no estás por
-                fuera.
-              </p>
-            </div>
+          <div>
+            <h2 className="h2">Ábrela desde el celular, sin datos.</h2>
+            <p className={shared.lead}>
+              Sirve un celular básico. No necesitas plan de datos ni wifi. No
+              cuesta nada.
+            </p>
             <Illustration
               name="sim-menu"
               caption="El menú de la SIM funciona sin datos ni wifi."
             />
-          </Reveal>
+          </div>
 
           <ol className={shared.steps}>
             {BASIC_PHONE_STEPS.map(([t, d], i) => (
@@ -140,89 +88,91 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 4 — corresponsales: kills the "toca ir al banco" barrier */}
-      <section className={styles.corresponsales}>
-        <div className={`shell ${shared.split}`}>
-          <Reveal>
-            <p className="eyebrow">No toca ir al banco</p>
-            <h2 className="h2">La tienda del barrio también es el banco.</h2>
-            <div className="prose">
-              <p>
-                Mucha gente no abre cuenta porque se imagina la fila, el
-                transporte hasta el centro y perder medio día de trabajo. Con
-                los <strong>corresponsales bancarios</strong> eso ya no aplica.
-              </p>
-              <p>
-                Un corresponsal es una tienda, droguería o papelería del barrio
-                autorizada para hacer operaciones del banco. Ahí puedes sacar
-                plata, consignar y pagar recibos, sin ir a una sucursal.
-              </p>
-            </div>
-          </Reveal>
-          <Illustration
-            name="corresponsal"
-            align="right"
-            caption="Busca el letrero del banco en la tienda, la droguería o la papelería."
-          />
-        </div>
-      </section>
-
-      {/* 5 — the honest caveat */}
-      <section className={styles.limits}>
+      <section className={shared.details}>
         <div className="shell">
-          <Reveal>
-            <h2 className="h2">Lo que sí tienes que saber antes.</h2>
-            <div className={styles.warnBox}>
-              <p>
-                Las cuentas de trámite simplificado tienen un límite de cuánto
-                puedes tener guardado y cuánto puedes sacar al mes. Ese tope se
-                cuenta en salarios mínimos, y en {REFERENCE.year} el salario
-                mínimo es de <strong>{money(REFERENCE.smmlv)}</strong>. Como
-                cambia cada enero, pregunta en la entidad cuál es el tope
-                vigente el día que vayas.
-              </p>
-              <p>
-                Para lo que gana y mueve la mayoría de la gente, ese tope no
-                estorba. Si manejas cantidades más grandes, ahí sí conviene una
-                cuenta de ahorros normal.
-              </p>
-              <p>
-                También: solo puedes tener <strong>una</strong> cuenta de este
-                tipo a tu nombre.
-              </p>
+          <details className="more-details">
+            <summary>Ver más sobre lo que te piden</summary>
+            <div className="more-body">
+              <CheckList yes={NEEDED} no={NOT_NEEDED} yesLabel="Sí necesitas" noLabel="No necesitas" />
+              <Illustration name="cedula" caption="Para una cuenta básica, con la cédula basta." />
             </div>
+          </details>
 
-            <div className={styles.protect}>
-              <p className={styles.protectTitle}>Tu plata está protegida</p>
-              <p>
-                Lo que tengas en una entidad vigilada está respaldado por
-                Fogafín hasta <strong>{money(REFERENCE.fogafin)}</strong> por
-                persona y por entidad. Si el banco quiebra, esa plata te la
-                devuelven. Debajo del colchón no hay nada de eso.
-              </p>
-              <p className={styles.protectNote}>
-                Antes de abrir cuenta en cualquier parte, confirma que la
-                entidad esté vigilada. Se consulta gratis.
-              </p>
-              <div className={styles.linkRow}>
-                <OfficialLink
-                  href="https://www.superfinanciera.gov.co"
-                  label="superfinanciera.gov.co"
-                />
-                <OfficialLink href="https://www.fogafin.gov.co" label="fogafin.gov.co" />
-              </div>
+          <details className="more-details">
+            <summary>¿Qué cuenta me conviene?</summary>
+            <div className="more-body">
+              {ACCOUNT_TYPES.map((t) => (
+                <div key={t.name}>
+                  <p>
+                    <strong>{t.name}.</strong> {t.what}
+                  </p>
+                  <p>
+                    Lo bueno: {t.good} Cuidado: {t.watch}
+                  </p>
+                </div>
+              ))}
             </div>
-          </Reveal>
+          </details>
+
+          <details className="more-details">
+            <summary>¿Dónde saco o meto plata sin ir al banco?</summary>
+            <div className="more-body">
+              <p>
+                En una tienda, droguería o papelería del barrio con el letrero
+                del banco. Se llama <strong>corresponsal bancario</strong>.
+                Ahí puedes sacar plata, consignar y pagar recibos.
+              </p>
+              <Illustration
+                name="corresponsal"
+                caption="Busca el letrero del banco en la tienda, la droguería o la papelería."
+              />
+            </div>
+          </details>
+
+          <details className="more-details">
+            <summary>¿La cuenta sencilla tiene límites?</summary>
+            <div className="more-body">
+              <p>
+                Sí. Tiene un tope de cuánto puedes tener guardado y cuánto
+                puedes sacar al mes. El tope se cuenta en salarios mínimos. En{" "}
+                {REFERENCE.year} el salario mínimo es{" "}
+                <strong>{money(REFERENCE.smmlv)}</strong>. Cambia cada enero:
+                pregunta el tope el día que vayas.
+              </p>
+              <p>
+                Para lo que mueve la mayoría de la gente, el tope no estorba.
+                Solo puedes tener <strong>una</strong> cuenta de este tipo.
+              </p>
+            </div>
+          </details>
+
+          <details className="more-details">
+            <summary>¿Mi plata está segura en el banco?</summary>
+            <div className="more-body">
+              <p>
+                Sí, si la entidad está vigilada por el gobierno. Un fondo del
+                gobierno (Fogafín) te devuelve hasta{" "}
+                <strong>{money(REFERENCE.fogafin)}</strong> si el banco quiebra.
+                Debajo del colchón no hay nada de eso.
+              </p>
+              <p>
+                Antes de abrir cuenta, revisa gratis que la entidad esté
+                vigilada en la página de la Superfinanciera (la oficina que
+                vigila a los bancos).
+              </p>
+              <p>
+                <OfficialLink href="https://www.superfinanciera.gov.co" label="superfinanciera.gov.co" />
+              </p>
+            </div>
+          </details>
         </div>
       </section>
 
-      <NextStep step={2} href="/presupuesto" title="Organizar tu plata" />
-
-      <CTA
-        title="Ya con cuenta, guardar rinde más."
-        body="La calculadora muestra qué pasa con lo que guardas cuando está en una entidad y no debajo del colchón."
-        href="/herramientas/ahorro"
-        label="Ver la calculadora"
+      <NextStep
+        links={[
+          { href: "/presupuesto", title: "¿Cómo organizo la plata si gano distinto cada día?" },
+          { href: "/estafas", title: "¿Cómo sé si un mensaje del banco es una estafa?" },
+        ]}
       />
     </>
   );

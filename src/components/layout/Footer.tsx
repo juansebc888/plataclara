@@ -1,61 +1,36 @@
 import Link from "next/link";
-import { CATEGORIES } from "@/content/categories";
-import { FOOTER_EXTRA, SITE } from "@/content/site";
+import { SITE } from "@/content/site";
 import styles from "./Footer.module.css";
+
+const LINKS = [
+  { href: "/", label: "Inicio" },
+  { href: "/ayuda", label: "Hablar con alguien" },
+  { href: "/glosario", label: "Qué significa cada palabra" },
+  { href: "/sobre-el-proyecto", label: "Quiénes somos" },
+  { href: "/privacidad", label: "Privacidad" },
+] as const;
 
 /** Server Component — no interactivity, ships zero JS. */
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={`shell ${styles.inner}`}>
-        <div>
-          <Link href="/" className={styles.brand}>
-            <span className={styles.mark} aria-hidden="true" />
-            {SITE.name}
-          </Link>
-          <p className={styles.note}>
-            Guías gratuitas de educación financiera. Sin publicidad, sin venta
-            de productos y sin cuentas ni formularios. Contamos visitas para
-            saber qué le sirve a la gente, sin cookies y sin identificarte.
-          </p>
-        </div>
-
-        <div className={styles.cols}>
-          <div>
-            <p className={styles.h}>Temas</p>
-            {CATEGORIES.slice(0, 4).map((c) => (
-              <Link key={c.slug} href={`/${c.slug}`} className={styles.link}>
-                {c.name}
-              </Link>
-            ))}
-          </div>
-          <div>
-            <p className={styles.h}>Otros temas</p>
-            {CATEGORIES.slice(4).map((c) => (
-              <Link key={c.slug} href={`/${c.slug}`} className={styles.link}>
-                {c.name}
-              </Link>
-            ))}
-          </div>
-          <div>
-            <p className={styles.h}>Sitio</p>
-            {/* Glosario is already under "Otros temas" (from CATEGORIES). */}
-            {FOOTER_EXTRA.filter((l) => l.href !== "/glosario").map((l) => (
-              <Link key={l.href} href={l.href} className={styles.link}>
+      <div className="shell">
+        <p className={styles.note}>
+          <strong>{SITE.name}.</strong> Gratis. Sin publicidad. No vendemos
+          nada y no te pedimos datos. {SITE.city}.
+        </p>
+        <ul className={styles.links}>
+          {LINKS.map((l) => (
+            <li key={l.href}>
+              <Link href={l.href} prefetch={false} className={styles.link}>
                 {l.label}
               </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* The border sits on an inner element as wide as the content,
-          not on the padded .shell — otherwise it overhangs the text. */}
-      <div className="shell">
-        <div className={styles.base}>
-          <p>{SITE.city}</p>
-          <p>Información general. No es asesoría financiera personalizada.</p>
-        </div>
+            </li>
+          ))}
+        </ul>
+        <p className={styles.base}>
+          Información general. No es asesoría financiera personalizada.
+        </p>
       </div>
     </footer>
   );

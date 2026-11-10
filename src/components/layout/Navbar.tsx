@@ -20,16 +20,33 @@ function current(pathname: string, href: string) {
  * "Más" is a native <details>, so keyboard support comes for free.
  */
 export function Navbar() {
-  const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+  const header = useRef<HTMLElement>(null);
   const more = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 24);
-    onScroll();
+    // No React state: flip a data attribute directly, at most once per
+    // frame and only when the value changes.
+    let raf = 0;
+    let last: boolean | null = null;
+    const apply = () => {
+      raf = 0;
+      const solid = window.scrollY > 24;
+      if (solid !== last && header.current) {
+        last = solid;
+        header.current.toggleAttribute("data-solid", solid);
+      }
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+    apply();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   // Close the drawer and the "Más" menu whenever the route changes.
@@ -65,6 +82,7 @@ export function Navbar() {
 
   const drawerLink = (l: NavItem) => (
     <Link
+      prefetch={false}
       key={l.href}
       href={l.href}
       className={styles.drawerLink}
@@ -78,9 +96,9 @@ export function Navbar() {
   );
 
   return (
-    <header className={`${styles.nav} ${solid ? styles.solid : ""}`}>
+    <header ref={header} className={styles.nav}>
       <div className={`shell ${styles.inner}`}>
-        <Link href="/" className={styles.brand}>
+        <Link href="/" prefetch={false} className={styles.brand}>
           <span className={styles.mark} aria-hidden="true" />
           {SITE.name}
         </Link>
@@ -88,6 +106,7 @@ export function Navbar() {
         <nav className={styles.links} aria-label="Secciones">
           {NAV_PRIMARY.map((l) => (
             <Link
+              prefetch={false}
               key={l.href}
               href={l.href}
               className={styles.link}
@@ -107,6 +126,7 @@ export function Navbar() {
                 <div key={i} className={i ? styles.menuGroup : undefined}>
                   {group.map((l) => (
                     <Link
+                      prefetch={false}
                       key={l.href}
                       href={l.href}
                       className={styles.menuLink}
@@ -123,6 +143,7 @@ export function Navbar() {
             </div>
           </details>
           <Link
+            prefetch={false}
             href={NAV_PLAN.href}
             className={`btn btn-sm btn-ghost ${styles.plan}`}
             aria-current={current(pathname, NAV_PLAN.href)}

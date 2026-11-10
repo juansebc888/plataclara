@@ -1,94 +1,53 @@
 import Link from "next/link";
-import { CategoryGrid } from "@/components/ui/CategoryGrid";
-import { Facts } from "@/components/ui/Facts";
-import { Illustration } from "@/components/ui/Illustration";
 import { Questions } from "@/components/ui/Questions";
-import { Reveal } from "@/components/ui/Reveal";
 import { LazyAhorroHome } from "@/components/tools/LazyTools";
-import { ArrowRight } from "@/components/ui/Icon";
 import styles from "./page.module.css";
 
-/** Server Component. */
+/** Server Component. The questions are the hero. */
 export default function Home() {
   return (
     <>
       <section className={styles.hero}>
-        <div className={`shell ${styles.heroGrid}`}>
-          <div>
-            <p className="eyebrow rise">Guías gratuitas · Colombia</p>
-            <h1 className={`h1 ${styles.title}`}>
-              Tu plata, explicada{" "}
-              <span className="underline-mark">sin tanta vuelta.</span>
-            </h1>
-            <p className="sub">
-              Cuentas, presupuesto, crédito y deudas — explicado para quien
-              cobra en efectivo, sin contrato y sin haber pisado nunca un banco.
-            </p>
-            <div className={styles.ctaRow}>
-              <Link href="/empezando" className="btn">
-                Empezar aquí
-                <ArrowRight />
-              </Link>
-              <Link href="/mi-plan" className="btn btn-ghost">
-                Armar mi plan
-              </Link>
-            </div>
-          </div>
-
-          <div className={styles.heroViz}>
-            <LazyAhorroHome />
-          </div>
-        </div>
-      </section>
-
-      <section className={`section ${styles.questions}`}>
         <div className="shell">
+          <h1 className={`h1 ${styles.title}`}>
+            ¿Qué te preocupa de <span className="underline-mark">la plata?</span>
+          </h1>
+          <p className={styles.trust}>
+            Gratis. Sin publicidad. Sin registrarte. No vendemos nada.
+          </p>
+          <p className={styles.pick}>Toca tu pregunta:</p>
           <Questions />
         </div>
       </section>
 
-      <section className="section">
+      <section className={styles.save}>
         <div className="shell">
-          <Reveal>
-            <div className={styles.head}>
-              <div>
-                <p className="eyebrow">Ocho cosas que puedes resolver</p>
-                <h2 className="h2">¿Qué necesitas hacer?</h2>
-              </div>
-              <p className="lede">
-                No hay que leerlo todo. Cada página dice de entrada qué vas a
-                saber al terminarla.
-              </p>
-            </div>
-          </Reveal>
-          <CategoryGrid />
+          <h2 className="h2">¿Cuánto juntas guardando un poquito cada día?</h2>
+          <p className={styles.saveLead}>
+            Toca una cantidad. Es plata guardada en la casa, sin banco.
+          </p>
+          <div className={styles.calc}>
+            <LazyAhorroHome />
+          </div>
+          <p className={styles.saveMore}>
+            ¿Y si lo guardas en el banco?{" "}
+            <Link href="/herramientas/ahorro" prefetch={false}>
+              Mira la cuenta completa
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
-      <Facts />
-
-      <section className={styles.hook}>
+      <section className={styles.plan}>
         <div className="shell">
-          <Reveal>
-            <div className={styles.hookInner}>
-              <div>
-                <p className="eyebrow">Para llevar</p>
-                <h2 className="h2">Arma tu plan y llévatelo impreso.</h2>
-                <p className={styles.hookBody}>
-                  Marcas lo que necesitas hacer y sale una lista concreta en una
-                  hoja. Sin registrarte, sin dejar tus datos y sin tener que
-                  volver a entrar. Funciona aunque después te quedes sin datos.
-                </p>
-                <Link href="/mi-plan" className={`btn ${styles.hookBtn}`}>
-                  Armar mi plan
-                  <ArrowRight />
-                </Link>
-              </div>
-              <div className={styles.hookArt}>
-                <Illustration name="hoja-plan" bare />
-              </div>
-            </div>
-          </Reveal>
+          <p className={styles.planText}>
+            ¿Quieres una lista de lo que vas a hacer?{" "}
+            <Link href="/mi-plan" prefetch={false}>
+              Arma tu plan
+            </Link>
+            . No pide datos.
+          </p>
         </div>
       </section>
     </>
