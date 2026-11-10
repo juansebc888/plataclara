@@ -68,6 +68,17 @@ test("CDT savings never loses money against the mattress", () => {
   }
 });
 
+test("usury rate is for the current month", () => {
+  const now = new Date();
+  const { year, month } = REFERENCE.usuraVigencia;
+  const current = now.getFullYear() * 12 + now.getMonth() + 1;
+  assert.ok(
+    current <= year * 12 + month,
+    `La tasa de usura en src/lib/finance.ts (REFERENCE.usuraEA, "${REFERENCE.usuraMes}") ya venció. ` +
+      "Búscala en superfinanciera.gov.co y actualiza usuraEA, usuraMes y usuraVigencia."
+  );
+});
+
 test("reference data is for the current year", () => {
   assert.equal(
     REFERENCE.year,

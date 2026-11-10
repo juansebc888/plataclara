@@ -1,3 +1,7 @@
+/*
+ * Nested radii: inner = outer − padding (card 24px, padding ~18–24px),
+ * so boxes inside the card use 6–12px and never look "fatter" than it.
+ */
 .card {
   margin: 0;
   background: #fff;
@@ -10,7 +14,7 @@
 .head {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 22px;
 }
 
@@ -22,39 +26,39 @@
 }
 
 .q {
-  font-size: 13.5px;
+  font-size: var(--fs-sm, 15px);
   font-weight: 600;
   color: var(--ink);
   margin: 0;
 }
-.qMute {
-  color: var(--gray);
-  font-weight: 500;
-}
 
 .picks {
   display: flex;
-  gap: 5px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .pick {
   font-family: inherit;
-  font-size: 12.5px;
+  font-size: var(--fs-sm, 15px);
   font-weight: 600;
-  color: var(--gray);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2, #4a5562);
   background: var(--paper);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong, #8f877c);
   border-radius: 99px;
-  padding: 7px 13px;
+  min-height: 44px;
+  padding: 10px 16px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.12s ease;
 }
 .pick:hover {
-  transform: translateY(-1px);
-  border-color: var(--gray);
+  border-color: var(--ink);
   color: var(--ink);
+}
+.pick:active {
+  transform: scale(0.96);
 }
 .on,
 .on:hover {
@@ -64,8 +68,8 @@
 }
 
 .elapsed {
-  font-size: 12.5px;
-  color: var(--gray);
+  font-size: var(--fs-sm, 15px);
+  color: var(--ink-2, #4a5562);
   margin: 0 0 14px;
   font-variant-numeric: tabular-nums;
 }
@@ -74,17 +78,27 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 14px 0 4px;
+  padding: 14px 0 14px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  margin: 4px 0 10px;
+  margin: 4px 0 6px;
+}
+
+.amountHelp {
+  font-size: var(--fs-sm, 15px);
+  font-weight: 600;
+  color: var(--ink);
 }
 
 .amountLabel {
   display: flex;
   align-items: center;
   gap: 4px;
-  cursor: text;
+  min-height: 48px;
+  border-bottom: 2px solid var(--line-strong, #8f877c);
+}
+.amountLabel:focus-within {
+  border-bottom-color: var(--blue);
 }
 
 .peso {
@@ -92,7 +106,7 @@
   font-weight: 800;
   font-size: clamp(26px, 3.2vw, 34px);
   letter-spacing: -0.04em;
-  color: var(--gray);
+  color: var(--ink-2, #4a5562);
 }
 
 .amountInput {
@@ -106,6 +120,7 @@
   padding: 0;
   width: 100%;
   min-width: 0;
+  min-height: 46px;
   font-variant-numeric: tabular-nums;
   outline: none;
 }
@@ -115,8 +130,16 @@
   border-radius: 4px;
 }
 
-.neutral {
-  color: var(--ink) !important;
+.amountHint {
+  font-size: var(--fs-sm, 15px);
+  color: var(--red-text);
+  margin: 0;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--ink);
 }
 
 .bars {
@@ -139,7 +162,7 @@
 }
 
 .barName {
-  font-size: 13.5px;
+  font-size: var(--fs-sm, 15px);
   font-weight: 600;
   color: var(--ink);
   margin: 0;
@@ -148,8 +171,8 @@
 .barName span {
   display: block;
   font-weight: 400;
-  font-size: 12px;
-  color: var(--gray);
+  font-size: 14px;
+  color: var(--ink-2, #4a5562);
   margin-top: 2px;
 }
 
@@ -162,20 +185,23 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.good {
+.good,
+.foot .good {
   color: var(--green-text);
 }
 .bad {
   color: var(--red-text);
 }
-.badText {
+/* Must beat `.foot strong`: the extra money lost is red, never green. */
+.badText,
+.foot .badText {
   color: var(--red-text);
 }
 
 .track {
   height: 13px;
-  background: var(--paper);
-  border: 1px solid var(--line);
+  background: #efece7;
+  border: 1px solid #d6d0c8;
   border-radius: 99px;
   overflow: hidden;
 }
@@ -185,10 +211,9 @@
   border-radius: 99px;
   /* width only — the browser can keep this off the main thread */
   transition: width 0.12s linear;
-  will-change: width;
 }
 .flat {
-  background: #c9cdd3;
+  background: #aeb4bc;
 }
 .grow {
   background: linear-gradient(90deg, #1fbe84, var(--green));
@@ -198,36 +223,136 @@
 }
 
 .foot {
-  font-size: 13px;
+  font-size: var(--fs-sm, 15px);
   line-height: 1.55;
-  color: var(--gray);
+  color: var(--ink-2, #4a5562);
   margin: 20px 0 0;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 .foot strong {
-  color: var(--green-text);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .warn {
-  font-size: 12px;
+  font-size: var(--fs-sm, 15px);
   line-height: 1.5;
-  color: var(--gray);
+  color: var(--ink-2, #4a5562);
   margin: 12px 0 0;
   padding: 11px 13px;
   background: #fff9ec;
   border: 1px solid #f4e4c0;
-  border-radius: 11px;
+  border-radius: 10px;
+}
+
+/* --- home variant --- */
+
+.homeCard {
+  padding: 20px 18px;
+}
+
+.homeQ {
+  font-size: var(--fs-base, 17px);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.homePicks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.homePick {
+  font-family: inherit;
+  font-size: var(--fs-base, 17px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line-strong, #8f877c);
+  border-radius: 12px;
+  min-height: 52px;
+  padding: 10px 6px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.12s ease;
+}
+.homePick:hover {
+  border-color: var(--ink);
+}
+.homePick.on,
+.homePick.on:hover {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.homePick:active {
+  transform: scale(0.96);
+}
+
+.homeCard .barName {
+  font-size: var(--fs-sm, 15px);
+}
+.homeCard .barAmt {
+  font-size: clamp(22px, 2.1vw, 25px);
+}
+
+.homeResult {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2, #4a5562);
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.homeResult strong {
+  font-weight: 700;
+}
+
+.homeMore {
+  font-size: var(--fs-sm, 15px);
+  font-weight: 600;
+  margin: 12px 0 0;
+}
+.homeMore a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--blue);
+}
+
+.homeNote {
+  font-size: 14px;
+  color: var(--ink-3, #5b6672);
+  margin: 0;
 }
 
 @media (min-width: 620px) {
   .card {
     padding: 22px 24px 20px;
   }
+  .homeCard {
+    padding: 24px;
+  }
   .row {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pick,
+  .homePick,
+  .fill {
+    transition: none;
+  }
+  .pick:active,
+  .homePick:active {
+    transform: none;
   }
 }

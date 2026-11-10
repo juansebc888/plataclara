@@ -26,7 +26,7 @@ export const TERMS: Term[] = [
   {
     term: "Crédito",
     short: "Gasta plata que el banco te presta y que tienes que devolver.",
-    long: "Si no pagas a tiempo, cobra intereses y queda registrado en tu historial.",
+    long: "Siempre cobra intereses por prestarte la plata. Si no pagas a tiempo, además cobra intereses de mora y queda reportado en tu historial.",
     group: "credito",
   },
   {
@@ -92,7 +92,7 @@ export const TERMS: Term[] = [
   {
     term: "CDT",
     short: "Guardar plata en un banco por un tiempo fijo, a cambio de un interés que te dicen desde el principio.",
-    long: "No puedes sacarla antes sin perder el interés. A cambio, rinde mucho más que tenerla quieta.",
+    long: "Normalmente no se puede sacar antes de que venza. A cambio, rinde mucho más que tenerla quieta.",
     group: "ahorro",
   },
   {
@@ -103,14 +103,14 @@ export const TERMS: Term[] = [
   },
   {
     term: "Entidad vigilada",
-    short: "Una entidad que la Superintendencia Financiera controla.",
-    long: "Si está vigilada, hay reglas que debe cumplir y alguien a quien quejarte gratis. Si no lo está, no hay respaldo de ningún tipo.",
+    short: "Una entidad que controla el Estado: la Superintendencia Financiera (bancos) o, si es cooperativa de ahorro, la Supersolidaria.",
+    long: "Si está vigilada, hay reglas que debe cumplir y alguien a quien quejarte gratis. Tus ahorros en un banco los respalda Fogafín; en una cooperativa vigilada, Fogacoop. Una ONG que solo presta no recibe ahorros, así que no la vigila la Superfinanciera: pregunta antes de pagar cualquier cosa.",
     group: "cuentas",
   },
   {
     term: "Fogafín",
     short: "El seguro que protege tu plata si el banco quiebra.",
-    long: "Cubre hasta un monto por persona y por entidad. Solo aplica en entidades vigiladas.",
+    long: "Cubre hasta un monto por persona y por entidad. Solo aplica en bancos y entidades vigiladas por la Superfinanciera. En las cooperativas de ahorro vigiladas, el seguro equivalente es Fogacoop.",
     group: "ahorro",
   },
   {

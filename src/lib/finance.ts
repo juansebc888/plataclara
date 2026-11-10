@@ -41,6 +41,18 @@ export const REFERENCE = {
    */
   usuraEA: 0.2834,
   usuraMes: "noviembre de 2026",
+  /**
+   * Mes en que vence la cifra de usura de arriba. `npm test` falla en
+   * cuanto el mes actual pase de este. Al actualizar `usuraEA`, cambia
+   * también `usuraMes` y esto.
+   */
+  usuraVigencia: { year: 2026, month: 11 },
+  /**
+   * BEPS (Colpensiones). VERIFICAR cada enero en colpensiones.gov.co:
+   * el mínimo históricamente ha sido por aporte, no mensual.
+   */
+  bepsAporteMinimo: 20_000,
+  bepsTopeAnual: 2_450_000,
 } as const;
 
 /** Convierte una tasa mensual a su equivalente efectivo anual. */

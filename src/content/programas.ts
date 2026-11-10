@@ -6,7 +6,10 @@
  * son la fuente de verdad; esta página solo traduce.
  */
 
-export type ProgramKind = "no-se-devuelve" | "prestado" | "acceso";
+import { REFERENCE } from "@/lib/finance";
+import { money } from "@/lib/format";
+
+export type ProgramKind = "no-se-devuelve" | "prestado" | "acceso" | "ahorro";
 
 export type Program = {
   slug: string;
@@ -33,6 +36,7 @@ export const KIND_LABEL: Record<ProgramKind, string> = {
   "no-se-devuelve": "Plata que no se devuelve",
   prestado: "Plata prestada",
   acceso: "Abre la puerta",
+  ahorro: "Ahorro con premio del Estado",
 };
 
 export const PROGRAMS: Program[] = [
@@ -68,7 +72,7 @@ export const PROGRAMS: Program[] = [
     url: "https://www.colpensiones.gov.co",
     urlLabel: "colpensiones.gov.co",
     what: "Ahorro para la vejez hecho para quien gana menos de un salario mínimo. Ahorras lo que puedas, cuando puedas, y el Estado le suma un 20% encima.",
-    kind: "no-se-devuelve",
+    kind: "ahorro",
     forWhom:
       "Personas con ingresos por debajo de un salario mínimo que no alcanzan a cotizar pensión: vendedores, mototaxistas, trabajo por días, amas de casa, campesinos.",
     reality:
@@ -99,7 +103,7 @@ export const PROGRAMS: Program[] = [
         {
           title: "Cuánto y cada cuánto",
           body: [
-            "Para 2026 el aporte mínimo se mantiene en $20.000 al mes, con un tope de $2.450.000 al año. No hay obligación de aportar todos los meses: si un mes no pudiste, no pasa nada y no pierdes lo ahorrado.",
+            `Para ${REFERENCE.year} el aporte mínimo es de ${money(REFERENCE.bepsAporteMinimo)}, con un tope de ${money(REFERENCE.bepsTopeAnual)} al año. No hay obligación de aportar todos los meses: si un mes no pudiste, no pasa nada y no pierdes lo ahorrado.`,
             "Al llegar a la edad de retiro, lo ahorrado más el subsidio se convierte en una renta que llega de por vida. También se puede usar para completar semanas y alcanzar una pensión de vejez.",
           ],
         },
@@ -231,7 +235,7 @@ export const PROGRAMS: Program[] = [
       "No le presta directo a una persona. Preguntas en tu banco si tiene una línea Bancóldex disponible.",
     detail: {
       intro:
-        "Es el banco de desarrollo del Estado. Funciona por detrás: le presta a los bancos para que ellos presten más barato a las empresas.",
+        "Es el banco de desarrollo del Estado. Funciona por detrás: les presta a los bancos para que ellos presten más barato a las empresas.",
       outcomes: [
         "Por qué Bancóldex no te atiende directamente",
         "Qué preguntar en tu banco para acceder a una línea Bancóldex",
@@ -311,13 +315,13 @@ export const ALLIES: Ally[] = [
   },
   {
     name: "Cooperativas de ahorro y crédito",
-    desc: "Suelen ser más flexibles con quien no tiene historial. Antes de entregar plata, confirma en la Superfinanciera que la entidad esté vigilada.",
-    url: "https://www.superfinanciera.gov.co",
-    urlLabel: "superfinanciera.gov.co",
+    desc: "Suelen ser más flexibles con quien no tiene historial. Las que reciben ahorros las vigila la Superintendencia de la Economía Solidaria (Supersolidaria), no la Superfinanciera, y sus ahorros los respalda Fogacoop. Antes de entregar plata, confirma en la Supersolidaria que la cooperativa esté vigilada.",
+    url: "https://www.supersolidaria.gov.co",
+    urlLabel: "supersolidaria.gov.co",
   },
   {
     name: "ONG microfinancieras",
-    desc: "Están hechas específicamente para microempresarios sin acceso al banco. Prestan montos pequeños y acompañan el negocio.",
+    desc: "Están hechas específicamente para microempresarios sin acceso al banco. Prestan montos pequeños y acompañan el negocio. Como no reciben ahorros, no las vigila la Superfinanciera: confirma que estén registradas y no pagues nada por adelantado para que te aprueben.",
   },
   {
     name: "Cámara de Comercio de Barranquilla",
