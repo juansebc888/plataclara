@@ -5,6 +5,7 @@ import {
   type ReactNode,
   useEffect,
   useLayoutEffect,
+  startTransition,
   useMemo,
   useReducer,
   useRef,
@@ -40,6 +41,8 @@ type State = Params & {
   step: number;
   running: boolean;
   reduce: boolean;
+  /** Bumped on every restart; ticks from an older run are ignored. */
+  run: number;
   /** What the summary sentence describes; set when the animation ends. */
   settled: Params;
 };
@@ -48,11 +51,13 @@ type Action =
   | { type: "amount"; value: number }
   | { type: "freq"; value: Freq }
   | { type: "years"; value: number }
-  | { type: "tick" }
+  | { type: "tick"; step: number; run: number }
   | { type: "start" }
   | { type: "motion"; reduce: boolean };
 
-const STEPS = 60;
+const STEPS = 30;
+/** Total animation time; ticks are driven by requestAnimationFrame. */
+const DURATION = 600;
 
 const params = (s: Params): Params => ({
   amount: s.amount,
@@ -65,7 +70,7 @@ function restart(s: State): State {
   if (s.reduce) {
     return { ...s, step: STEPS, running: false, settled: params(s) };
   }
-  return { ...s, step: 0, running: true };
+  return { ...s, step: 0, running: true, run: s.run + 1 };
 }
 
 function reducer(s: State, a: Action): State {
@@ -84,7 +89,8 @@ function reducer(s: State, a: Action): State {
         ? { ...s, reduce: true, step: STEPS, running: false, settled: params(s) }
         : { ...s, reduce: false };
     case "tick": {
-      const next = Math.min(STEPS, s.step + 1);
+      if (!s.running || a.run !== s.run) return s;
+      const next = Math.min(STEPS, Math.max(s.step, a.step));
       const done = next >= STEPS;
       return {
         ...s,
@@ -129,7 +135,7 @@ function longerWithGain(p: Params): number | undefined {
  * pays interest only when it matures a year later, and the bank keeps
  * a withholding tax on that interest. See `simulateCdtSavings`.
  *
- * The animation runs on a fixed 60-frame budget regardless of the time
+ * The animation runs on a fixed 30-step, ~600 ms budget regardless of the time
  * horizon, so a 10-year projection costs exactly what a 1-year one
  * does on a slow device. Under `prefers-reduced-motion` it is skipped.
  *
@@ -149,7 +155,7 @@ export function AhorroCalculator({
       // makes a poor first impression; three years shows the mechanism.
       years: HOME_YEARS,
     };
-    return { ...initial, step: 0, running: false, reduce: false, settled: initial };
+    return { ...initial, step: 0, running: false, reduce: false, run: 0, settled: initial };
   });
 
   useEffect(() => {
@@ -168,11 +174,28 @@ export function AhorroCalculator({
     };
   }, []);
 
+  // A new run starts whenever `running` goes true with step 0. Time-based,
+  // so a slow device drops frames instead of stretching the animation; at
+  // most STEPS renders, each a low-priority transition so taps never queue.
+  const runKey = s.running ? s.run : null;
   useEffect(() => {
-    if (!s.running) return;
-    const t = setTimeout(() => dispatch({ type: "tick" }), 26);
-    return () => clearTimeout(t);
-  }, [s.running, s.step]);
+    if (runKey === null) return;
+    const run = runKey;
+    let raf = 0;
+    let t0 = 0;
+    let last = 0;
+    const frame = (t: number) => {
+      if (!t0) t0 = t;
+      const step = Math.min(STEPS, Math.floor(((t - t0) / DURATION) * STEPS));
+      if (step > last) {
+        last = step;
+        startTransition(() => dispatch({ type: "tick", step, run }));
+      }
+      if (step < STEPS) raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(raf);
+  }, [runKey]);
 
   const { freq, periods: totalPeriods, series, final } = useMemo(
     () => project({ amount: s.amount, freq: s.freq, years: s.years }),
@@ -564,7 +587,7 @@ function Bar({
       <div className={styles.track} aria-hidden="true">
         <div
           className={`${styles.fill} ${styles[variant]}`}
-          style={{ width: `${pct}%` }}
+          style={{ transform: `scaleX(${pct / 100})` }}
         />
       </div>
     </div>

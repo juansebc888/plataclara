@@ -35,7 +35,8 @@ export function Art({
       alt=""
       width={960}
       height={square ? 960 : 720}
-      sizes="(min-width: 980px) 380px, 260px"
+      sizes="(min-width: 980px) 380px, 50vw"
+      loading={priority ? undefined : "lazy"}
       priority={priority}
       className={className}
       style={{ width: "100%", height: "auto", borderRadius: 20 }}

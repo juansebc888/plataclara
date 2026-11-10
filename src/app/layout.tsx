@@ -1,30 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { RevealObserver } from "@/components/ui/RevealObserver";
 import { SITE } from "@/content/site";
 import "./globals.css";
 
 /**
- * next/font self-hosts and preloads both faces at build time:
- * no render-blocking request to Google, no layout shift.
+ * Headings only. Self-hosted by next/font, but NOT preloaded: it must not
+ * compete with the JS on a 3G link, and `swap` paints the fallback first.
+ * Body text uses the system stack (Roboto on Android): zero bytes, no reflow.
  */
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: ["700", "800"],
   variable: "--font-display",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
-const body = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-body",
-  display: "swap",
-  preload: true,
-});
+const BODY_STACK =
+  'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -57,7 +54,8 @@ export default function RootLayout({
   return (
     <html
       lang="es-CO"
-      className={`${display.variable} ${body.variable}`}
+      className={display.variable}
+      style={{ ["--font-body" as string]: BODY_STACK }}
       // The inline script below adds `js` before hydration.
       suppressHydrationWarning
     >
@@ -80,6 +78,7 @@ export default function RootLayout({
         <Navbar />
         <main id="contenido">{children}</main>
         <Footer />
+        <RevealObserver />
         <Analytics />
       </body>
     </html>
