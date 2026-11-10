@@ -7,16 +7,16 @@ export type Fact = {
 };
 
 /**
- * VERIFICAR: la cifra de préstamo informal está citada de segunda mano
- * (documento de la Cámara de Representantes citando al Banco de la República).
- * Buscar la publicación original antes de publicar el sitio.
+ * Crédito informal: Encuesta de Endeudamiento de ANIF y Colombia Fintech
+ * (37,3% de los hogares usa crédito informal). La cifra anterior, atribuida
+ * al Banco de la República, no se pudo encontrar en una fuente original.
  */
 export const FACTS: Fact[] = [
   {
-    filled: 3,
-    lead: "3 de cada 10",
-    who: "colombianos",
-    body: "Piden prestado por fuera del sistema, donde nadie les dice cuánto van a terminar pagando.",
+    filled: 4,
+    lead: "Casi 4 de cada 10",
+    who: "hogares",
+    body: "Usan préstamos por fuera del sistema, donde nadie les dice cuánto van a terminar pagando.",
     tone: "red",
   },
   {
@@ -36,4 +36,4 @@ export const FACTS: Fact[] = [
 ];
 
 export const FACTS_SOURCE =
-  "Préstamo informal: Banco de la República. Tasa de interés e inflación: estudios citados en el proyecto de ley 067 de 2026, Cámara de Representantes. Colombia obtuvo 379 puntos en la prueba PISA de competencia financiera; el promedio de la OCDE ronda los 500.";
+  "Préstamo informal: Encuesta de Endeudamiento de ANIF y Colombia Fintech. Tasa de interés e inflación: estudios citados en el proyecto de ley 067 de 2026, Cámara de Representantes. Colombia obtuvo 379 puntos en la prueba PISA de competencia financiera; el promedio de la OCDE ronda los 500.";

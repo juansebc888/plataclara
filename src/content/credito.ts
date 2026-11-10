@@ -1,9 +1,9 @@
 /**
  * Historial crediticio en Colombia.
  *
- * VERIFICAR antes de publicar: los plazos de permanencia del reporte
- * negativo vienen de la ley de habeas data financiero. Confirmar contra
- * la norma vigente y no contra resúmenes de terceros.
+ * Plazos de permanencia del reporte negativo: Ley 2157 de 2021 ("Borrón
+ * y cuenta nueva"), que modificó el art. 13 de la Ley 1266 de 2008.
+ * Verificado en noviembre de 2026 contra el texto en funcionpublica.gov.co.
  */
 
 export const CREDIT_MYTHS: [string, string][] = [
@@ -21,7 +21,7 @@ export const CREDIT_MYTHS: [string, string][] = [
   ],
   [
     "«Si pago, el reporte desaparece de una»",
-    "No es inmediato. El reporte negativo permanece un tiempo después del pago, con un tope máximo que fija la ley.",
+    "No es inmediato, pero tampoco es para siempre. Después de pagar, el reporte dura lo mismo que duró el atraso si fue menos de seis meses, o el doble si fue más, con un tope de cuatro años.",
   ],
 ];
 
@@ -51,7 +51,7 @@ export const CREDIT_STEPS: [string, string][] = [
 export const CREDIT_RIGHTS: string[] = [
   "Tienes derecho a consultar tu propia información y a que te expliquen qué aparece reportado.",
   "Si hay un error, puedes pedir que lo corrijan. La entidad tiene que responderte.",
-  "El reporte negativo no dura para siempre. El tiempo máximo es el doble de lo que duraste en mora, y en todo caso no más de cuatro años contados desde que pagaste. Cumplido ese plazo, borrarlo es obligatorio y puedes reclamarlo.",
+  "El reporte negativo no dura para siempre. Si te atrasaste menos de seis meses, dura lo mismo que duró el atraso, contado desde que pagaste. Si fue más, dura el doble, y nunca más de cuatro años desde que pagaste. Cumplido ese plazo, borrarlo es obligatorio y puedes reclamarlo (Ley 2157 de 2021).",
   "Nadie puede cobrarte por consultar tu propia información ni por «limpiar» tu historial. Quien ofrezca borrarte de las centrales por una tarifa te está estafando.",
   "Si le reclamas a una entidad y no te responde en el plazo de ley, puedes escalar al Defensor del Consumidor Financiero o a la Superintendencia Financiera, sin costo.",
 ];

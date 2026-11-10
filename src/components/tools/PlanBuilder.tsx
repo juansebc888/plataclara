@@ -86,17 +86,36 @@ export function PlanBuilder() {
           })}
         </div>
 
-        <button
-          type="button"
-          className={`btn ${styles.print}`}
-          onClick={() => window.print()}
-          disabled={ordered.length === 0}
-        >
-          Imprimir mi plan
-        </button>
+        <div className={styles.actions}>
+          <a
+            className={`btn ${styles.print}`}
+            href={ordered.length ? whatsappUrl(planText(ordered)) : undefined}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-disabled={ordered.length === 0}
+          >
+            Enviar a mi WhatsApp
+          </a>
+          <button
+            type="button"
+            className={`btn btn-ghost ${styles.secondary}`}
+            onClick={() => saveImage(ordered)}
+            disabled={ordered.length === 0}
+          >
+            Guardar como imagen
+          </button>
+          <button
+            type="button"
+            className={styles.printLink}
+            onClick={() => window.print()}
+            disabled={ordered.length === 0}
+          >
+            Imprimir
+          </button>
+        </div>
         <p className={styles.privacy}>
-          Si no tienes impresora, guárdala como PDF o tómale captura de
-          pantalla.
+          En WhatsApp, mándatelo a ti mismo o a alguien de confianza. La
+          imagen queda en tu galería.
         </p>
         <p className={styles.privacy}>Nada de esto sale de tu teléfono.</p>
       </div>
@@ -143,4 +162,108 @@ export function PlanBuilder() {
       </div>
     </div>
   );
+}
+
+type GoalItem = (typeof GOALS)[number];
+
+const FOOT =
+  "Nada de esto cuesta plata. Si alguien te cobra por abrirte una cuenta, por gestionarte un subsidio o por consultar tu historial, es una estafa.";
+
+/** The plan as plain text, for WhatsApp. */
+function planText(goals: GoalItem[]): string {
+  const blocks = goals.map(
+    (g) => `*${g.label}*\n` + TASKS[g.key].map((t) => `☐ ${t}`).join("\n")
+  );
+  return ["*Mi plan* · Plata Clara", ...blocks, FOOT, "plataclara.co"].join("\n\n");
+}
+
+/** Opens WhatsApp with the plan ready; the reader picks who gets it. */
+function whatsappUrl(text: string): string {
+  return `https://wa.me/?text=${encodeURIComponent(text)}`;
+}
+
+/** Draws the plan on a canvas and shares or downloads it as a PNG. */
+async function saveImage(goals: GoalItem[]) {
+  if (goals.length === 0) return;
+  const W = 1080;
+  const PAD = 72;
+  const scale = 1;
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const font = (size: number, weight = 400) =>
+    `${weight} ${size}px system-ui, -apple-system, Roboto, Arial, sans-serif`;
+
+  const wrap = (text: string, size: number, weight: number, maxW: number) => {
+    ctx.font = font(size, weight);
+    const lines: string[] = [];
+    let line = "";
+    for (const word of text.split(" ")) {
+      const test = line ? `${line} ${word}` : word;
+      if (ctx.measureText(test).width > maxW && line) {
+        lines.push(line);
+        line = word;
+      } else line = test;
+    }
+    if (line) lines.push(line);
+    return lines;
+  };
+
+  // Lay out once to measure height, then draw.
+  type Row = { text: string; size: number; weight: number; color: string; x: number; gap: number; box?: boolean };
+  const rows: Row[] = [];
+  const push = (text: string, size: number, weight: number, color: string, gap: number, x = PAD, box = false) =>
+    wrap(text, size, weight, W - x - PAD).forEach((t, i) =>
+      rows.push({ text: t, size, weight, color, x, gap: i === 0 ? gap : 8, box: box && i === 0 })
+    );
+
+  push("Plata Clara", 30, 700, "#5b6672", 0);
+  push("Mi plan", 72, 800, "#0a1725", 12);
+  for (const g of goals) {
+    push(g.label, 42, 700, "#0a1725", 48);
+    for (const t of TASKS[g.key]) push(t, 34, 400, "#0a1725", 22, PAD + 56, true);
+  }
+  push(FOOT, 28, 400, "#4a5562", 56);
+  push("plataclara.co", 28, 700, "#0a1725", 16);
+
+  const height = rows.reduce((h, r) => h + r.gap + r.size * 1.3, PAD * 2);
+  canvas.width = W * scale;
+  canvas.height = Math.ceil(height) * scale;
+  ctx.scale(scale, scale);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, W, height);
+
+  let y = PAD;
+  for (const r of rows) {
+    y += r.gap + r.size * 1.3;
+    ctx.font = font(r.size, r.weight);
+    ctx.fillStyle = r.color;
+    ctx.fillText(r.text, r.x, y - r.size * 0.3);
+    if (r.box) {
+      ctx.strokeStyle = "#0a1725";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(PAD + 4, y - r.size * 1.05, 32, 32);
+    }
+  }
+
+  const blob: Blob | null = await new Promise((res) => canvas.toBlob(res, "image/png"));
+  if (!blob) return;
+  const file = new File([blob], "mi-plan.png", { type: "image/png" });
+
+  // Phones: open the share sheet (WhatsApp, Galería…). Otherwise download.
+  if (navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: "Mi plan" });
+      return;
+    } catch {
+      /* cancelled: fall through to download */
+    }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mi-plan.png";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

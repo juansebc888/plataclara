@@ -1,9 +1,9 @@
 /**
  * Canales de ayuda reales.
  *
- * VERIFICAR antes de publicar: los teléfonos y direcciones locales
- * cambian. Confirmar cada dato contra la fuente oficial y agregar los
- * puntos de atención de Barranquilla.
+ * Teléfonos de la Superfinanciera tomados de su página oficial de canales
+ * de atención (noviembre de 2026). La Superfinanciera no tiene oficina en
+ * Barranquilla: se atiende por teléfono o en línea. Revisar cada año.
  */
 
 export type HelpChannel = {
@@ -31,7 +31,7 @@ export const CHANNELS: HelpChannel[] = [
     name: "La Superfinanciera (la oficina del gobierno que vigila a los bancos)",
     forWhat:
       "Cuando la entidad no responde, o cuando quieres que el reclamo quede en un registro oficial.",
-    how: "Puedes poner la queja directamente, sin pasar primero por el Defensor. Son caminos separados y tú eliges.",
+    how: "Llama gratis desde cualquier ciudad al 018000 120 100 (lunes a viernes, 8 a.m. a 6 p.m.) o pon la queja en su página. No tiene oficina en Barranquilla, pero no la necesitas. Puedes ir directo, sin pasar primero por el Defensor.",
     cost: "Gratis.",
     tone: "blue",
     url: "https://www.superfinanciera.gov.co",

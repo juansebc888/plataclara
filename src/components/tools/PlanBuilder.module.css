@@ -100,6 +100,39 @@
   transform: none;
 }
 
+.actions {
+  display: grid;
+  gap: 10px;
+}
+.actions .print,
+.actions .secondary {
+  width: 100%;
+  justify-content: center;
+  min-height: 52px;
+}
+.actions a[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.printLink {
+  justify-self: center;
+  min-height: 44px;
+  padding: 0 12px;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--amber);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.printLink:disabled {
+  opacity: 0.45;
+}
+
 .privacy {
   font-size: var(--fs-sm, 15px);
   line-height: 1.5;

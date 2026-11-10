@@ -3,10 +3,11 @@ import type { CheckItem } from "@/components/ui/CheckList";
 /**
  * Requisitos de apertura de cuentas básicas en Colombia.
  *
- * VERIFICAR antes de publicar: los topes de saldo y de retiro de las
- * cuentas de trámite simplificado están atados al salario mínimo, así
- * que cambian cada enero. Confirmar el valor vigente y la fuente
- * (Superfinanciera / la entidad) antes de poner cifras exactas.
+ * Topes de las cuentas sencillas (hoy "depósitos de bajo monto",
+ * Decreto 222 de 2020): el saldo máximo de 8 salarios mínimos aparece de
+ * forma consistente en bancos y guías; el tope de movimientos al mes
+ * cambia según la entidad. Por eso el sitio da el tope de saldo como
+ * referencia y pide preguntar el resto. Revisado en noviembre de 2026.
  */
 
 export const NEEDED: CheckItem[] = [

@@ -117,8 +117,9 @@ export default function Page() {
                 Todo lo que escribes o marcas ahí <strong>se queda en tu
                 teléfono</strong>. Los cálculos se hacen en tu propio navegador
                 y no viajan a ningún servidor. Cuando cierras la página,
-                desaparecen. Por eso el plan se imprime en vez de guardarse: no
-                hay ninguna cuenta donde guardarlo.
+                desaparecen. Por eso el plan te lo llevas tú: por WhatsApp, como
+                imagen o impreso. Si lo mandas por WhatsApp, viaja como cualquier
+                mensaje tuyo; nosotros no lo vemos.
               </p>
 
               <h2 className="h2">Enlaces a otras páginas.</h2>
